@@ -1,4 +1,15 @@
 package com.financeapp.frontend;
 
-public class LoginFrame {
+import javax.swing.*;
+
+public class LoginFrame extends BaseFrame{
+    public LoginFrame()
+    {
+        super("Finance App - Sign In");
+    }
+
+    @Override
+    protected void addGuiComponents() {
+
+    }
 }
