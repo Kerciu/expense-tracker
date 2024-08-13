@@ -18,6 +18,8 @@ public class RegisterFrame extends BaseFrame {
         add(createTextField());
         add(createPasswordField());
         add(createReenterPasswordField());
+        add(createRegisterButton());
+        add(createLoginLabel());
     }
 
     private JPasswordField createReenterPasswordField()
@@ -70,5 +72,34 @@ public class RegisterFrame extends BaseFrame {
     {
         rePasswordField.setBounds(20, 360, super.getWidth() - 50, 40);
         rePasswordField.setFont(new Font("Dialog", Font.PLAIN, 28));
+    }
+
+    private JButton createRegisterButton()
+    {
+        JButton registerButton = new JButton("Register");
+        addRegisterButtonAttributes(registerButton);
+        return registerButton;
+    }
+
+    private void addRegisterButtonAttributes(JButton registerButton)
+    {
+        registerButton.setBounds(20, 460, super.getWidth() - 50, 40);
+        registerButton.setFont(new Font("Dialog", Font.BOLD, 20));
+        registerButton.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    private JLabel createLoginLabel()
+    {
+        String text = "Already have an account? Click here to sign in!";
+        JLabel loginLabel = new JLabel(text);
+        addLoginLabelAttributes(loginLabel);
+        return loginLabel;
+    }
+
+    private void addLoginLabelAttributes (JLabel loginLabel)
+    {
+        loginLabel.setBounds(0, 510, super.getWidth() - 10, 30);
+        loginLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
 }
