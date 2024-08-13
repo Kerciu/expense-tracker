@@ -18,6 +18,8 @@ public class LoginFrame extends BaseFrame{
         add(createLabel("Password", LabelType.PASSWORD));
         add(createTextField());
         add(createPasswordField());
+        add(createLoginButton());
+        add(createRegisterLabel());
     }
 
     private JLabel createLabel(String text, LabelType type)
@@ -39,6 +41,21 @@ public class LoginFrame extends BaseFrame{
         JPasswordField passwordField = new JPasswordField();
         addPasswordFieldAttributes(passwordField);
         return passwordField;
+    }
+
+    private JButton createLoginButton()
+    {
+        JButton loginButton = new JButton("Login");
+        addLoginButtonAttributes(loginButton);
+        return loginButton;
+    }
+
+    private JLabel createRegisterLabel()
+    {
+        String text = "No account yet? Click here to sign up!";
+        JLabel registerLabel = new JLabel(text);
+        addRegisterLabelAttributes(registerLabel);
+        return registerLabel;
     }
 
     private void addLabelAttributes(JLabel label, LabelType type)
@@ -70,5 +87,19 @@ public class LoginFrame extends BaseFrame{
     {
         passwordField.setBounds(20, 320, super.getWidth() - 50, 40);
         passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
+    }
+
+    private void addLoginButtonAttributes(JButton loginButton)
+    {
+        loginButton.setBounds(20, 460, super.getWidth() - 50, 40);
+        loginButton.setFont(new Font("Dialog", Font.BOLD, 20));
+        loginButton.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    private void addRegisterLabelAttributes(JLabel registerLabel)
+    {
+        registerLabel.setBounds(0, 510, super.getWidth() - 10, 30);
+        registerLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
 }
