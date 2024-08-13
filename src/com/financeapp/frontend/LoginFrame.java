@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class LoginFrame extends BaseFrame{
     private enum LabelType {CENTER_TEXT, USERNAME, PASSWORD};
-    private enum TextFieldType {};
 
     public LoginFrame()
     {
@@ -17,6 +16,8 @@ public class LoginFrame extends BaseFrame{
         Component financeManager = add(createLabel("Finance Manager", LabelType.CENTER_TEXT));
         add(createLabel("Username", LabelType.USERNAME));
         add(createLabel("Password", LabelType.PASSWORD));
+        add(createTextField(LabelType.USERNAME));
+        add(createTextField(LabelType.PASSWORD));
     }
 
     private JLabel createLabel(String text, LabelType type)
@@ -26,7 +27,7 @@ public class LoginFrame extends BaseFrame{
         return label;
     }
 
-    private JTextField createTextField(TextFieldType type)
+    private JTextField createTextField(LabelType type)
     {
         JTextField textField = new JTextField();
         addTextFieldAttributes(textField, type);
@@ -47,15 +48,24 @@ public class LoginFrame extends BaseFrame{
                 label.setHorizontalAlignment(SwingConstants.CENTER);
             }
             case PASSWORD -> {
-                label.setBounds(0, 20, super.getWidth(), 40);
-                label.setFont(new Font("Dialog", Font.BOLD, 32));
+                label.setBounds(20, 280, super.getWidth() - 30, 24);
+                label.setFont(new Font("Dialog", Font.PLAIN, 20));
                 label.setHorizontalAlignment(SwingConstants.CENTER);
             }
         }
     }
 
-    private void addTextFieldAttributes(JTextField textField, TextFieldType type)
+    private void addTextFieldAttributes(JTextField textField, LabelType type)
     {
-
+        switch(type){
+            case USERNAME -> {
+                textField.setBounds(20, 160, super.getWidth() - 50, 40);
+                textField.setFont(new Font("Dialog", Font.PLAIN, 28));
+            }
+            case PASSWORD -> {
+                textField.setBounds(20, 320, super.getWidth() - 50, 40);
+                textField.setFont(new Font("Dialog", Font.PLAIN, 28));
+            }
+        }
     }
 }
