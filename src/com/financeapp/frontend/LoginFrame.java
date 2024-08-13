@@ -34,4 +34,18 @@ public class LoginFrame extends BaseFrame{
         registerLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
         registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
+
+    protected JButton createLoginButton()
+    {
+        JButton loginButton = new JButton("Login");
+        addLoginButtonAttributes(loginButton);
+        return loginButton;
+    }
+
+    protected void addLoginButtonAttributes(JButton loginButton)
+    {
+        loginButton.setBounds(20, 460, super.getWidth() - 50, 40);
+        loginButton.setFont(new Font("Dialog", Font.BOLD, 20));
+        loginButton.setHorizontalAlignment(SwingConstants.CENTER);
+    }
 }

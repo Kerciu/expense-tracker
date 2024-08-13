@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class BaseFrame extends JFrame {
-    protected enum LabelType {CENTER_TEXT, USERNAME, PASSWORD};
+    protected enum LabelType {CENTER_TEXT, USERNAME, PASSWORD, REENTER_PASSWORD};
 
     public BaseFrame(String title)
     {
@@ -45,30 +45,38 @@ public abstract class BaseFrame extends JFrame {
         return passwordField;
     }
 
-    protected JButton createLoginButton()
-    {
-        JButton loginButton = new JButton("Login");
-        addLoginButtonAttributes(loginButton);
-        return loginButton;
-    }
-
     protected void addLabelAttributes(JLabel label, LabelType type)
     {
         switch (type){
             case CENTER_TEXT -> {
-                label.setBounds(0, 20, super.getWidth(), 40);
-                label.setFont(new Font("Dialog", Font.BOLD, 32));
-                label.setHorizontalAlignment(SwingConstants.CENTER);
+                addCenterTextAttributes(label);
             }
             case USERNAME -> {
-                label.setBounds(20, 120, super.getWidth() - 30, 24);
-                label.setFont(new Font("Dialog", Font.PLAIN, 20));
+                addUsernameLabelAttributes(label);
             }
             case PASSWORD -> {
-                label.setBounds(20, 280, super.getWidth() - 30, 24);
-                label.setFont(new Font("Dialog", Font.PLAIN, 20));
+                addPasswordLabelAttributes(label);
             }
         }
+    }
+
+    protected void addCenterTextAttributes(JLabel label)
+    {
+        label.setBounds(0, 20, super.getWidth(), 40);
+        label.setFont(new Font("Dialog", Font.BOLD, 32));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    protected void addUsernameLabelAttributes(JLabel label)
+    {
+        label.setBounds(20, 120, super.getWidth() - 30, 24);
+        label.setFont(new Font("Dialog", Font.PLAIN, 20));
+    }
+
+    protected void addPasswordLabelAttributes(JLabel label)
+    {
+        label.setBounds(20, 280, super.getWidth() - 30, 24);
+        label.setFont(new Font("Dialog", Font.PLAIN, 20));
     }
 
     protected void addTextFieldAttributes(JTextField textField)
@@ -83,10 +91,4 @@ public abstract class BaseFrame extends JFrame {
         passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
     }
 
-    protected void addLoginButtonAttributes(JButton loginButton)
-    {
-        loginButton.setBounds(20, 460, super.getWidth() - 50, 40);
-        loginButton.setFont(new Font("Dialog", Font.BOLD, 20));
-        loginButton.setHorizontalAlignment(SwingConstants.CENTER);
-    }
 }
