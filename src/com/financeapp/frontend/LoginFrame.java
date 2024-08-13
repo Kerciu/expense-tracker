@@ -13,11 +13,11 @@ public class LoginFrame extends BaseFrame{
 
     @Override
     protected void addGuiComponents() {
-        Component financeManager = add(createLabel("Finance Manager", LabelType.CENTER_TEXT));
+        add(createLabel("Finance Manager", LabelType.CENTER_TEXT));
         add(createLabel("Username", LabelType.USERNAME));
         add(createLabel("Password", LabelType.PASSWORD));
-        add(createTextField(LabelType.USERNAME));
-        add(createTextField(LabelType.PASSWORD));
+        add(createTextField());
+        add(createPasswordField());
     }
 
     private JLabel createLabel(String text, LabelType type)
@@ -27,11 +27,18 @@ public class LoginFrame extends BaseFrame{
         return label;
     }
 
-    private JTextField createTextField(LabelType type)
+    private JTextField createTextField()
     {
         JTextField textField = new JTextField();
-        addTextFieldAttributes(textField, type);
+        addTextFieldAttributes(textField);
         return textField;
+    }
+
+    private JPasswordField createPasswordField()
+    {
+        JPasswordField passwordField = new JPasswordField();
+        addPasswordFieldAttributes(passwordField);
+        return passwordField;
     }
 
     private void addLabelAttributes(JLabel label, LabelType type)
@@ -45,27 +52,23 @@ public class LoginFrame extends BaseFrame{
             case USERNAME -> {
                 label.setBounds(20, 120, super.getWidth() - 30, 24);
                 label.setFont(new Font("Dialog", Font.PLAIN, 20));
-                label.setHorizontalAlignment(SwingConstants.CENTER);
             }
             case PASSWORD -> {
                 label.setBounds(20, 280, super.getWidth() - 30, 24);
                 label.setFont(new Font("Dialog", Font.PLAIN, 20));
-                label.setHorizontalAlignment(SwingConstants.CENTER);
             }
         }
     }
 
-    private void addTextFieldAttributes(JTextField textField, LabelType type)
+    private void addTextFieldAttributes(JTextField textField)
     {
-        switch(type){
-            case USERNAME -> {
-                textField.setBounds(20, 160, super.getWidth() - 50, 40);
-                textField.setFont(new Font("Dialog", Font.PLAIN, 28));
-            }
-            case PASSWORD -> {
-                textField.setBounds(20, 320, super.getWidth() - 50, 40);
-                textField.setFont(new Font("Dialog", Font.PLAIN, 28));
-            }
-        }
+        textField.setBounds(20, 160, super.getWidth() - 50, 40);
+        textField.setFont(new Font("Dialog", Font.PLAIN, 28));
+    }
+
+    private void addPasswordFieldAttributes(JPasswordField passwordField)
+    {
+        passwordField.setBounds(20, 320, super.getWidth() - 50, 40);
+        passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
     }
 }
