@@ -15,6 +15,9 @@ public class MainFrame extends BaseFrame {
     protected void addGuiComponents() {
         add(createWelcomeMessageLabel());
         add(createCurrentBalanceLabel());
+        add(createCurrentBalanceTextField());
+        add(createDepositButton());
+        add(createWithdrawButton());
     }
 
     private JLabel createWelcomeMessageLabel()
@@ -43,6 +46,21 @@ public class MainFrame extends BaseFrame {
         return currentBalanceTextField;
     }
 
+    private JButton createDepositButton()
+    {
+        JButton depositButton = new JButton("Deposit");
+        addDepositButtonAttributes(depositButton);
+        return depositButton;
+    }
+
+    private JButton createWithdrawButton()
+    {
+
+        JButton withdrawButton = new JButton("Withdraw");
+        addWithdrawButtonAttributes(withdrawButton);
+        return withdrawButton;
+    }
+
     private void addWelcomeMessageAttributes(JLabel messageLabel)
     {
         messageLabel.setBounds(0, 20, getWidth() - 10, 40);
@@ -62,6 +80,19 @@ public class MainFrame extends BaseFrame {
         textField.setBounds(15, 120, getWidth() - 50, 40);
         textField.setFont(new Font("Dialog", Font.BOLD, 28));
         textField.setHorizontalAlignment(SwingConstants.CENTER);
+        textField.setEditable(false);
+    }
+
+    private void addDepositButtonAttributes(JButton button)
+    {
+        button.setBounds(15, 180, getWidth() - 10, 30);
+        button.setFont(new Font("Dialog", Font.PLAIN, 22));
+    }
+
+    private void addWithdrawButtonAttributes(JButton button)
+    {
+        button.setBounds(15, 250, getWidth() - 10, 30);
+        button.setFont(new Font("Dialog", Font.PLAIN, 22));
     }
 
     private String getCurrentCurrency()
