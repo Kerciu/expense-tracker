@@ -3,7 +3,7 @@ package com.financeapp.frontend.authentication;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginFrame extends BaseFrame{
+public class LoginFrame extends AuthenticationBaseFrame{
     public LoginFrame()
     {
         super("Finance App - Sign In");

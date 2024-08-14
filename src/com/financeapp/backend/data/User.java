@@ -1,4 +1,4 @@
-package com.financeapp.frontend;
+package com.financeapp.backend.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

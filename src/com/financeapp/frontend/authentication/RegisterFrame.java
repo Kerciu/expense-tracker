@@ -3,7 +3,7 @@ package com.financeapp.frontend.authentication;
 import javax.swing.*;
 import java.awt.*;
 
-public class RegisterFrame extends BaseFrame {
+public class RegisterFrame extends AuthenticationBaseFrame {
 
     public RegisterFrame()
     {

@@ -1,28 +1,17 @@
 package com.financeapp.frontend.authentication;
 
+import com.financeapp.frontend.app.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class BaseFrame extends JFrame {
+public abstract class AuthenticationBaseFrame extends BaseFrame {
     protected enum LabelType {CENTER_TEXT, USERNAME, PASSWORD, REENTER_PASSWORD};
 
-    public BaseFrame(String title)
+    public AuthenticationBaseFrame(String title)
     {
-        initializeComponents(title);
+        super(title, 420, 600);
     }
-
-    private void initializeComponents(String title)
-    {
-        setTitle(title);
-        setSize(420, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(null);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        addGuiComponents();
-    }
-
-    protected abstract void addGuiComponents();
 
     protected JLabel createLabel(String text, LabelType type)
     {
