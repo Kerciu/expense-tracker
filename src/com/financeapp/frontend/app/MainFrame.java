@@ -18,6 +18,9 @@ public class MainFrame extends BaseFrame {
         add(createCurrentBalanceTextField());
         add(createDepositButton());
         add(createWithdrawButton());
+        add(createPastTransactionsButton());
+        add(createGenerateReportButton());
+        add(createLogoutButton());
     }
 
     private JLabel createWelcomeMessageLabel()
@@ -55,10 +58,30 @@ public class MainFrame extends BaseFrame {
 
     private JButton createWithdrawButton()
     {
-
         JButton withdrawButton = new JButton("Withdraw");
         addWithdrawButtonAttributes(withdrawButton);
         return withdrawButton;
+    }
+
+    private JButton createPastTransactionsButton()
+    {
+        JButton pastTransactionsButton = new JButton("Transactions History");
+        addPastTransactionsButtonAttributes(pastTransactionsButton);
+        return pastTransactionsButton;
+    }
+
+    private JButton createGenerateReportButton()
+    {
+        JButton generateReportButton = new JButton("Generate Report");
+        addGenerateReportButtonAttributes(generateReportButton);
+        return generateReportButton;
+    }
+
+    private JButton createLogoutButton()
+    {
+        JButton logoutButton = new JButton("Logout");
+        addLogoutButtonAttributes(logoutButton);
+        return logoutButton;
     }
 
     private void addWelcomeMessageAttributes(JLabel messageLabel)
@@ -94,6 +117,25 @@ public class MainFrame extends BaseFrame {
         button.setBounds(15, 250, getWidth() - 10, 30);
         button.setFont(new Font("Dialog", Font.PLAIN, 22));
     }
+
+    private void addPastTransactionsButtonAttributes(JButton button)
+    {
+        button.setBounds(15, 320, getWidth() - 10, 30);
+        button.setFont(new Font("Dialog", Font.PLAIN, 22));
+    }
+
+    private void addGenerateReportButtonAttributes(JButton button)
+    {
+        button.setBounds(15, 390, getWidth() - 10, 30);
+        button.setFont(new Font("Dialog", Font.PLAIN, 22));
+    }
+
+    private void addLogoutButtonAttributes(JButton button)
+    {
+        button.setBounds(15, 500, getWidth() - 10, 30);
+        button.setFont(new Font("Dialog", Font.PLAIN, 22));
+    }
+
 
     private String getCurrentCurrency()
     {
