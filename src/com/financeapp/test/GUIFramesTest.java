@@ -1,4 +1,4 @@
-package java.test;
+package com.financeapp.test;
 
 public class GUIFramesTest {
 }
