@@ -1,4 +1,4 @@
-package com.financeapp.frontend;
+package com.financeapp.frontend.authentication;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,5 +90,4 @@ public abstract class BaseFrame extends JFrame {
         passwordField.setBounds(20, 320, super.getWidth() - 50, 40);
         passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
     }
-
 }

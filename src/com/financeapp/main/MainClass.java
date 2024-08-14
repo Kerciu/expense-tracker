@@ -1,7 +1,7 @@
 package com.financeapp.main;
 
-import com.financeapp.frontend.LoginFrame;
-import com.financeapp.frontend.RegisterFrame;
+import com.financeapp.frontend.app.MainFrame;
+import com.financeapp.frontend.authentication.RegisterFrame;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class MainClass {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new RegisterFrame().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }

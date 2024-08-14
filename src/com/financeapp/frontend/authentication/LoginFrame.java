@@ -1,4 +1,4 @@
-package com.financeapp.frontend;
+package com.financeapp.frontend.authentication;
 
 import javax.swing.*;
 import java.awt.*;
