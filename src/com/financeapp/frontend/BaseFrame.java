@@ -33,7 +33,7 @@ public abstract class BaseFrame extends JFrame {
 
     protected JTextField createTextField()
     {
-        JTextField textField = new JTextField();
+        JTextField textField = new PlaceholderTextField("Enter your username..");
         addTextFieldAttributes(textField);
         return textField;
     }
