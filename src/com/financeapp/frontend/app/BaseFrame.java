@@ -5,7 +5,7 @@ import com.financeapp.backend.data.User;
 import javax.swing.*;
 
 public abstract class BaseFrame extends JFrame {
-    private User user;
+    protected User user;
 
     public BaseFrame(String title, int width, int height) {
         initializeComponents(title, width, height);
