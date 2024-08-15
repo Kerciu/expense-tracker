@@ -12,11 +12,20 @@ public class UIComponentFactory {
         return label;
     }
 
+    public static JTextField createTextField(int x, int y, int width, int height, int fontSize, boolean editable) {
+        JTextField textField = new JTextField();
+        textField.setBounds(x, y, width, height);
+        textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        textField.setHorizontalAlignment(SwingConstants.LEFT);
+        textField.setEditable(editable);
+        return textField;
+    }
+
     public static JTextField createTextField(String text, int x, int y, int width, int height, int fontSize, boolean editable) {
         JTextField textField = new JTextField(text);
         textField.setBounds(x, y, width, height);
         textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
-        textField.setHorizontalAlignment(SwingConstants.CENTER);
+        textField.setHorizontalAlignment(SwingConstants.LEFT);
         textField.setEditable(editable);
         return textField;
     }
@@ -26,5 +35,12 @@ public class UIComponentFactory {
         button.setBounds(x, y, width, height);
         button.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         return button;
+    }
+
+    public static JPasswordField createPasswordField(int x, int y, int width, int height, int fontSize) {
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBounds(x, y, width, height);
+        passwordField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        return passwordField;
     }
 }

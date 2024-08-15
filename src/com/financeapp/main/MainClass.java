@@ -11,7 +11,7 @@ public class MainClass {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LoginFrame().setVisible(true);
+                new RegisterFrame().setVisible(true);
             }
         });
     }

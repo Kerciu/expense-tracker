@@ -1,9 +1,9 @@
 package com.financeapp.frontend.authentication;
 
 import com.financeapp.frontend.app.BaseFrame;
+import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
-import java.awt.*;
 
 public abstract class AuthenticationBaseFrame extends BaseFrame {
     protected enum LabelType {CENTER_TEXT, USERNAME, PASSWORD, REENTER_PASSWORD};
@@ -13,70 +13,26 @@ public abstract class AuthenticationBaseFrame extends BaseFrame {
         super(title, 420, 600);
     }
 
-    protected JLabel createLabel(String text, LabelType type)
-    {
-        JLabel label = new JLabel(text);
-        addLabelAttributes(label, type);
-        return label;
-    }
-
-    protected JTextField createTextField()
-    {
-        JTextField textField = new PlaceholderTextField("Enter your username..");
-        addTextFieldAttributes(textField);
-        return textField;
-    }
-
-    protected JPasswordField createPasswordField()
-    {
-        JPasswordField passwordField = new JPasswordField();
-        addPasswordFieldAttributes(passwordField);
-        return passwordField;
-    }
-
-    protected void addLabelAttributes(JLabel label, LabelType type)
-    {
-        switch (type){
+    protected JLabel createLabel(String text, LabelType type) {
+        switch (type) {
             case CENTER_TEXT -> {
-                addCenterTextAttributes(label);
+                return UIComponentFactory.createLabel(text, 0, 20, super.getWidth(), 40, 32, SwingConstants.CENTER);
             }
             case USERNAME -> {
-                addUsernameLabelAttributes(label);
+                return UIComponentFactory.createLabel(text, 20, 120, super.getWidth() - 30, 24, 20, SwingConstants.LEFT);
             }
-            case PASSWORD -> {
-                addPasswordLabelAttributes(label);
+            case PASSWORD, REENTER_PASSWORD -> {
+                return UIComponentFactory.createLabel(text, 20, (type == LabelType.PASSWORD ? 220 : 320), super.getWidth() - 30, 24, 20, SwingConstants.LEFT);
             }
+            default -> throw new IllegalArgumentException("Invalid LabelType");
         }
     }
 
-    protected void addCenterTextAttributes(JLabel label)
-    {
-        label.setBounds(0, 20, super.getWidth(), 40);
-        label.setFont(new Font("Dialog", Font.BOLD, 32));
-        label.setHorizontalAlignment(SwingConstants.CENTER);
+    protected JTextField createTextField() {
+        return UIComponentFactory.createTextField(20, 160, super.getWidth() - 50, 40, 28, true);
     }
 
-    protected void addUsernameLabelAttributes(JLabel label)
-    {
-        label.setBounds(20, 120, super.getWidth() - 30, 24);
-        label.setFont(new Font("Dialog", Font.PLAIN, 20));
-    }
-
-    protected void addPasswordLabelAttributes(JLabel label)
-    {
-        label.setBounds(20, 280, super.getWidth() - 30, 24);
-        label.setFont(new Font("Dialog", Font.PLAIN, 20));
-    }
-
-    protected void addTextFieldAttributes(JTextField textField)
-    {
-        textField.setBounds(20, 160, super.getWidth() - 50, 40);
-        textField.setFont(new Font("Dialog", Font.PLAIN, 28));
-    }
-
-    protected void addPasswordFieldAttributes(JPasswordField passwordField)
-    {
-        passwordField.setBounds(20, 320, super.getWidth() - 50, 40);
-        passwordField.setFont(new Font("Dialog", Font.PLAIN, 28));
+    protected JPasswordField createPasswordField() {
+        return UIComponentFactory.createPasswordField(20, 320, super.getWidth() - 50, 40, 28);
     }
 }

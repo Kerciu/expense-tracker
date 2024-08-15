@@ -1,7 +1,8 @@
 package com.financeapp.frontend.authentication;
 
+import com.financeapp.frontend.components.UIComponentFactory;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class LoginFrame extends AuthenticationBaseFrame{
     public LoginFrame()
@@ -20,32 +21,14 @@ public class LoginFrame extends AuthenticationBaseFrame{
         add(createRegisterLabel());
     }
 
-    private JLabel createRegisterLabel()
-    {
-        String text = "No account yet? Click here to sign up!";
-        JLabel registerLabel = new JLabel(text);
-        addRegisterLabelAttributes(registerLabel);
-        return registerLabel;
+    private JButton createLoginButton() {
+        return UIComponentFactory.createButton("Login", 20, 460, super.getWidth() - 50, 40, 20);
     }
 
-    private void addRegisterLabelAttributes (JLabel registerLabel)
-    {
-        registerLabel.setBounds(0, 510, super.getWidth() - 10, 30);
-        registerLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-        registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    }
-
-    protected JButton createLoginButton()
-    {
-        JButton loginButton = new JButton("Login");
-        addLoginButtonAttributes(loginButton);
-        return loginButton;
-    }
-
-    protected void addLoginButtonAttributes(JButton loginButton)
-    {
-        loginButton.setBounds(20, 460, super.getWidth() - 50, 40);
-        loginButton.setFont(new Font("Dialog", Font.BOLD, 20));
-        loginButton.setHorizontalAlignment(SwingConstants.CENTER);
+    private JLabel createRegisterLabel() {
+        return UIComponentFactory.createLabel(
+                "No account yet? Click here to sign up!",
+                0, 510, super.getWidth() - 10, 30, 20, SwingConstants.CENTER
+        );
     }
 }
