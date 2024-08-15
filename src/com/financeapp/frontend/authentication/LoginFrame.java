@@ -9,6 +9,8 @@ import com.mysql.cj.log.Log;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginFrame extends AuthenticationBaseFrame{
     private JTextField usernameTextField;
@@ -75,9 +77,25 @@ public class LoginFrame extends AuthenticationBaseFrame{
     }
 
     private JLabel createRegisterLabel() {
-        return UIComponentFactory.createLabel(
+        JLabel registerLabel = UIComponentFactory.createLabel(
                 "No account yet? Click here to sign up!",
                 0, 510, super.getWidth() - 10, 30, 20, SwingConstants.CENTER
         );
+        registerLabel.addMouseListener(
+                createRegisterLabelMouseListener()
+        );
+
+        return registerLabel;
+    }
+
+    private MouseAdapter createRegisterLabelMouseListener()
+    {
+        return new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                LoginFrame.this.dispose();
+                new RegisterFrame().setVisible(true);
+            }
+        };
     }
 }

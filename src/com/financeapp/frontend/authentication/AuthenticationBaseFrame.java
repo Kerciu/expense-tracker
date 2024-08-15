@@ -33,6 +33,6 @@ public abstract class AuthenticationBaseFrame extends BaseFrame {
     }
 
     protected JPasswordField createPasswordField() {
-        return UIComponentFactory.createPasswordField(20, 320, super.getWidth() - 50, 40, 28);
+        return UIComponentFactory.createPasswordField(20, 260, super.getWidth() - 50, 40, 28);
     }
 }
