@@ -6,10 +6,8 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class MySQLConnector {
-
     private static String DB_URL;
     private static String DB_USERNAME;
     private static String DB_PASSWORD;
@@ -35,15 +33,17 @@ public class MySQLConnector {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            String hashedPassword = hashPassword(password);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, hashedPassword);
+            preparedStatement.setString(2, password);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    int userId = resultSet.getInt("id");
-                    BigDecimal balance = resultSet.getBigDecimal("balance");
-                    return new User(userId, username, password, balance);
+                    String storedHashedPassword = resultSet.getString("password");
+                    if (PasswordUtils.checkIfPasswordMatches(password, storedHashedPassword)) {
+                        int userId = resultSet.getInt("id");
+                        BigDecimal balance = resultSet.getBigDecimal("balance");
+                        return new User(userId, username, password, balance);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -51,10 +51,5 @@ public class MySQLConnector {
         }
 
         return null;
-    }
-
-    private static String hashPassword(String password) {
-        // replace with actual password hashing logic (e.g., bcrypt)
-        return password; // Placeholder
     }
 }
