@@ -13,7 +13,7 @@ public class MySQLConnector {
     private static String DB_PASSWORD;
 
     static {
-        try (InputStream input = MySQLConnector.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = MySQLConnector.class.getClassLoader().getResourceAsStream("com/financeapp/backend/resources/config.properties")) {
             Properties prop = new Properties();
             if (input == null) {
                 System.out.println("Sorry, unable to find config.properties");
@@ -28,22 +28,28 @@ public class MySQLConnector {
     }
 
     public static User validateLogin(String username, String password) {
-        String query = SQLStatementFactory.constructUserDataStatement();
+        String query = SQLStatementFactory.constructUsernameStatement();
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String storedHashedPassword = resultSet.getString("password");
+
                     if (PasswordUtils.checkIfPasswordMatches(password, storedHashedPassword)) {
                         int userId = resultSet.getInt("id");
                         BigDecimal balance = resultSet.getBigDecimal("balance");
                         return new User(userId, username, password, balance);
                     }
+                    else {
+                        System.out.println("Password does not match.");
+                    }
+                }
+                else {
+                    System.out.println("No user found with the given username and password.");
                 }
             }
         } catch (SQLException e) {
@@ -90,6 +96,9 @@ public class MySQLConnector {
     }
 
     private static Connection getConnection() throws SQLException {
+        if (DB_URL == null || DB_USERNAME == null || DB_PASSWORD == null) {
+            throw new SQLException("Database configuration is not set");
+        }
         return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
     }
 }

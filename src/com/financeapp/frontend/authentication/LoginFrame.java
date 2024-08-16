@@ -71,7 +71,7 @@ public class LoginFrame extends AuthenticationBaseFrame{
         JOptionPane.showMessageDialog(mainFrame, "Signed In Succesfully!");
     }
 
-    private void showFailureWindow()
+        private void showFailureWindow()
     {
         JOptionPane.showMessageDialog(LoginFrame.this, "Username or Password does not match!");
     }
