@@ -2,35 +2,14 @@ package com.financeapp.backend.db;
 
 import com.financeapp.backend.data.User;
 
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.Properties;
 
 public class MySQLConnector {
-    private static String DB_URL;
-    private static String DB_USERNAME;
-    private static String DB_PASSWORD;
-
-    static {
-        try (InputStream input = MySQLConnector.class.getClassLoader().getResourceAsStream("com/financeapp/backend/resources/config.properties")) {
-            Properties prop = new Properties();
-            if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
-            }
-            prop.load(input);
-            DB_URL = prop.getProperty("db.url");
-            DB_USERNAME = prop.getProperty("db.username");
-            DB_PASSWORD = prop.getProperty("db.password");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public static User validateLogin(String username, String password) {
         String query = SQLStatementFactory.constructUsernameStatement();
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
@@ -66,7 +45,7 @@ public class MySQLConnector {
         /* true - success, false - failure */
         if (!checkIfUserExists(username))
         {
-            Connection connection = getConnection();
+            Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                 SQLStatementFactory.insertUserIntoDatabase()
             );
@@ -84,7 +63,7 @@ public class MySQLConnector {
 
     private static boolean checkIfUserExists(String username) throws SQLException
     {
-        Connection connection = getConnection();
+        Connection connection = DatabaseConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
             SQLStatementFactory.constructUsernameStatement()
         );
@@ -93,12 +72,5 @@ public class MySQLConnector {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
-    }
-
-    private static Connection getConnection() throws SQLException {
-        if (DB_URL == null || DB_USERNAME == null || DB_PASSWORD == null) {
-            throw new SQLException("Database configuration is not set");
-        }
-        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
     }
 }
