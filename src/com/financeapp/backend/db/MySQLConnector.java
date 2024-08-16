@@ -52,4 +52,23 @@ public class MySQLConnector {
 
         return null;
     }
+
+    public static boolean registerNewUser(String username, String password) throws SQLException
+    {
+        /* true - success, false - failure */
+        return false;
+    }
+
+    private static boolean checkIfUserExists(String username) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement(
+            SQLStatementFactory.constructUsernameStatement()
+        );
+
+        preparedStatement.setString(1, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        return resultSet.next();
+    }
 }
