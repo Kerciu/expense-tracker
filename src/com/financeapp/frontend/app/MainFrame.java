@@ -19,10 +19,12 @@ public class MainFrame extends BaseFrame {
                 0, 20, getWidth() - 10, 40, 18, SwingConstants.CENTER
         ));
         add(UIComponentFactory.createLabel("Current Balance", 0, 80, getWidth() - 10, 30, 22, SwingConstants.CENTER));
-        add(UIComponentFactory.createTextField(
+        JTextField userBalanceTextField = UIComponentFactory.createTextField(
                 user.getBalance() + " " + getCurrentCurrency(),
                 15, 120, getWidth() - 50, 40, 28, false
-        ));
+        );
+        userBalanceTextField.setHorizontalAlignment(SwingConstants.CENTER);
+        add(userBalanceTextField);
         add(UIComponentFactory.createButton("Deposit", 15, 180, getWidth() - 10, 30, 22));
         add(UIComponentFactory.createButton("Withdraw", 15, 250, getWidth() - 10, 30, 22));
         add(UIComponentFactory.createButton("Transactions History", 15, 320, getWidth() - 10, 30, 22));
