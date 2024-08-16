@@ -30,7 +30,7 @@ public class MySQLConnector {
     public static User validateLogin(String username, String password) {
         String query = SQLStatementFactory.constructUserDataStatement();
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
@@ -55,13 +55,30 @@ public class MySQLConnector {
 
     public static boolean registerNewUser(String username, String password) throws SQLException
     {
+        String hashedPassword = PasswordUtils.hashPassword(password);
+
         /* true - success, false - failure */
+        if (!checkIfUserExists(username))
+        {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                SQLStatementFactory.insertUserIntoDatabase()
+            );
+
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, hashedPassword);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        }
+
         return false;
     }
 
     private static boolean checkIfUserExists(String username) throws SQLException
     {
-        Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
             SQLStatementFactory.constructUsernameStatement()
         );
@@ -70,5 +87,9 @@ public class MySQLConnector {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
+    }
+
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
     }
 }
