@@ -43,4 +43,12 @@ public class UIComponentFactory {
         passwordField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         return passwordField;
     }
+
+    public static JComboBox<String> createStringComboBox(String[] availableOptions, int x, int y, int width, int height, int fontSize)
+    {
+        JComboBox<String> comboBox = new JComboBox<>(availableOptions);
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        return comboBox;
+    }
 }

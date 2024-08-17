@@ -87,6 +87,22 @@ public class MainFrame extends BaseFrame implements ActionListener {
             new LoginFrame().setVisible(true);
             return;
         }
+        else if (buttonClicked.equalsIgnoreCase("Add Expense"))
+        {
+            new AddExpenseFrame("Add Expense", user, 420, 600).setVisible(true);
+        }
+        else if (buttonClicked.equalsIgnoreCase("Transactions History"))
+        {
+            new TransactionHistoryFrame("Transactions History", user, 420, 600).setVisible(true);
+        }
+        else if (buttonClicked.equalsIgnoreCase("Generate Report"))
+        {
+            new GenerateReportFrame("Generate Report", user, 420, 600).setVisible(true);
+        }
+        else if (buttonClicked.equalsIgnoreCase("Settings"))
+        {
+            new SettingsFrame("Settings", user, 420, 600).setVisible(true);
+        }
     }
 
     private String getCurrentCurrency()

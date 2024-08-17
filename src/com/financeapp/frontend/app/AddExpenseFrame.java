@@ -13,20 +13,93 @@ public class AddExpenseFrame extends BaseFrame {
     @Override
     protected void addGuiComponents() {
         add(createAddExpenseLabel());
-        add(createAmmountLabel());
+        addAmountEnteringComponents();
+        addCategoryComponents();
+        addDescriptionComponents();
     }
 
     private JLabel createAddExpenseLabel()
     {
         return UIComponentFactory.createLabel(
-                "<html><br>Add Expense</html></br><hr>", 0, 20, getWidth() - 10, 40, 18, SwingConstants.CENTER
+                "Add new transaction", 0, 20, getWidth() - 10, 50, 30, SwingConstants.CENTER
         );
     }
 
-    private JLabel createAmmountLabel()
+    private void addAmountEnteringComponents()
+    {
+        add(new JSeparator());
+        add(createAmountLabel());
+        add(createAmountTextField());
+        add(createAmountInstructionLabel());
+    }
+
+    private void addCategoryComponents()
+    {
+        add(createCategoryLabel());
+        add(createCategoryComboBox());
+    }
+
+    private void addDescriptionComponents()
+    {
+        add(createDescriptionLabel());
+        add(createDescriptionTextField());
+    }
+
+    private JLabel createAmountLabel()
     {
         return UIComponentFactory.createLabel(
-                "Ammount", 0, 60, getWidth()-10, 40, 18, SwingConstants.LEFT
+                "Amount", 5, 80, getWidth()-10, 40, 30, SwingConstants.LEFT
+        );
+    }
+
+    private JTextField createAmountTextField()
+    {
+        return UIComponentFactory.createTextField(
+                5, 120, getWidth() - 10, 40, 20, true
+        );
+    }
+
+    private JLabel createAmountInstructionLabel()
+    {
+        String text = "* (negative - expense, positive - income)";
+        return UIComponentFactory.createLabel(
+                text, 5, 160, getWidth() - 10, 40, 14, SwingConstants.LEFT
+        );
+    }
+
+    private JLabel createCategoryLabel()
+    {
+        return UIComponentFactory.createLabel(
+                "Category", 5, 200, getWidth() - 10, 40, 30, SwingConstants.LEFT
+        );
+    }
+
+    private JComboBox<String> createCategoryComboBox()
+    {
+        String[] categories = createCategoriesArray();
+        return  UIComponentFactory.createStringComboBox(
+            categories, 5, 240, getWidth() - 10, 40, 30
+        );
+    }
+
+    private String[] createCategoriesArray()
+    {
+        return new String[] {
+
+        };
+    }
+
+    private JLabel createDescriptionLabel()
+    {
+        return UIComponentFactory.createLabel(
+                "Description", 5, 300, getWidth()-10, 40, 30, SwingConstants.LEFT
+        );
+    }
+
+    private  JTextField createDescriptionTextField()
+    {
+        return UIComponentFactory.createTextField(
+                5, 340, getWidth()-10, 40, 20, true
         );
     }
 }
