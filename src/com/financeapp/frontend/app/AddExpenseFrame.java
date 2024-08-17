@@ -4,15 +4,22 @@ import com.financeapp.backend.data.User;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
 
 public class AddExpenseFrame extends BaseFrame {
     private String amountEntered;
     private String categorySelected;
     private String descriptionProvided;
+    private boolean isExpense;
+
+    private JComboBox<String> categoryComboBox;
+    private JCheckBox expenseCheckBox;
+    private JCheckBox incomeCheckBox;
 
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
+        isExpense = true;
     }
 
     @Override
@@ -38,15 +45,17 @@ public class AddExpenseFrame extends BaseFrame {
         JTextField textField = createAmountTextField();
         amountEntered = textField.getText();
         add(textField);
-        add(createAmountInstructionLabel());
+        createTypeCheckingCheckBoxes();
+        add(expenseCheckBox);
+        add(incomeCheckBox);
     }
 
     private void addCategoryComponents()
     {
         add(createCategoryLabel());
-        JComboBox<String> comboBox = createCategoryComboBox();
-        categorySelected = (String) comboBox.getSelectedItem();
-        add(comboBox);
+        categoryComboBox = createCategoryComboBox();
+        categorySelected = (String) categoryComboBox.getSelectedItem();
+        add(categoryComboBox);
     }
 
     private void addDescriptionComponents()
@@ -67,7 +76,7 @@ public class AddExpenseFrame extends BaseFrame {
     private JLabel createAmountLabel()
     {
         return UIComponentFactory.createLabel(
-                "Amount", 5, 80, getWidth()-10, 40, 30, SwingConstants.LEFT
+                "Amount", 5, 80, getWidth()-10, 40, 26, SwingConstants.LEFT
         );
     }
 
@@ -78,30 +87,59 @@ public class AddExpenseFrame extends BaseFrame {
         );
     }
 
-    private JLabel createAmountInstructionLabel()
+    private void createTypeCheckingCheckBoxes()
     {
-        String text = "* (negative - expense, positive - income)";
-        return UIComponentFactory.createLabel(
-                text, 5, 160, getWidth() - 10, 40, 14, SwingConstants.LEFT
+        int checkBoxWidth = 140;
+        int checkBoxHeight = 30;
+        int gap = 10;
+        int offset = 20;
+
+        int totalWidth = getWidth() - 2 * gap;
+        int centerY = 160;
+
+        int expenseCheckBoxX = (totalWidth / 2) - checkBoxWidth - gap + offset;
+        int incomeCheckBoxX = (totalWidth / 2) + gap + offset;
+
+        expenseCheckBox = UIComponentFactory.createCheckBox(
+                "Expense", expenseCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, true
         );
+        incomeCheckBox = UIComponentFactory.createCheckBox(
+                "Income", incomeCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, false
+        );
+
+        expenseCheckBox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                isExpense = true;
+                incomeCheckBox.setSelected(false);
+                updateCategories();
+            }
+        });
+
+        incomeCheckBox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                isExpense = false;
+                expenseCheckBox.setSelected(false);
+                updateCategories();
+            }
+        });
     }
 
     private JLabel createCategoryLabel()
     {
         return UIComponentFactory.createLabel(
-                "Category", 5, 200, getWidth() - 10, 40, 30, SwingConstants.LEFT
+                "Category", 5, 200, getWidth() - 10, 40, 26, SwingConstants.LEFT
         );
     }
 
     private JComboBox<String> createCategoryComboBox()
     {
-        String[] categories = createCategoriesArray();
+        String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
         return  UIComponentFactory.createStringComboBox(
             categories, 5, 240, getWidth() - 10, 40, 20
         );
     }
 
-    private String[] createCategoriesArray()
+    private String[] createExpenseCategoriesArray()
     {
         return new String[] {
             "Food and Drinks",
@@ -119,10 +157,25 @@ public class AddExpenseFrame extends BaseFrame {
         };
     }
 
+    private String[] createIncomeCategoriesArray()
+    {
+        return new String[]{
+                "Salary", "Freelance", "Investments", "Rent Income",
+                "Gifts", "Other"
+        };
+    }
+
+    private void updateCategories()
+    {
+        String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
+        categoryComboBox.setModel(new DefaultComboBoxModel<>(categories));
+        categorySelected = (String) categoryComboBox.getSelectedItem();
+    }
+
     private JLabel createDescriptionLabel()
     {
         return UIComponentFactory.createLabel(
-                "Description", 5, 300, getWidth()-10, 40, 30, SwingConstants.LEFT
+                "Description", 5, 300, getWidth()-10, 40, 26, SwingConstants.LEFT
         );
     }
 
@@ -140,7 +193,7 @@ public class AddExpenseFrame extends BaseFrame {
 
     private JButton createGoBackButton()
     {
-        JButton button= UIComponentFactory.createButton(
+        JButton button = UIComponentFactory.createButton(
                 "Go Back", 5, 500, (getWidth() - 10) / 2, 40, 30
         );
         return button;
@@ -149,7 +202,7 @@ public class AddExpenseFrame extends BaseFrame {
     private JButton createAddButton()
     {
         int offset = (getWidth() - 10) / 2; // 205px
-        JButton button= UIComponentFactory.createButton(
+        JButton button = UIComponentFactory.createButton(
                 "Add", offset+ 5, 500, offset, 40, 30
         );
 

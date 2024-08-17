@@ -52,10 +52,19 @@ public class UIComponentFactory {
         return comboBox;
     }
 
-    public static JTextArea createTextArea(int x, int y, int width, int height, int fontSize) {
+    public static JTextArea createTextArea(int x, int y, int width, int height, int fontSize)
+    {
         JTextArea textArea = new JTextArea();
         textArea.setBounds(x, y, width, height);
         textArea.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         return textArea;
+    }
+
+    public static JCheckBox createCheckBox(String text, int x, int y, int width, int height, int fontSize, boolean checked)
+    {
+        JCheckBox checkBox = new JCheckBox(text, checked);
+        checkBox.setBounds(x, y, width, height);
+        checkBox.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        return checkBox;
     }
 }
