@@ -51,4 +51,11 @@ public class UIComponentFactory {
         comboBox.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         return comboBox;
     }
+
+    public static JTextArea createTextArea(int x, int y, int width, int height, int fontSize) {
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(x, y, width, height);
+        textArea.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        return textArea;
+    }
 }
