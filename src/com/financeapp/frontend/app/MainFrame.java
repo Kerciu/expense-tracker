@@ -1,12 +1,14 @@
 package com.financeapp.frontend.app;
 
 import com.financeapp.backend.data.User;
+import com.financeapp.frontend.authentication.LoginFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainFrame extends BaseFrame {
+public class MainFrame extends BaseFrame implements ActionListener {
     public MainFrame(User user)
     {
         super("Finance Manager", user, 420, 600);
@@ -46,27 +48,45 @@ public class MainFrame extends BaseFrame {
 
     private void addDepositButton() {
         JButton depositButton = UIComponentFactory.createButton("Add Expense", 5, 180, getWidth() - 10, 30, 22);
+        depositButton.addActionListener(this);
         add(depositButton);
     }
 
     private void addTransactionsHistoryButton() {
-        JButton withdrawButton = UIComponentFactory.createButton("Transactions History", 5, 250, getWidth() - 10, 30, 22);
-        add(withdrawButton);
+        JButton transactionsHistoryButton = UIComponentFactory.createButton("Transactions History", 5, 250, getWidth() - 10, 30, 22);
+        transactionsHistoryButton.addActionListener(this);
+        add(transactionsHistoryButton);
     }
 
     private void addGenerateReportButton() {
-        JButton transactionsHistoryButton = UIComponentFactory.createButton("Generate Report", 5, 320, getWidth() - 10, 30, 22);
-        add(transactionsHistoryButton);
+        JButton generateReportButton = UIComponentFactory.createButton("Generate Report", 5, 320, getWidth() - 10, 30, 22);
+        generateReportButton.addActionListener(this);
+        add(generateReportButton);
     }
 
     private void addSettingsButton() {
         JButton generateReportButton = UIComponentFactory.createButton("Settings", 5, 390, getWidth() - 10, 30, 22);
+        generateReportButton.addActionListener(this);
         add(generateReportButton);
     }
 
     private void addLogoutButton() {
         JButton logoutButton = UIComponentFactory.createButton("Logout", 5, 500, getWidth() - 10, 30, 22);
+        logoutButton.addActionListener(this);
         add(logoutButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        String buttonClicked = e.getActionCommand();
+
+        if (buttonClicked.equalsIgnoreCase("Logout"))
+        {
+            MainFrame.this.dispose();
+            new LoginFrame().setVisible(true);
+            return;
+        }
     }
 
     private String getCurrentCurrency()
