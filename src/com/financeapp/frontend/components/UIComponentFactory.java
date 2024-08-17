@@ -67,4 +67,11 @@ public class UIComponentFactory {
         checkBox.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         return checkBox;
     }
+
+    public static JSeparator createSeparator(int x, int y, int width, int height)
+    {
+        JSeparator separator = new JSeparator();
+        separator.setBounds(x, y, width, height);
+        return separator;
+    }
 }

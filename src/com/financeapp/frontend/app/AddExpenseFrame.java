@@ -4,6 +4,8 @@ import com.financeapp.backend.data.User;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
 
@@ -19,13 +21,15 @@ public class AddExpenseFrame extends BaseFrame {
 
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
-        isExpense = true;
+        isExpense = false;
     }
 
     @Override
     protected void addGuiComponents() {
+        add(createSeparator());
         add(createAddExpenseLabel());
         addAmountEnteringComponents();
+        addCheckBoxes();
         addCategoryComponents();
         addDescriptionComponents();
         addButtons();
@@ -38,13 +42,21 @@ public class AddExpenseFrame extends BaseFrame {
         );
     }
 
+    private JSeparator createSeparator()
+    {
+        return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
+    }
+
     private void addAmountEnteringComponents()
     {
-        add(new JSeparator());
         add(createAmountLabel());
         JTextField textField = createAmountTextField();
         amountEntered = textField.getText();
         add(textField);
+    }
+
+    private void addCheckBoxes()
+    {
         createTypeCheckingCheckBoxes();
         add(expenseCheckBox);
         add(incomeCheckBox);
@@ -54,8 +66,9 @@ public class AddExpenseFrame extends BaseFrame {
     {
         add(createCategoryLabel());
         categoryComboBox = createCategoryComboBox();
-        categorySelected = (String) categoryComboBox.getSelectedItem();
         add(categoryComboBox);
+        updateCategories();
+        categorySelected = (String) categoryComboBox.getSelectedItem();
     }
 
     private void addDescriptionComponents()
@@ -64,7 +77,6 @@ public class AddExpenseFrame extends BaseFrame {
         JTextArea descriptionTextArea = createDescriptionTextArea();
         descriptionProvided = descriptionTextArea.getText();
         add(descriptionTextArea);
-        add(createDescriptionTextArea());
     }
 
     private void addButtons()
@@ -101,10 +113,10 @@ public class AddExpenseFrame extends BaseFrame {
         int incomeCheckBoxX = (totalWidth / 2) + gap + offset;
 
         expenseCheckBox = UIComponentFactory.createCheckBox(
-                "Expense", expenseCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, true
+                "Expense", expenseCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, false
         );
         incomeCheckBox = UIComponentFactory.createCheckBox(
-                "Income", incomeCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, false
+                "Income", incomeCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, true
         );
 
         expenseCheckBox.addItemListener(e -> {
@@ -167,9 +179,11 @@ public class AddExpenseFrame extends BaseFrame {
 
     private void updateCategories()
     {
-        String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
-        categoryComboBox.setModel(new DefaultComboBoxModel<>(categories));
-        categorySelected = (String) categoryComboBox.getSelectedItem();
+        if (categoryComboBox != null) {
+            String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
+            categoryComboBox.setModel(new DefaultComboBoxModel<>(categories));
+            categorySelected = (String) categoryComboBox.getSelectedItem();
+        }
     }
 
     private JLabel createDescriptionLabel()
@@ -186,7 +200,8 @@ public class AddExpenseFrame extends BaseFrame {
         );
 
         textArea.setLineWrap(true);
-        textArea.setBorder(BorderFactory.createEmptyBorder());
+        textArea.setWrapStyleWord(true);
+        textArea.setBorder(new LineBorder(Color.GRAY, 1, true));
 
         return textArea;
     }
