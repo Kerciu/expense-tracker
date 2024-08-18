@@ -1,6 +1,8 @@
 package com.financeapp.frontend.app;
 
+import com.financeapp.backend.data.Transaction;
 import com.financeapp.backend.data.User;
+import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
@@ -11,13 +13,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 
 public class AddExpenseFrame extends BaseFrame {
-    private String amountEntered;
-    private String categorySelected;
-    private String descriptionProvided;
+    private JTextField amountEnteringTextField;
     private boolean isExpense;
-
     private JComboBox<String> categoryComboBox;
     private JCheckBox expenseCheckBox;
     private JCheckBox incomeCheckBox;
@@ -55,9 +56,8 @@ public class AddExpenseFrame extends BaseFrame {
     private void addAmountEnteringComponents()
     {
         add(createAmountLabel());
-        JTextField textField = createAmountTextField();
-        amountEntered = textField.getText();
-        add(textField);
+        amountEnteringTextField = createAmountTextField();
+        add(amountEnteringTextField);
     }
 
     private void addCheckBoxes()
@@ -73,7 +73,6 @@ public class AddExpenseFrame extends BaseFrame {
         categoryComboBox = createCategoryComboBox();
         add(categoryComboBox);
         updateCategories();
-        categorySelected = (String) categoryComboBox.getSelectedItem();
     }
 
     private void addDescriptionComponents()
@@ -191,7 +190,6 @@ public class AddExpenseFrame extends BaseFrame {
         if (categoryComboBox != null) {
             String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
             categoryComboBox.setModel(new DefaultComboBoxModel<>(categories));
-            categorySelected = (String) categoryComboBox.getSelectedItem();
         }
     }
 
@@ -274,7 +272,7 @@ public class AddExpenseFrame extends BaseFrame {
         JButton button = UIComponentFactory.createButton(
                 "Add", offset+ 5, 500, offset, 40, 30
         );
-
+        button.addActionListener(createAddTransactionActionListener());
         return button;
     }
 
@@ -287,5 +285,40 @@ public class AddExpenseFrame extends BaseFrame {
                 new MainFrame(user).setVisible(true);
             }
         };
+    }
+
+    private ActionListener createAddTransactionActionListener()
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int userId = user.getId();
+                if (!validateAmountEntered(amountEnteringTextField.getText())) {
+                    JOptionPane.showMessageDialog(AddExpenseFrame.this, "Amount entered must be a positive number!");
+                    return;
+                }
+                BigDecimal amount = filterAmountEntered(amountEnteringTextField.getText());
+                String type = (isExpense ? "Expense" : "Income");
+                String category = (String) categoryComboBox.getSelectedItem();
+                category = category != null ? category : "Other";
+                String description = descriptionTextArea.getText();
+
+                try {
+                    MySQLConnector.insertTransactionIntoDatabase(userId, amount, type, category, description);
+                    JOptionPane.showMessageDialog(AddExpenseFrame.this, "Transaction added successfully!");
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(AddExpenseFrame.this, "An error occurred while adding the transaction: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        };
+    }
+
+    private boolean validateAmountEntered(String amountEntered) {
+        return false;
+    }
+
+    private BigDecimal filterAmountEntered(String amountEntered)
+    {
+        return new BigDecimal(0);
     }
 }
