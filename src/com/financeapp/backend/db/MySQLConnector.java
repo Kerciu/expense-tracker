@@ -1,8 +1,10 @@
 package com.financeapp.backend.db;
 
+import com.financeapp.backend.data.Transaction;
 import com.financeapp.backend.data.User;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 
 public class MySQLConnector {
@@ -59,6 +61,15 @@ public class MySQLConnector {
         preparedStatement.setString(2, hashedPassword);
     }
 
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, int userId, BigDecimal amount, String type, String category, String description) throws  SQLException
+    {
+        preparedStatement.setString(1, String.valueOf(userId));
+        preparedStatement.setString(2, String.valueOf(amount.setScale(2, RoundingMode.FLOOR)));
+        preparedStatement.setString(3, type);
+        preparedStatement.setString(4, category);
+        preparedStatement.setString(5, description);
+    }
+
     private static User processValidationResult(ResultSet resultSet, String password) throws SQLException {
         if (resultSet.next()) {
             String storedHashedPassword = resultSet.getString("password");
@@ -74,5 +85,17 @@ public class MySQLConnector {
             System.out.println("No user found with the given username and password.");
         }
         return null;
+    }
+
+    public static void insertTransactionIntoDatabase(int userID, BigDecimal amount, String type, String category, String description) throws SQLException
+    {
+        String query = SQLStatementFactory.insertTransactionIntoDatabase();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            setPreparedStatementParameters(preparedStatement, userID, amount, type, category, description);
+            preparedStatement.executeUpdate();
+        }
     }
 }

@@ -11,4 +11,10 @@ public class SQLStatementFactory {
     {
         return "INSERT INTO user_data (username, password) VALUES (?, ?);";
     }
+
+    public static String insertTransactionIntoDatabase()
+    {
+        return "INSERT INTO transactions (user_id, amount, type, category, description) "
+                + "VALUES (?, ?, ?, ?, ?);";
+    }
 }
