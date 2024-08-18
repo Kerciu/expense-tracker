@@ -5,10 +5,10 @@ import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.AbstractDocument;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.math.BigDecimal;
 
 public class AddExpenseFrame extends BaseFrame {
     private String amountEntered;
@@ -20,6 +20,7 @@ public class AddExpenseFrame extends BaseFrame {
     private JCheckBox expenseCheckBox;
     private JCheckBox incomeCheckBox;
     private JTextArea descriptionTextArea;
+    private JLabel charsRemainingLabel;
 
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
@@ -77,8 +78,12 @@ public class AddExpenseFrame extends BaseFrame {
     {
         add(createDescriptionLabel());
         JTextArea descriptionTextArea = createDescriptionTextArea();
-        descriptionProvided = descriptionTextArea.getText();
         add(descriptionTextArea);
+        add(createDescriptionCharsRemainingLabel());
+
+        if (charsRemainingLabel != null) {
+            updateCharsRemainingLabel();
+        }
     }
 
     private void addButtons()
@@ -207,20 +212,49 @@ public class AddExpenseFrame extends BaseFrame {
 
         int maxChars = 100;
         descriptionTextArea.setDocument(new LimitedDocument(maxChars));
+        descriptionTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                SwingUtilities.invokeLater(AddExpenseFrame.this::updateCharsRemainingLabel);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                SwingUtilities.invokeLater(AddExpenseFrame.this::updateCharsRemainingLabel);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                SwingUtilities.invokeLater(AddExpenseFrame.this::updateCharsRemainingLabel);
+            }
+        });
 
         return descriptionTextArea;
     }
 
     private JLabel createDescriptionCharsRemainingLabel()
     {
-        int charsRemaining = 100 - descriptionProvided.length();
+        int charsRemaining = 100 - descriptionTextArea.getText().length();
 
-        return UIComponentFactory.createLabel(
+        charsRemainingLabel =  UIComponentFactory.createLabel(
                 charsRemaining+ " characters remaining",
-                getWidth()/2, 470,
-                getWidth() - 10,30,
-                20, SwingConstants.LEFT
+                getWidth()/2, 460,
+                getWidth() / 2 - 10,30,
+                14, SwingConstants.RIGHT
         );
+
+        return charsRemainingLabel;
+    }
+
+    private void updateCharsRemainingLabel()
+    {
+        if (charsRemainingLabel != null) {
+            int maxChars = 100;
+            int charsUsed = descriptionTextArea.getDocument().getLength();
+            int charsRemaining = maxChars - charsUsed;
+            charsRemainingLabel.setText(charsRemaining + " characters remaining");
+        }
+
     }
 
     private JButton createGoBackButton()
