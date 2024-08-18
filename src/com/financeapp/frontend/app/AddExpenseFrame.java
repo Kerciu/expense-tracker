@@ -5,6 +5,7 @@ import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class AddExpenseFrame extends BaseFrame {
     private JComboBox<String> categoryComboBox;
     private JCheckBox expenseCheckBox;
     private JCheckBox incomeCheckBox;
+    private JTextArea descriptionTextArea;
 
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
@@ -195,15 +197,30 @@ public class AddExpenseFrame extends BaseFrame {
 
     private  JTextArea createDescriptionTextArea()
     {
-        JTextArea textArea= UIComponentFactory.createTextArea(
+        descriptionTextArea = UIComponentFactory.createTextArea(
                 5, 340, getWidth()-10, 120, 20
         );
 
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setBorder(new LineBorder(Color.GRAY, 1, true));
+        descriptionTextArea.setLineWrap(true);
+        descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setBorder(new LineBorder(Color.GRAY, 1, true));
 
-        return textArea;
+        int maxChars = 100;
+        descriptionTextArea.setDocument(new LimitedDocument(maxChars));
+
+        return descriptionTextArea;
+    }
+
+    private JLabel createDescriptionCharsRemainingLabel()
+    {
+        int charsRemaining = 100 - descriptionProvided.length();
+
+        return UIComponentFactory.createLabel(
+                charsRemaining+ " characters remaining",
+                getWidth()/2, 470,
+                getWidth() - 10,30,
+                20, SwingConstants.LEFT
+        );
     }
 
     private JButton createGoBackButton()
