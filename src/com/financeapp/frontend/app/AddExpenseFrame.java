@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 
 public class AddExpenseFrame extends BaseFrame {
@@ -305,6 +306,7 @@ public class AddExpenseFrame extends BaseFrame {
 
                 try {
                     MySQLConnector.insertTransactionIntoDatabase(userId, amount, type, category, description);
+                    clearAllTheFieldsUponAdding();
                     JOptionPane.showMessageDialog(AddExpenseFrame.this, "Transaction added successfully!");
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(AddExpenseFrame.this, "An error occurred while adding the transaction: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
@@ -313,12 +315,36 @@ public class AddExpenseFrame extends BaseFrame {
         };
     }
 
+    private void clearAllTheFieldsUponAdding()
+    {
+        amountEnteringTextField.setText("");
+        descriptionTextArea.setText("");
+    }
+
     private boolean validateAmountEntered(String amountEntered) {
-        return false;
+        if (amountEntered == null || amountEntered.isEmpty())
+            return false;
+
+        try {
+            BigDecimal amount = new BigDecimal(amountEntered);
+            return amount.compareTo(BigDecimal.ZERO) > 0;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private BigDecimal filterAmountEntered(String amountEntered)
     {
-        return new BigDecimal(0);
+        if (amountEntered == null || amountEntered.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+
+        try {
+            BigDecimal amount = new BigDecimal(amountEntered);
+            return amount.setScale(2, RoundingMode.FLOOR);
+        } catch (NumberFormatException e) {
+            return BigDecimal.ZERO;
+        }
     }
 }
