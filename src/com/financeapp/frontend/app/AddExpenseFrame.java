@@ -8,6 +8,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
 public class AddExpenseFrame extends BaseFrame {
@@ -262,6 +264,7 @@ public class AddExpenseFrame extends BaseFrame {
         JButton button = UIComponentFactory.createButton(
                 "Go Back", 5, 500, (getWidth() - 10) / 2, 40, 30
         );
+        button.addActionListener(createGoBackButtonActionListener());
         return button;
     }
 
@@ -273,5 +276,16 @@ public class AddExpenseFrame extends BaseFrame {
         );
 
         return button;
+    }
+
+    private ActionListener createGoBackButtonActionListener()
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddExpenseFrame.this.dispose();
+                new MainFrame(user).setVisible(true);
+            }
+        };
     }
 }

@@ -85,10 +85,10 @@ public class MainFrame extends BaseFrame implements ActionListener {
         {
             MainFrame.this.dispose();
             new LoginFrame().setVisible(true);
-            return;
         }
         else if (buttonClicked.equalsIgnoreCase("Add Expense"))
         {
+            MainFrame.this.dispose();
             new AddExpenseFrame("Add Expense", user, 420, 600).setVisible(true);
         }
         else if (buttonClicked.equalsIgnoreCase("Transactions History"))
