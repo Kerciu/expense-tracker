@@ -20,6 +20,19 @@ public class TransactionTypePanel extends JPanel {
         addCheckBoxes(width);
     }
 
+    public boolean getIsExpense()
+    {
+        return isExpense;
+    }
+
+    public JCheckBox getExpenseCheckBox() {
+        return expenseCheckBox;
+    }
+
+    public JCheckBox getIncomeCheckBox() {
+        return incomeCheckBox;
+    }
+
     private void addCheckBoxes(int width)
     {
         createTypeCheckingCheckBoxes(width);

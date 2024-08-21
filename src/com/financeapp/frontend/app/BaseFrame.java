@@ -17,6 +17,10 @@ public abstract class BaseFrame extends JFrame {
         initializeComponents(title, width, height);
     }
 
+    public User getUser() {
+        return user;
+    }
+
     private void initializeComponents(String title, int width, int height) {
         setTitle(title);
         setSize(width, height);

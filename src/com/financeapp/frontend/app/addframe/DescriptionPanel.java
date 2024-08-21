@@ -19,6 +19,14 @@ public class DescriptionPanel extends JPanel {
         addDescriptionComponents(width);
     }
 
+    public JTextArea getDescriptionTextArea() {
+        return descriptionTextArea;
+    }
+
+    public JLabel getCharsRemainingLabel() {
+        return charsRemainingLabel;
+    }
+
     private void addDescriptionComponents(int width)
     {
         add(createDescriptionLabel(width));

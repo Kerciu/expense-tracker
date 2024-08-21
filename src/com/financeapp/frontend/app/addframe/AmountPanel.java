@@ -12,6 +12,10 @@ public class AmountPanel extends JPanel {
         addAmountEnteringComponents(width);
     }
 
+    public JTextField getAmountEnteringTextField() {
+        return amountEnteringTextField;
+    }
+
     private void addAmountEnteringComponents(int width)
     {
         add(createAmountLabel(width));

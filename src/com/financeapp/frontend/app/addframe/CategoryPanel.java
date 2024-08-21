@@ -12,6 +12,10 @@ public class CategoryPanel extends JPanel {
         addCategoryComponents(width, isExpense);
     }
 
+    public JComboBox<String> getCategoryComboBox() {
+        return categoryComboBox;
+    }
+
     private void addCategoryComponents(int width, boolean isExpense)
     {
         add(createCategoryLabel(width));

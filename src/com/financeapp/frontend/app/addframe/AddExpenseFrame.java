@@ -28,9 +28,37 @@ public class AddExpenseFrame extends BaseFrame {
     private JTextArea descriptionTextArea;
     private JLabel charsRemainingLabel;
 
+    private AmountPanel amountPanel;
+    private TransactionTypePanel transactionTypePanel;
+    private CategoryPanel categoryPanel;
+    private DescriptionPanel descriptionPanel;
+    private ButtonPanel buttonPanel;
+
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
         isExpense = false;
+    }
+
+    g
+
+    public AmountPanel getAmountPanel() {
+        return amountPanel;
+    }
+
+    public TransactionTypePanel getTransactionTypePanel() {
+        return transactionTypePanel;
+    }
+
+    public CategoryPanel getCategoryPanel() {
+        return categoryPanel;
+    }
+
+    public DescriptionPanel getDescriptionPanel() {
+        return descriptionPanel;
+    }
+
+    public ButtonPanel getButtonPanel() {
+        return buttonPanel;
     }
 
     @Override
