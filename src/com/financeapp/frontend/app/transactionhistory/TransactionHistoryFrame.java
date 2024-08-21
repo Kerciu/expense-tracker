@@ -2,12 +2,14 @@ package com.financeapp.frontend.app.transactionhistory;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.frontend.app.BaseFrame;
-import com.financeapp.frontend.app.addframe.panels.*;
+import com.financeapp.frontend.app.transactionhistory.panels.TransactionHistoryButtonPanel;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 
 public class TransactionHistoryFrame extends BaseFrame {
+    private TransactionHistoryButtonPanel transactionHistoryButtonPanel;
+
     public TransactionHistoryFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
     }
@@ -18,26 +20,25 @@ public class TransactionHistoryFrame extends BaseFrame {
         addPanels();
     }
 
-    @Override
-    protected void addPanels()
+    private void addPanels()
     {
         initializePanels();
         arrangePanels();
+
+        add(transactionHistoryButtonPanel);
 
         revalidate();
         repaint();
     }
 
-    @Override
-    protected void initializePanels()
+    private void initializePanels()
     {
-
+        transactionHistoryButtonPanel = new TransactionHistoryButtonPanel(this, getWidth());
     }
 
-    @Override
-    protected void arrangePanels()
+    private void arrangePanels()
     {
-
+        transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 30);
     }
 
     private void addWelcomingComponents()

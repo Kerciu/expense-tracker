@@ -32,7 +32,4 @@ public abstract class BaseFrame extends JFrame {
     }
 
     protected abstract void addGuiComponents();
-    protected abstract void addPanels();
-    protected abstract void initializePanels();
-    protected abstract void arrangePanels();
 }

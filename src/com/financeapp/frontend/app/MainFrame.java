@@ -102,14 +102,17 @@ public class MainFrame extends BaseFrame implements ActionListener {
         }
         else if (buttonClicked.equalsIgnoreCase("Transactions History"))
         {
+            MainFrame.this.dispose();
             new TransactionHistoryFrame("Transactions History", user, 420, 600).setVisible(true);
         }
         else if (buttonClicked.equalsIgnoreCase("Generate Report"))
         {
+            MainFrame.this.dispose();
             new GenerateReportFrame("Generate Report", user, 420, 600).setVisible(true);
         }
         else if (buttonClicked.equalsIgnoreCase("Settings"))
         {
+            MainFrame.this.dispose();
             new SettingsFrame("Settings", user, 420, 600).setVisible(true);
         }
     }

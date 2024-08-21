@@ -12,7 +12,7 @@ public class AddExpenseFrame extends BaseFrame {
     private TransactionTypePanel transactionTypePanel;
     private CategoryPanel categoryPanel;
     private DescriptionPanel descriptionPanel;
-    private ButtonPanel buttonPanel;
+    private AddExpenseFrameButtonPanel buttonPanel;
 
     public AddExpenseFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
@@ -26,8 +26,7 @@ public class AddExpenseFrame extends BaseFrame {
         addPanels();
     }
 
-    @Override
-    protected void addPanels()
+    private void addPanels()
     {
         initializePanels();
         arrangePanels();
@@ -42,18 +41,16 @@ public class AddExpenseFrame extends BaseFrame {
         repaint();
     }
 
-    @Override
-    protected void initializePanels()
+    private void initializePanels()
     {
         amountPanel = new AmountPanel(getWidth());
         categoryPanel = new CategoryPanel(getWidth(), false);
         transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
-        buttonPanel = new ButtonPanel(this, getWidth());
+        buttonPanel = new AddExpenseFrameButtonPanel(this, getWidth());
     }
 
-    @Override
-    protected void arrangePanels()
+    private void arrangePanels()
     {
         amountPanel.setBounds(0, 80, getWidth(), 80);
         transactionTypePanel.setBounds(0, 160, getWidth(), 40);
@@ -96,7 +93,7 @@ public class AddExpenseFrame extends BaseFrame {
         return descriptionPanel;
     }
 
-    public ButtonPanel getButtonPanel() {
+    public AddExpenseFrameButtonPanel getButtonPanel() {
         return buttonPanel;
     }
 }

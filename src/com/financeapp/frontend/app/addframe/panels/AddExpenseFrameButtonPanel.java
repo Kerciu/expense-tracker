@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 
-public class ButtonPanel extends JPanel {
+public class AddExpenseFrameButtonPanel extends JPanel {
     private AddExpenseFrame source;
     private final User user;
     private final JTextField amountEnteringTextField;
@@ -21,7 +21,7 @@ public class ButtonPanel extends JPanel {
     private final JComboBox<String> categoryComboBox;
     private final boolean isExpense;
 
-    public ButtonPanel(AddExpenseFrame source, int width) {
+    public AddExpenseFrameButtonPanel(AddExpenseFrame source, int width) {
         this.source = source;
         this.user = source.getUser();
         this.amountEnteringTextField = source.getAmountPanel().getAmountEnteringTextField();
