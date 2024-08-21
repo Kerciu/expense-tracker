@@ -1,8 +1,10 @@
-package com.financeapp.frontend.app;
+package com.financeapp.frontend.app.addframe;
 
-import com.financeapp.backend.data.Transaction;
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
+import com.financeapp.frontend.app.BaseFrame;
+import com.financeapp.frontend.app.LimitedDocument;
+import com.financeapp.frontend.app.MainFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
