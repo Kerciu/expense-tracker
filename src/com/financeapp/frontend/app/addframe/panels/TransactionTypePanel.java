@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.frontend.components.UIComponentFactory;
 
@@ -43,21 +43,19 @@ public class TransactionTypePanel extends JPanel {
     private void createTypeCheckingCheckBoxes(int width)
     {
         int checkBoxWidth = 140;
-        int checkBoxHeight = 30;
         int gap = 10;
         int offset = 20;
 
         int totalWidth = width - 2 * gap;
-        int centerY = 160;
 
         int expenseCheckBoxX = (totalWidth / 2) - checkBoxWidth - gap + offset;
         int incomeCheckBoxX = (totalWidth / 2) + gap + offset;
 
         expenseCheckBox = UIComponentFactory.createCheckBox(
-                "Expense", expenseCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, false
+                "Expense", expenseCheckBoxX, 0, checkBoxWidth, 30, 20, false
         );
         incomeCheckBox = UIComponentFactory.createCheckBox(
-                "Income", incomeCheckBoxX, centerY, checkBoxWidth, checkBoxHeight, 20, true
+                "Income", incomeCheckBoxX, 0, checkBoxWidth, 30, 20, true
         );
 
         expenseCheckBox.addItemListener(e -> {

@@ -3,6 +3,7 @@ package com.financeapp.frontend.app;
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.frontend.app.addframe.AddExpenseFrame;
+import com.financeapp.frontend.app.transactionhistory.TransactionHistoryFrame;
 import com.financeapp.frontend.authentication.LoginFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 

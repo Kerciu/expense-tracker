@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.frontend.components.UIComponentFactory;
 
@@ -26,14 +26,14 @@ public class AmountPanel extends JPanel {
     private JLabel createAmountLabel(int width)
     {
         return UIComponentFactory.createLabel(
-                "Amount", 5, 80, width - 10, 40, 26, SwingConstants.LEFT
+                "Amount", 5, 0, width - 10, 40, 26, SwingConstants.LEFT
         );
     }
 
     private JTextField createAmountTextField(int width)
     {
         return UIComponentFactory.createTextField(
-                5, 120, width - 10, 40, 20, true
+                5, 40, width - 10, 40, 20, true
         );
     }
 

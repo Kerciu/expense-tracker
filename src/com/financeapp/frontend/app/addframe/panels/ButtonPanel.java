@@ -1,8 +1,9 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.frontend.app.MainFrame;
+import com.financeapp.frontend.app.addframe.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
@@ -41,7 +42,7 @@ public class ButtonPanel extends JPanel {
     private JButton createGoBackButton(int width)
     {
         JButton button = UIComponentFactory.createButton(
-                "Go Back", 5, 500, (width - 10) / 2, 40, 30
+                "Go Back", 5, 0, (width - 10) / 2, 40, 30
         );
         button.addActionListener(createGoBackButtonActionListener());
         return button;
@@ -51,7 +52,7 @@ public class ButtonPanel extends JPanel {
     {
         int offset = (width - 10) / 2; // 205px
         JButton button = UIComponentFactory.createButton(
-                "Add", offset+ 5, 500, offset, 40, 30
+                "Add", offset+ 5, 0, offset, 40, 30
         );
         button.addActionListener(createAddTransactionActionListener());
         return button;
@@ -114,8 +115,7 @@ public class ButtonPanel extends JPanel {
         }
     }
 
-    private BigDecimal filterAmountEntered(String amountEntered)
-    {
+    private BigDecimal filterAmountEntered(String amountEntered) {
         if (amountEntered == null || amountEntered.isEmpty()) {
             return BigDecimal.ZERO;
         }
@@ -126,6 +126,5 @@ public class ButtonPanel extends JPanel {
         } catch (NumberFormatException e) {
             return BigDecimal.ZERO;
         }
-    }
     }
 }

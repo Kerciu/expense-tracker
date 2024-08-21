@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.frontend.app.LimitedDocument;
 import com.financeapp.frontend.components.UIComponentFactory;
@@ -42,14 +42,14 @@ public class DescriptionPanel extends JPanel {
     private JLabel createDescriptionLabel(int width)
     {
         return UIComponentFactory.createLabel(
-                "Description", 5, 300, width-10, 40, 26, SwingConstants.LEFT
+                "Description", 5, 0, width-10, 40, 26, SwingConstants.LEFT
         );
     }
 
     private  JTextArea createDescriptionTextArea(int width)
     {
         descriptionTextArea = UIComponentFactory.createTextArea(
-                5, 340, width-10, 120, 20
+                5, 40, width-10, 120, 20
         );
 
         descriptionTextArea.setLineWrap(true);
@@ -84,7 +84,7 @@ public class DescriptionPanel extends JPanel {
 
         charsRemainingLabel =  UIComponentFactory.createLabel(
                 charsRemaining+ " characters remaining",
-                width/2, 460,
+                width/2, 160,
                 width / 2 - 10,30,
                 14, SwingConstants.RIGHT
         );

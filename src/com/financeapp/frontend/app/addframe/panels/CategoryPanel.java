@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.frontend.components.UIComponentFactory;
 
@@ -27,7 +27,7 @@ public class CategoryPanel extends JPanel {
     private JLabel createCategoryLabel(int width)
     {
         return UIComponentFactory.createLabel(
-                "Category", 5, 200, width - 10, 40, 26, SwingConstants.LEFT
+                "Category", 5, 0, width - 10, 40, 26, SwingConstants.LEFT
         );
     }
 
@@ -35,7 +35,7 @@ public class CategoryPanel extends JPanel {
     {
         String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
         return  UIComponentFactory.createStringComboBox(
-                categories, 5, 240, width - 10, 40, 20
+                categories, 5, 40, width - 10, 40, 20
         );
     }
 
@@ -67,9 +67,7 @@ public class CategoryPanel extends JPanel {
 
     public void updateCategories(boolean isExpense)
     {
-        if (categoryComboBox != null) {
             String[] categories = isExpense ? createExpenseCategoriesArray() : createIncomeCategoriesArray();
             categoryComboBox.setModel(new DefaultComboBoxModel<>(categories));
-        }
     }
 }
