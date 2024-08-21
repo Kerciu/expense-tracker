@@ -51,7 +51,7 @@ public class TransactionTypePanel extends JPanel {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 isExpense = true;
                 incomeCheckBox.setSelected(false);
-                categoryPanel.updateCategories();
+                categoryPanel.updateCategories(this.isExpense);
             }
         });
 
@@ -59,7 +59,7 @@ public class TransactionTypePanel extends JPanel {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 isExpense = false;
                 expenseCheckBox.setSelected(false);
-                categoryPanel.updateCategories();
+                categoryPanel.updateCategories(this.isExpense);
             }
         });
     }
