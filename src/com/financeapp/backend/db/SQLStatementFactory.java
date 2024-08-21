@@ -17,4 +17,11 @@ public class SQLStatementFactory {
         return "INSERT INTO transactions (user_id, amount, type, category, description) "
                 + "VALUES (?, ?, ?, ?, ?);";
     }
+
+    public static String selectAllUserTransactionAmounts()
+    {
+        return "SELECT amount, type FROM transactions WHERE user_id = ("
+                + "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
 }

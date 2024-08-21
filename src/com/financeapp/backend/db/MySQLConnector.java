@@ -56,6 +56,11 @@ public class MySQLConnector {
         return preparedStatement;
     }
 
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, String username) throws SQLException
+    {
+        preparedStatement.setString(1, username);
+    }
+
     private static void setPreparedStatementParameters(PreparedStatement preparedStatement, String username, String hashedPassword) throws SQLException {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, hashedPassword);
@@ -96,6 +101,32 @@ public class MySQLConnector {
         {
             setPreparedStatementParameters(preparedStatement, userID, amount, type, category, description);
             preparedStatement.executeUpdate();
+        }
+    }
+
+    public static void getAllTransactionAmounts(User user) throws SQLException
+    {
+        String query = SQLStatementFactory.selectAllUserTransactionAmounts();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            setPreparedStatementParameters(preparedStatement, user.getUsername());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            user.setBalance(BigDecimal.ZERO);
+
+            while(resultSet.next())
+            {
+                String type = resultSet.getString("type");
+                BigDecimal transactionAmount = resultSet.getBigDecimal("amount");
+
+                if (type.equalsIgnoreCase("Expense")) {
+                    user.subBalance(transactionAmount);
+                } else {
+                    user.addBalance(transactionAmount);
+                }
+            }
         }
     }
 }

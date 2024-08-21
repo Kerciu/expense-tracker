@@ -1,12 +1,14 @@
 package com.financeapp.frontend.app;
 
 import com.financeapp.backend.data.User;
+import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.frontend.authentication.LoginFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class MainFrame extends BaseFrame implements ActionListener {
     public MainFrame(User user)
@@ -38,6 +40,11 @@ public class MainFrame extends BaseFrame implements ActionListener {
     }
 
     private void addBalanceTextField() {
+        try {
+            MySQLConnector.getAllTransactionAmounts(user);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
         JTextField userBalanceTextField = UIComponentFactory.createTextField(
                 user.getBalance() + " " + getCurrentCurrency(),
                 15, 120, getWidth() - 50, 40, 28, false

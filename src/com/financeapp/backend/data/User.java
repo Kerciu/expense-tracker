@@ -35,6 +35,15 @@ public class User {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance.setScale(2, RoundingMode.FLOOR);
+    }
 
+    public void addBalance(BigDecimal balance)
+    {
+        this.balance = this.balance.add(balance).setScale(2, RoundingMode.FLOOR);
+    }
+
+    public void subBalance(BigDecimal balance)
+    {
+        this.balance = this.balance.subtract(balance).setScale(2, RoundingMode.FLOOR);
     }
 }
