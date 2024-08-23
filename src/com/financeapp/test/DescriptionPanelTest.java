@@ -1,4 +1,4 @@
-package com.financeapp.test.guitest;
+package com.financeapp.test;
 
 import com.financeapp.frontend.app.addframe.panels.DescriptionPanel;
 import org.junit.jupiter.api.BeforeEach;

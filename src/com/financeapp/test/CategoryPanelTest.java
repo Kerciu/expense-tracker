@@ -1,9 +1,9 @@
-package com.financeapp.test.guitest;
+package com.financeapp.test;
 
 import com.financeapp.frontend.app.addframe.panels.CategoryPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import javax.swing.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CategoryPanelTest {
