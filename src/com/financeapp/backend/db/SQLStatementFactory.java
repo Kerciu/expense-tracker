@@ -24,4 +24,12 @@ public class SQLStatementFactory {
                 + "SELECT id FROM user_data WHERE username = ?" +
                 ");";
     }
+
+    public static String selectTransactionHistoryDetailsForCardDisplay()
+    {
+        return "SELECT amount, type, category, description " +
+                "FROM transactions WHERE user_id = ("
+                + "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
 }

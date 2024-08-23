@@ -129,4 +129,17 @@ public class MySQLConnector {
             }
         }
     }
+
+    public static ResultSet getTransactionHistoryDetailsForCards(User user) throws SQLException
+    {
+        String query = SQLStatementFactory.selectTransactionHistoryDetailsForCardDisplay();
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            setPreparedStatementParameters(preparedStatement, user.getUsername());
+
+            return preparedStatement.executeQuery();
+        }
+    }
 }
