@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class HistoryCard extends JPanel {
     private BigDecimal amount;
@@ -21,6 +20,9 @@ public class HistoryCard extends JPanel {
         this.type = type;
         this.category = category;
         this.description = description;
+
+        initializeCardLook();
+        addComponents();
     }
 
     private void initializeCardLook()
@@ -28,6 +30,34 @@ public class HistoryCard extends JPanel {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         setPreferredSize(new Dimension(400, 100));
+    }
+
+    private void addComponents() {
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        contentPanel.add(createCategoryLabel(), gbc);
+
+        gbc.gridy = 1;
+        contentPanel.add(createAmountLabel(), gbc);
+
+        gbc.gridy = 2;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPanel.add(createDescriptionTextArea(), gbc);
+
+        JPanel buttonPanel = createButtonPanel();
+
+        add(contentPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.EAST);
     }
 
     private JLabel createCategoryLabel()
@@ -71,22 +101,28 @@ public class HistoryCard extends JPanel {
 
     private JButton createDeleteButton()
     {
-        String deleteButtonIconPath = "assets/images/delete.png";
+        String deleteButtonIconPath = "/home/kerciu/Desktop/finance-management-app/assets/images/delete.png";
         JButton button = new JButton(IconLoader.loadIcon(deleteButtonIconPath));
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setContentAreaFilled(false);
         button.setFocusable(false);
+        button.setPreferredSize(new Dimension(24, 24));
+        button.setMinimumSize(new Dimension(24, 24));
+        button.setMaximumSize(new Dimension(24, 24));
         button.addActionListener(createDeleteButtonActionListener());
         return button;
     }
 
     private JButton createEditButton()
     {
-        String editButtonIconPath = "assets/images/edit.png";
+        String editButtonIconPath = "/home/kerciu/Desktop/finance-management-app/assets/images/edit.png";
         JButton button = new JButton(IconLoader.loadIcon(editButtonIconPath));
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setContentAreaFilled(false);
         button.setFocusable(false);
+        button.setPreferredSize(new Dimension(24, 24));
+        button.setMinimumSize(new Dimension(24, 24));
+        button.setMaximumSize(new Dimension(24, 24));
         button.addActionListener(createEditButtonActionListener());
         return button;
     }

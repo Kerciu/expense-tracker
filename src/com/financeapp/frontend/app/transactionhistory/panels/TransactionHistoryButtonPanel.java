@@ -7,6 +7,7 @@ import com.financeapp.frontend.components.UIComponentFactory;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 public class TransactionHistoryButtonPanel extends JPanel{
     private TransactionHistoryFrame source;
@@ -16,6 +17,7 @@ public class TransactionHistoryButtonPanel extends JPanel{
 
         setLayout(null);
         addButtons(width);
+        add(new HistoryCard(new BigDecimal(50), "Expense", "Food", "I bought kebab and went clubbing after it"));
     }
 
     private void addButtons(int width)
