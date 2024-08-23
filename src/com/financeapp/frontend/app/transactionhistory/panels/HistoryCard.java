@@ -1,7 +1,13 @@
 package com.financeapp.frontend.app.transactionhistory.panels;
 
+import com.financeapp.backend.utils.IconLoader;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class HistoryCard extends JPanel {
     private BigDecimal amount;
@@ -15,5 +21,74 @@ public class HistoryCard extends JPanel {
         this.type = type;
         this.category = category;
         this.description = description;
+    }
+
+    private void initializeCardLook()
+    {
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        setPreferredSize(new Dimension(400, 100));
+    }
+
+    private JLabel createCategoryLabel()
+    {
+        JLabel categoryLabel = new JLabel(category);
+        categoryLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        return categoryLabel;
+    }
+
+    private JLabel createAmountLabel()
+    {
+        String text = (type.equalsIgnoreCase("Expense") ? " - " : " + ") + amount.toString();
+        JLabel amountLabel = new JLabel(text);
+        amountLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        return amountLabel;
+    }
+
+    private JTextArea createDescriptionTextArea()
+    {
+        JTextArea textArea = new JTextArea(description);
+        textArea.setFont(new Font("Dialog", Font.PLAIN, 12));
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setPreferredSize(new Dimension(380, 40));
+        return textArea;
+    }
+
+    private JButton createDeleteButton()
+    {
+        String deleteButtonIconPath = "assets/images/delete.png";
+        JButton button = new JButton(IconLoader.loadIcon(deleteButtonIconPath));
+        button.addActionListener(createDeleteButtonActionListener());
+        return button;
+    }
+
+    private JButton createEditButton()
+    {
+        String editButtonIconPath = "assets/images/edit.png";
+        JButton button = new JButton(IconLoader.loadIcon(editButtonIconPath));
+        button.addActionListener(createEditButtonActionListener());
+        return button;
+    }
+
+    private ActionListener createDeleteButtonActionListener()
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
+    }
+
+    private ActionListener createEditButtonActionListener()
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
     }
 }

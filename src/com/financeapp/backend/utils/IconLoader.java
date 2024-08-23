@@ -13,7 +13,7 @@ public class IconLoader {
                 System.err.println("Icon not found: " + filePath);
                 return null;
             }
-            
+
             return new ImageIcon(inputStream.readAllBytes());
         } catch (IOException e) {
             e.printStackTrace();
