@@ -19,7 +19,6 @@ public class AddExpenseFrameButtonPanel extends JPanel {
     private final JTextField amountEnteringTextField;
     private final JTextArea descriptionTextArea;
     private final JComboBox<String> categoryComboBox;
-    private final boolean isExpense;
 
     public AddExpenseFrameButtonPanel(AddExpenseFrame source, int width) {
         this.source = source;
@@ -27,7 +26,6 @@ public class AddExpenseFrameButtonPanel extends JPanel {
         this.amountEnteringTextField = source.getAmountPanel().getAmountEnteringTextField();
         this.descriptionTextArea = source.getDescriptionPanel().getDescriptionTextArea();
         this.categoryComboBox = source.getCategoryPanel().getCategoryComboBox();
-        this.isExpense = source.getTransactionTypePanel().getIsExpense();
 
         setLayout(null);
         addButtons(width);
@@ -80,7 +78,11 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                     return;
                 }
                 BigDecimal amount = filterAmountEntered(amountEnteringTextField.getText());
-                String type = (isExpense ? "Expense" : "Income");
+
+                String type = (source.getTransactionTypePanel().getIsExpense() ? "Expense" : "Income");
+
+                System.out.println("isExpense: " + source.getTransactionTypePanel().getIsExpense());
+
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";
                 String description = descriptionTextArea.getText();

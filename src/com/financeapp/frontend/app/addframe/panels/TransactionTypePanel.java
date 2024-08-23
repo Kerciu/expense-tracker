@@ -14,7 +14,6 @@ public class TransactionTypePanel extends JPanel {
     public TransactionTypePanel(CategoryPanel categoryPanel, int width)
     {
         this.categoryPanel = categoryPanel;
-        this.isExpense = false;
 
         setLayout(null);
         addCheckBoxes(width);
@@ -24,6 +23,8 @@ public class TransactionTypePanel extends JPanel {
     {
         return isExpense;
     }
+
+    public void setIsExpense(boolean isExpense) { this.isExpense = isExpense; }
 
     public JCheckBox getExpenseCheckBox() {
         return expenseCheckBox;
@@ -52,10 +53,10 @@ public class TransactionTypePanel extends JPanel {
         int incomeCheckBoxX = (totalWidth / 2) + gap + offset;
 
         expenseCheckBox = UIComponentFactory.createCheckBox(
-                "Expense", expenseCheckBoxX, 0, checkBoxWidth, 30, 20, false
+                "Expense", expenseCheckBoxX, 0, checkBoxWidth, 30, 20, true
         );
         incomeCheckBox = UIComponentFactory.createCheckBox(
-                "Income", incomeCheckBoxX, 0, checkBoxWidth, 30, 20, true
+                "Income", incomeCheckBoxX, 0, checkBoxWidth, 30, 20, false
         );
 
         expenseCheckBox.addItemListener(e -> {
@@ -63,6 +64,7 @@ public class TransactionTypePanel extends JPanel {
                 isExpense = true;
                 incomeCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
+                System.out.println("Expense selected, isExpense set to: " + isExpense); // Debug
             }
         });
 
@@ -71,6 +73,7 @@ public class TransactionTypePanel extends JPanel {
                 isExpense = false;
                 expenseCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
+                System.out.println("Income selected, isExpense set to: " + isExpense); // Debug
             }
         });
     }
