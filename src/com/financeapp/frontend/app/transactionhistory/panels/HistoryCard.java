@@ -56,10 +56,26 @@ public class HistoryCard extends JPanel {
         return textArea;
     }
 
+    private JPanel createButtonPanel()
+    {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setPreferredSize( new Dimension(80, 24));
+
+        buttonPanel.add(createEditButton());
+        buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+        buttonPanel.add(createDeleteButton());
+
+        return buttonPanel;
+    }
+
     private JButton createDeleteButton()
     {
         String deleteButtonIconPath = "assets/images/delete.png";
         JButton button = new JButton(IconLoader.loadIcon(deleteButtonIconPath));
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setContentAreaFilled(false);
+        button.setFocusable(false);
         button.addActionListener(createDeleteButtonActionListener());
         return button;
     }
@@ -68,6 +84,9 @@ public class HistoryCard extends JPanel {
     {
         String editButtonIconPath = "assets/images/edit.png";
         JButton button = new JButton(IconLoader.loadIcon(editButtonIconPath));
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setContentAreaFilled(false);
+        button.setFocusable(false);
         button.addActionListener(createEditButtonActionListener());
         return button;
     }
