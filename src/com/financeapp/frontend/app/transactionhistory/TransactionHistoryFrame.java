@@ -2,12 +2,14 @@ package com.financeapp.frontend.app.transactionhistory;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.frontend.app.BaseFrame;
+import com.financeapp.frontend.app.transactionhistory.panels.HistoryCardsPanel;
 import com.financeapp.frontend.app.transactionhistory.panels.TransactionHistoryButtonPanel;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 
 public class TransactionHistoryFrame extends BaseFrame {
+    private HistoryCardsPanel historyCardsPanel;
     private TransactionHistoryButtonPanel transactionHistoryButtonPanel;
 
     public TransactionHistoryFrame(String title, User user, int width, int height) {
@@ -25,6 +27,7 @@ public class TransactionHistoryFrame extends BaseFrame {
         initializePanels();
         arrangePanels();
 
+        add(historyCardsPanel);
         add(transactionHistoryButtonPanel);
 
         revalidate();
@@ -33,11 +36,13 @@ public class TransactionHistoryFrame extends BaseFrame {
 
     private void initializePanels()
     {
+        historyCardsPanel = new HistoryCardsPanel(user);
         transactionHistoryButtonPanel = new TransactionHistoryButtonPanel(this, getWidth());
     }
 
     private void arrangePanels()
     {
+        historyCardsPanel.setBounds(0, 90, getWidth(), 380);
         transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 30);
     }
 
@@ -45,6 +50,7 @@ public class TransactionHistoryFrame extends BaseFrame {
     {
         add(createSeparator());
         add(createTransactionHistoryLabel());
+        add(createHistoryCardsPanel());
     }
 
     private JLabel createTransactionHistoryLabel()
@@ -57,5 +63,10 @@ public class TransactionHistoryFrame extends BaseFrame {
     private JSeparator createSeparator()
     {
         return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
+    }
+
+    private JPanel createHistoryCardsPanel()
+    {
+        return new HistoryCardsPanel(user);
     }
 }

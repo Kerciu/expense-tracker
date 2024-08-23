@@ -17,7 +17,6 @@ public class TransactionHistoryButtonPanel extends JPanel{
 
         setLayout(null);
         addButtons(width);
-        add(new HistoryCard(new BigDecimal(50), "Expense", "Food", "I bought kebab and went clubbing after it"));
     }
 
     private void addButtons(int width)

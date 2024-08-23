@@ -101,7 +101,7 @@ public class HistoryCard extends JPanel {
 
     private JButton createDeleteButton()
     {
-        String deleteButtonIconPath = "/home/kerciu/Desktop/finance-management-app/assets/images/delete.png";
+        String deleteButtonIconPath = "/resources/assets/images/delete.png";
         JButton button = new JButton(IconLoader.loadIcon(deleteButtonIconPath));
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setContentAreaFilled(false);
@@ -115,7 +115,7 @@ public class HistoryCard extends JPanel {
 
     private JButton createEditButton()
     {
-        String editButtonIconPath = "/home/kerciu/Desktop/finance-management-app/assets/images/edit.png";
+        String editButtonIconPath = "/resources/assets/images/edit.png";
         JButton button = new JButton(IconLoader.loadIcon(editButtonIconPath));
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setContentAreaFilled(false);
