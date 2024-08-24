@@ -28,7 +28,7 @@ public class HistoryCardsPanel extends JPanel {
     {
         add(new HistoryCard(new BigDecimal(50), "Expense", "Food", "I bought kebab and went clubbing after it"));
         add(new HistoryCard(new BigDecimal(120), "Income", "Investing", "I invested in crypto"));
-        add(new HistoryCard(new BigDecimal(170), "Expense", "Transport", "I went to Berlin for a weekend"));
+        add(new HistoryCard(new BigDecimal(170), "Expense", "Transport", "I went to Berlin for a weekendwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"));
     }
 
     private void fetchTransactionHistoryInformation(User user) throws SQLException

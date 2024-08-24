@@ -38,7 +38,7 @@ public class HistoryCard extends JPanel {
         contentPanel.setOpaque(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(2, 5, 2, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
         gbc.gridx = 0;
@@ -93,7 +93,7 @@ public class HistoryCard extends JPanel {
         buttonPanel.setPreferredSize( new Dimension(80, 24));
 
         buttonPanel.add(createEditButton());
-        buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
         buttonPanel.add(createDeleteButton());
 
         return buttonPanel;
