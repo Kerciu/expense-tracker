@@ -79,9 +79,9 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                 }
                 BigDecimal amount = filterAmountEntered(amountEnteringTextField.getText());
 
-                String type = (source.getTransactionTypePanel().getIsExpense() ? "Expense" : "Income");
+                String type = (source.isExpense() ? "Expense" : "Income");
 
-                System.out.println("isExpense: " + source.getTransactionTypePanel().getIsExpense());
+                System.out.println("isExpense: " + source.isExpense());
 
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";

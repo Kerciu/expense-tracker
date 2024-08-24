@@ -1,30 +1,26 @@
 package com.financeapp.frontend.app.addframe.panels;
 
+import com.financeapp.frontend.app.addframe.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
 
 public class TransactionTypePanel extends JPanel {
+    private  AddExpenseFrame source;
     private JCheckBox expenseCheckBox;
     private JCheckBox incomeCheckBox;
     private CategoryPanel categoryPanel;
     private boolean isExpense;
 
-    public TransactionTypePanel(CategoryPanel categoryPanel, int width)
+    public TransactionTypePanel(AddExpenseFrame source, CategoryPanel categoryPanel, int width)
     {
+        this.source = source;
         this.categoryPanel = categoryPanel;
 
         setLayout(null);
         addCheckBoxes(width);
     }
-
-    public boolean getIsExpense()
-    {
-        return isExpense;
-    }
-
-    public void setIsExpense(boolean isExpense) { this.isExpense = isExpense; }
 
     public JCheckBox getExpenseCheckBox() {
         return expenseCheckBox;
@@ -52,6 +48,8 @@ public class TransactionTypePanel extends JPanel {
         int expenseCheckBoxX = (totalWidth / 2) - checkBoxWidth - gap + offset;
         int incomeCheckBoxX = (totalWidth / 2) + gap + offset;
 
+        isExpense = true;
+
         expenseCheckBox = UIComponentFactory.createCheckBox(
                 "Expense", expenseCheckBoxX, 0, checkBoxWidth, 30, 20, true
         );
@@ -65,6 +63,7 @@ public class TransactionTypePanel extends JPanel {
                 incomeCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
                 System.out.println("Expense selected, isExpense set to: " + isExpense); // Debug
+                source.setExpense(isExpense);
             }
         });
 
@@ -74,7 +73,12 @@ public class TransactionTypePanel extends JPanel {
                 expenseCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
                 System.out.println("Income selected, isExpense set to: " + isExpense); // Debug
+                source.setExpense(isExpense);
             }
         });
+    }
+
+    public boolean getIsExpense() {
+        return  isExpense;
     }
 }
