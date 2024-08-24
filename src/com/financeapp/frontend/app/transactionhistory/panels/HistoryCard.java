@@ -147,8 +147,7 @@ public class HistoryCard extends JPanel {
                         MySQLConnector.deleteTransactionHistoryCard(id);
                         JOptionPane.showMessageDialog(source, "Card deleted successfully!");
 
-                        source.revalidate();
-                        source.repaint();
+                        source.removeCard(HistoryCard.this);
 
                         } catch(SQLException e1) {
                             e1.printStackTrace();
