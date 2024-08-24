@@ -6,6 +6,8 @@ import com.financeapp.backend.data.User;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLConnector {
     public static User validateLogin(String username, String password) {
@@ -54,6 +56,11 @@ public class MySQLConnector {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, username);
         return preparedStatement;
+    }
+
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, int id) throws SQLException
+    {
+        preparedStatement.setString(1, String.valueOf(id));
     }
 
     private static void setPreparedStatementParameters(PreparedStatement preparedStatement, String username) throws SQLException
@@ -130,8 +137,9 @@ public class MySQLConnector {
         }
     }
 
-    public static ResultSet getTransactionHistoryDetailsForCards(User user) throws SQLException
+    public static List<Transaction>  getTransactionHistoryDetailsForCards(User user) throws SQLException
     {
+        List<Transaction> transactions = new ArrayList<>();
         String query = SQLStatementFactory.selectTransactionHistoryDetailsForCardDisplay();
 
         try(Connection connection = DatabaseConnection.getConnection();
@@ -139,18 +147,29 @@ public class MySQLConnector {
         {
             setPreparedStatementParameters(preparedStatement, user.getUsername());
 
-            return preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                int id = resultSet.getInt("id");
+                BigDecimal amount = resultSet.getBigDecimal("amount");
+                String type = resultSet.getString("type");
+                String category = resultSet.getString("category");
+                String description = resultSet.getString("description");
+                transactions.add(new Transaction(id, user.getId(), amount, type, category, description));
+            }
+
+            return transactions;
         }
     }
 
-    public static void deleteTransactionHistoryCard(User user) throws  SQLException
+    public static void deleteTransactionHistoryCard(int transactionId) throws  SQLException
     {
         String query = SQLStatementFactory.deleteTransactionHistoryRecord();
 
         try(Connection connection = DatabaseConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            setPreparedStatementParameters(preparedStatement, user.getUsername());
+            setPreparedStatementParameters(preparedStatement, transactionId);
             preparedStatement.executeUpdate();
         }
     }

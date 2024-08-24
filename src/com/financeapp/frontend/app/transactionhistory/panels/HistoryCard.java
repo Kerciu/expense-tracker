@@ -12,13 +12,15 @@ import java.sql.SQLException;
 
 public class HistoryCard extends JPanel {
     private HistoryCardsPanel source;
+    private int id;
     private BigDecimal amount;
     private String type;
     private String category;
     private String description;
 
-    public HistoryCard(HistoryCardsPanel source, BigDecimal amount, String type, String category, String description)
+    public HistoryCard(HistoryCardsPanel source, int id, BigDecimal amount, String type, String category, String description)
     {
+        this.id = id;
         this.source = source;
         this.amount = amount;
         this.type = type;
@@ -34,6 +36,7 @@ public class HistoryCard extends JPanel {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         setPreferredSize(new Dimension(400, 100));
+        setMaximumSize(new Dimension(400, 100));
     }
 
     private void addComponents() {
@@ -141,7 +144,7 @@ public class HistoryCard extends JPanel {
                     case JOptionPane.YES_OPTION -> {
                         try {
 
-                        MySQLConnector.deleteTransactionHistoryCard(source.getUser());
+                        MySQLConnector.deleteTransactionHistoryCard(id);
                         JOptionPane.showMessageDialog(source, "Card deleted successfully!");
 
                         source.revalidate();

@@ -27,7 +27,7 @@ public class SQLStatementFactory {
 
     public static String selectTransactionHistoryDetailsForCardDisplay()
     {
-        return "SELECT amount, type, category, description " +
+        return "SELECT id, amount, type, category, description " +
                 "FROM transactions WHERE user_id = ("
                 + "SELECT id FROM user_data WHERE username = ?" +
                 ");";
@@ -35,8 +35,6 @@ public class SQLStatementFactory {
 
     public static String deleteTransactionHistoryRecord()
     {
-        return "DELETE FROM transactions WHERE user_id = ("
-                + "SELECT id FROM user_data WHERE username = ?" +
-                ");";
+        return "DELETE FROM transactions WHERE id = ?;";
     }
 }

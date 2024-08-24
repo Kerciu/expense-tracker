@@ -9,6 +9,7 @@ import com.financeapp.frontend.components.UIComponentFactory;
 import javax.swing.*;
 
 public class TransactionHistoryFrame extends BaseFrame {
+    private JScrollPane historyCardsScrollPane;
     private HistoryCardsPanel historyCardsPanel;
     private TransactionHistoryButtonPanel transactionHistoryButtonPanel;
 
@@ -27,7 +28,7 @@ public class TransactionHistoryFrame extends BaseFrame {
         initializePanels();
         arrangePanels();
 
-        add(historyCardsPanel);
+        add(historyCardsScrollPane);
         add(transactionHistoryButtonPanel);
 
         revalidate();
@@ -37,12 +38,16 @@ public class TransactionHistoryFrame extends BaseFrame {
     private void initializePanels()
     {
         historyCardsPanel = new HistoryCardsPanel(user);
+        historyCardsScrollPane = new JScrollPane(historyCardsPanel);
+        historyCardsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        historyCardsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         transactionHistoryButtonPanel = new TransactionHistoryButtonPanel(this, getWidth());
     }
 
     private void arrangePanels()
     {
-        historyCardsPanel.setBounds(0, 90, getWidth(), 380);
+        historyCardsScrollPane.setBounds(0, 90, getWidth(), 380);
         transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 30);
     }
 
