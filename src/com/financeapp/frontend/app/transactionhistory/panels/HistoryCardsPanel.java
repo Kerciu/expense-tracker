@@ -19,22 +19,36 @@ public class HistoryCardsPanel extends JPanel {
 
         try {
             fetchTransactionHistoryInformation(user);
+            addTransactionHistoryCards();
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to load transaction history.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        addTransactionHistoryCards();
     }
 
     public User getUser() {
         return user;
     }
 
-    private void addTransactionHistoryCards()
-    {
-        add(new HistoryCard(this, new BigDecimal(50), "Expense", "Food", "I bought kebab and went clubbing after it"));
-        add(new HistoryCard(this, new BigDecimal(120), "Income", "Investing", "I invested in crypto"));
-        add(new HistoryCard(this, new BigDecimal(170), "Expense", "Transport", "I went to Berlin for a weekendwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"));
+    private void addTransactionHistoryCards() throws SQLException {
+        // amount, type, category, description
+        while (resultSet.next()) {
+            BigDecimal amount = resultSet.getBigDecimal("amount");
+            String type = resultSet.getString("type");
+            String category = resultSet.getString("category");
+            String description = resultSet.getString("description");
+
+            add(new HistoryCard(this, amount, type, category, description));
+        }
     }
 
     private void fetchTransactionHistoryInformation(User user) throws SQLException
