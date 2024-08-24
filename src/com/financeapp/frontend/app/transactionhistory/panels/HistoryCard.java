@@ -1,5 +1,6 @@
 package com.financeapp.frontend.app.transactionhistory.panels;
 
+import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.backend.utils.IconLoader;
 
 import javax.swing.*;
@@ -7,15 +8,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 public class HistoryCard extends JPanel {
+    private HistoryCardsPanel source;
     private BigDecimal amount;
     private String type;
     private String category;
     private String description;
 
-    public HistoryCard(BigDecimal amount, String type, String category, String description)
+    public HistoryCard(HistoryCardsPanel source, BigDecimal amount, String type, String category, String description)
     {
+        this.source = source;
         this.amount = amount;
         this.type = type;
         this.category = category;
@@ -132,7 +136,26 @@ public class HistoryCard extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showConfirmDialog(source, "Do you really want to delete this card?");
+                switch(result) {
+                    case JOptionPane.YES_OPTION -> {
+                        try {
 
+                        MySQLConnector.deleteTransactionHistoryCard(source.getUser());
+                        JOptionPane.showMessageDialog(source, "Card deleted successfully!");
+
+                        source.revalidate();
+                        source.repaint();
+
+                        } catch(SQLException e1) {
+                            e1.printStackTrace();
+                            JOptionPane.showMessageDialog(source, "Error occurred while deleting a card!");
+                        }
+                     }
+                    case JOptionPane.NO_OPTION, JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION -> {
+                        // do nothing
+                    }
+                }
             }
         };
     }

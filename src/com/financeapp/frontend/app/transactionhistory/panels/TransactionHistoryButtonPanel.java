@@ -7,7 +7,6 @@ import com.financeapp.frontend.components.UIComponentFactory;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 
 public class TransactionHistoryButtonPanel extends JPanel{
     private TransactionHistoryFrame source;

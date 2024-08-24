@@ -142,4 +142,16 @@ public class MySQLConnector {
             return preparedStatement.executeQuery();
         }
     }
+
+    public static void deleteTransactionHistoryCard(User user) throws  SQLException
+    {
+        String query = SQLStatementFactory.deleteTransactionHistoryRecord();
+
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            setPreparedStatementParameters(preparedStatement, user.getUsername());
+            preparedStatement.executeUpdate();
+        }
+    }
 }

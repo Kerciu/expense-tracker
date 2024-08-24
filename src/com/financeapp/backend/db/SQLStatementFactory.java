@@ -32,4 +32,11 @@ public class SQLStatementFactory {
                 + "SELECT id FROM user_data WHERE username = ?" +
                 ");";
     }
+
+    public static String deleteTransactionHistoryRecord()
+    {
+        return "DELETE FROM transactions WHERE user_id = ("
+                + "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
 }
