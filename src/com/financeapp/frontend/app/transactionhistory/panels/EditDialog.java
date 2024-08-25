@@ -11,6 +11,7 @@ public class EditDialog extends JDialog {
     private TransactionTypePanel transactionTypePanel;
     private CategoryPanel categoryPanel;
     private DescriptionPanel descriptionPanel;
+    private EditButtonPanel editButtonPanel;
 
     public EditDialog(HistoryCardsPanel source, HistoryCard historyCard)
     {
@@ -22,7 +23,8 @@ public class EditDialog extends JDialog {
         setSize(400, 600);
         setModal(false);
         setLocationRelativeTo(source);
-        setLayout(null);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setResizable(false);
 
         initializeAllComponents();
     }
@@ -40,6 +42,7 @@ public class EditDialog extends JDialog {
         add(transactionTypePanel);
         add(categoryPanel);
         add(descriptionPanel);
+        add(editButtonPanel);
     }
 
     private void initializePanels()
@@ -48,6 +51,7 @@ public class EditDialog extends JDialog {
         categoryPanel = new CategoryPanel(getWidth(), true);
         transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
+        editButtonPanel = new EditButtonPanel(this, getWidth());
     }
 
     private void fillWithExistingValues()
@@ -55,6 +59,13 @@ public class EditDialog extends JDialog {
         amountPanel.setAmountText(String.valueOf(historyCard.getAmount()));
         transactionTypePanel.setExpense(historyCard.getType().equalsIgnoreCase("Expense"));
         descriptionPanel.getDescriptionTextArea().setText(historyCard.getDescription());
+
+        JComboBox<String> categoryComboBox = categoryPanel.getCategoryComboBox();
+        String categoryFromDB = historyCard.getCategory();
+
+        if (categoryFromDB != null) {
+            categoryComboBox.setSelectedItem(categoryFromDB);
+        }
     }
 
     public AmountPanel getAmountPanel() {

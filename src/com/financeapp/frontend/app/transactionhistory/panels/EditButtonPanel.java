@@ -50,7 +50,7 @@ public class EditButtonPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int userId = source.getSource().getUser().getId();
+                int transactionId = source.getHistoryCard().getId();
 
                 if (!TransactionFlowFilter.validateAmountEntered(source.getAmountPanel().getAmountEnteringTextField().getText())) {
                     JOptionPane.showMessageDialog(source, "Amount entered must be a positive number!");
@@ -67,11 +67,11 @@ public class EditButtonPanel extends JPanel {
                 String description = source.getDescriptionPanel().getDescriptionTextArea().getText();
 
                 try {
-                    MySQLConnector.updateTransactionCard(userId, amount, type, category, description);
+                    MySQLConnector.updateTransactionCard(transactionId, amount, type, category, description);
                     JOptionPane.showMessageDialog(source, "Transaction updated successfully!");
                     source.dispose();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(source, "An error occurred while adding the transaction: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(source, "An error occurred while updating the transaction: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         };
