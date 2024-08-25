@@ -3,6 +3,7 @@ package com.financeapp.frontend.app.transactionhistory.panels;
 import com.financeapp.frontend.app.addframe.panels.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class EditDialog extends JDialog {
     private HistoryCardsPanel source;
@@ -20,10 +21,10 @@ public class EditDialog extends JDialog {
 
         setTitle("Edit Card");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 600);
+        setSize(400, 500);
         setModal(false);
         setLocationRelativeTo(source);
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLayout(null);
         setResizable(false);
 
         initializeAllComponents();
@@ -33,6 +34,9 @@ public class EditDialog extends JDialog {
     {
         initializePanels();
         fillWithExistingValues();
+
+        arrangePanels();
+
         addComponents();
     }
 
@@ -52,6 +56,15 @@ public class EditDialog extends JDialog {
         transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
         editButtonPanel = new EditButtonPanel(this, getWidth());
+    }
+
+    private void arrangePanels()
+    {
+        amountPanel.setBounds(0, 10, getWidth(), 80);
+        transactionTypePanel.setBounds(0, 100, getWidth(), 40);
+        categoryPanel.setBounds(0, 140, getWidth(), 80);
+        descriptionPanel.setBounds(0, 220, getWidth(), 200);
+        editButtonPanel.setBounds(0, 420, getWidth(), 40);
     }
 
     private void fillWithExistingValues()
