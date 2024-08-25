@@ -41,6 +41,10 @@ public class AmountPanel extends JPanel {
         return amountEnteringTextField.getText();
     }
 
+    public void setAmountText(String amountText) {
+        amountEnteringTextField.setText(amountText);
+    }
+
     public void clear() {
         amountEnteringTextField.setText("");
     }

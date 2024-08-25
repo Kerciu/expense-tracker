@@ -7,15 +7,13 @@ import javax.swing.*;
 import java.awt.event.ItemEvent;
 
 public class TransactionTypePanel extends JPanel {
-    private  AddExpenseFrame source;
     private JCheckBox expenseCheckBox;
     private JCheckBox incomeCheckBox;
     private CategoryPanel categoryPanel;
     private boolean isExpense;
 
-    public TransactionTypePanel(AddExpenseFrame source, CategoryPanel categoryPanel, int width)
+    public TransactionTypePanel(CategoryPanel categoryPanel, int width)
     {
-        this.source = source;
         this.categoryPanel = categoryPanel;
 
         setLayout(null);
@@ -63,7 +61,6 @@ public class TransactionTypePanel extends JPanel {
                 incomeCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
                 System.out.println("Expense selected, isExpense set to: " + isExpense); // Debug
-                source.setExpense(isExpense);
             }
         });
 
@@ -73,7 +70,6 @@ public class TransactionTypePanel extends JPanel {
                 expenseCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
                 System.out.println("Income selected, isExpense set to: " + isExpense); // Debug
-                source.setExpense(isExpense);
             }
         });
     }

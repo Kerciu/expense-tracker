@@ -167,7 +167,7 @@ public class HistoryCard extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new EditDialog(source).setVisible(true);
             }
         };
     }

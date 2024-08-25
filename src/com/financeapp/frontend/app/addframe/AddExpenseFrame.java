@@ -46,7 +46,7 @@ public class AddExpenseFrame extends BaseFrame {
     {
         amountPanel = new AmountPanel(getWidth());
         categoryPanel = new CategoryPanel(getWidth(), true);
-        transactionTypePanel = new TransactionTypePanel(this, categoryPanel, getWidth());
+        transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
         buttonPanel = new AddExpenseFrameButtonPanel(this, getWidth());
     }

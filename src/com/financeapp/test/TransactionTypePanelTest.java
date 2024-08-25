@@ -20,7 +20,7 @@ public class TransactionTypePanelTest {
     @BeforeEach
     public void setUp() {
         mockCategoryPanel = new CategoryPanel(800, true);
-        panel = new TransactionTypePanel(new AddExpenseFrame("abc", new User(10, "abc", "abc", new BigDecimal(10)), 500, 500),mockCategoryPanel, 800);
+        panel = new TransactionTypePanel(mockCategoryPanel, 800);
     }
 
     @Test
