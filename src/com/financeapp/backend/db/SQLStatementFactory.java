@@ -37,4 +37,11 @@ public class SQLStatementFactory {
     {
         return "DELETE FROM transactions WHERE id = ?;";
     }
+
+    public static String updateTransactionHistoryRecord()
+    {
+        return "UPDATE transactions SET " +
+                "amount = ?, type = ?, category = ?, description = ? "
+                + "WHERE id = ?;";
+    }
 }
