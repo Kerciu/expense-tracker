@@ -1,7 +1,6 @@
 package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.backend.utils.ExpenseWrapper;
-import com.financeapp.frontend.app.addframe.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

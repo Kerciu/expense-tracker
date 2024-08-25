@@ -1,7 +1,7 @@
 package com.financeapp.frontend.app.transactionhistory.panels;
 
 import com.financeapp.frontend.app.MainFrame;
-import com.financeapp.frontend.app.transactionhistory.TransactionHistoryFrame;
+import com.financeapp.frontend.app.transactionhistory.frame.TransactionHistoryFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

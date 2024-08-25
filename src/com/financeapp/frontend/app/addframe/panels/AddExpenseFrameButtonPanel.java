@@ -5,14 +5,13 @@ import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.backend.utils.ExpenseWrapper;
 import com.financeapp.backend.utils.TransactionFlowFilter;
 import com.financeapp.frontend.app.MainFrame;
-import com.financeapp.frontend.app.addframe.AddExpenseFrame;
+import com.financeapp.frontend.app.addframe.frame.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.SQLException;
 
 public class AddExpenseFrameButtonPanel extends JPanel {

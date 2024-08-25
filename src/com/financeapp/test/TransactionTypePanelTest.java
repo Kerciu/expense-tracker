@@ -1,14 +1,10 @@
 package com.financeapp.test;
 
-import com.financeapp.backend.data.User;
-import com.financeapp.frontend.app.addframe.AddExpenseFrame;
 import com.financeapp.frontend.app.addframe.panels.CategoryPanel;
 import com.financeapp.frontend.app.addframe.panels.TransactionTypePanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.swing.*;
-
-import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 

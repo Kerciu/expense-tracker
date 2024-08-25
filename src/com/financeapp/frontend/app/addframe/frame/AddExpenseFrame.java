@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe;
+package com.financeapp.frontend.app.addframe.frame;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.frontend.app.BaseFrame;

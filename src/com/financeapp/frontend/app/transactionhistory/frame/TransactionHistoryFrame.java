@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.transactionhistory;
+package com.financeapp.frontend.app.transactionhistory.frame;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.frontend.app.BaseFrame;
