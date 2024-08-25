@@ -56,4 +56,28 @@ public class EditDialog extends JDialog {
         transactionTypePanel.setExpense(historyCard.getType().equalsIgnoreCase("Expense"));
         descriptionPanel.getDescriptionTextArea().setText(historyCard.getDescription());
     }
+
+    public AmountPanel getAmountPanel() {
+        return amountPanel;
+    }
+
+    public TransactionTypePanel getTransactionTypePanel() {
+        return transactionTypePanel;
+    }
+
+    public CategoryPanel getCategoryPanel() {
+        return categoryPanel;
+    }
+
+    public DescriptionPanel getDescriptionPanel() {
+        return descriptionPanel;
+    }
+
+    public HistoryCard getHistoryCard() {
+        return historyCard;
+    }
+
+    public HistoryCardsPanel getSource() {
+        return source;
+    }
 }

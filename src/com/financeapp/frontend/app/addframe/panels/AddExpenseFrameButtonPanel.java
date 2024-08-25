@@ -2,6 +2,7 @@ package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
+import com.financeapp.backend.utils.TransactionFlowFilter;
 import com.financeapp.frontend.app.MainFrame;
 import com.financeapp.frontend.app.addframe.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
@@ -73,11 +74,11 @@ public class AddExpenseFrameButtonPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int userId = user.getId();
-                if (!validateAmountEntered(amountEnteringTextField.getText())) {
+                if (!TransactionFlowFilter.validateAmountEntered(amountEnteringTextField.getText())) {
                     JOptionPane.showMessageDialog(source, "Amount entered must be a positive number!");
                     return;
                 }
-                BigDecimal amount = filterAmountEntered(amountEnteringTextField.getText());
+                BigDecimal amount = TransactionFlowFilter.filterAmountEntered(amountEnteringTextField.getText());
 
                 String type = (source.getTransactionTypePanel().getIsExpense() ? "Expense" : "Income");
 
@@ -102,31 +103,5 @@ public class AddExpenseFrameButtonPanel extends JPanel {
     {
         amountEnteringTextField.setText("");
         descriptionTextArea.setText("");
-    }
-
-    private boolean validateAmountEntered(String amountEntered) {
-        if (amountEntered == null || amountEntered.isEmpty())
-            return false;
-
-        try {
-            BigDecimal amount = new BigDecimal(amountEntered);
-            return amount.compareTo(BigDecimal.ZERO) > 0;
-        }
-        catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private BigDecimal filterAmountEntered(String amountEntered) {
-        if (amountEntered == null || amountEntered.isEmpty()) {
-            return BigDecimal.ZERO;
-        }
-
-        try {
-            BigDecimal amount = new BigDecimal(amountEntered);
-            return amount.setScale(2, RoundingMode.FLOOR);
-        } catch (NumberFormatException e) {
-            return BigDecimal.ZERO;
-        }
     }
 }

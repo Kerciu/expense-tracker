@@ -173,4 +173,9 @@ public class MySQLConnector {
             preparedStatement.executeUpdate();
         }
     }
+
+    public static void updateTransactionCard(int userID, BigDecimal amount, String type, String category, String description) throws SQLException
+    {
+
+    }
 }
