@@ -77,4 +77,8 @@ public class TransactionTypePanel extends JPanel {
     public boolean getIsExpense() {
         return  isExpense;
     }
+
+    public void setExpense(boolean expense) {
+        isExpense = expense;
+    }
 }

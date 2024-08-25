@@ -6,14 +6,16 @@ import javax.swing.*;
 
 public class EditDialog extends JDialog {
     private HistoryCardsPanel source;
+    private HistoryCard historyCard;
     private AmountPanel amountPanel;
     private TransactionTypePanel transactionTypePanel;
     private CategoryPanel categoryPanel;
     private DescriptionPanel descriptionPanel;
 
-    public EditDialog(HistoryCardsPanel source)
+    public EditDialog(HistoryCardsPanel source, HistoryCard historyCard)
     {
         this.source = source;
+        this.historyCard = historyCard;
 
         setTitle("Edit Card");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -22,7 +24,13 @@ public class EditDialog extends JDialog {
         setLocationRelativeTo(source);
         setLayout(null);
 
+        initializeAllComponents();
+    }
+
+    private void initializeAllComponents()
+    {
         initializePanels();
+        fillWithExistingValues();
         addComponents();
     }
 
@@ -44,6 +52,8 @@ public class EditDialog extends JDialog {
 
     private void fillWithExistingValues()
     {
-        
+        amountPanel.setAmountText(String.valueOf(historyCard.getAmount()));
+        transactionTypePanel.setExpense(historyCard.getType().equalsIgnoreCase("Expense"));
+        descriptionPanel.getDescriptionTextArea().setText(historyCard.getDescription());
     }
 }

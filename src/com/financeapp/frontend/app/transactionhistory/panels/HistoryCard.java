@@ -167,8 +167,28 @@ public class HistoryCard extends JPanel {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new EditDialog(source).setVisible(true);
+                new EditDialog(source, HistoryCard.this).setVisible(true);
             }
         };
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
