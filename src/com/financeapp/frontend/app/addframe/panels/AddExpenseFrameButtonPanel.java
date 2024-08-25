@@ -2,6 +2,7 @@ package com.financeapp.frontend.app.addframe.panels;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
+import com.financeapp.backend.utils.ExpenseWrapper;
 import com.financeapp.backend.utils.TransactionFlowFilter;
 import com.financeapp.frontend.app.MainFrame;
 import com.financeapp.frontend.app.addframe.AddExpenseFrame;
@@ -80,9 +81,7 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                 }
                 BigDecimal amount = TransactionFlowFilter.filterAmountEntered(amountEnteringTextField.getText());
 
-                String type = (source.getTransactionTypePanel().getIsExpense() ? "Expense" : "Income");
-
-                System.out.println("isExpense: " + source.getTransactionTypePanel().getIsExpense());
+                String type = (ExpenseWrapper.isExpense() ? "Expense" : "Income");
 
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";

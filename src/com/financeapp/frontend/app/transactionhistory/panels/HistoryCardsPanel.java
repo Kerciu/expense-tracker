@@ -36,15 +36,19 @@ public class HistoryCardsPanel extends JPanel {
             add(new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getCategory(), t.getDescription()));
         }
 
-        repaint();
+        updatePanel();
+    }
+
+    public void updatePanel()
+    {
         revalidate();
+        repaint();
     }
 
     public void removeCard(HistoryCard historyCard)
     {
         remove(historyCard);
-        repaint();
-        revalidate();
+        updatePanel();
     }
 
     private List<Transaction> fetchTransactionHistoryInformation(User user) throws SQLException
