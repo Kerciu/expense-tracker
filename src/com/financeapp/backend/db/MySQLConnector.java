@@ -82,6 +82,15 @@ public class MySQLConnector {
         preparedStatement.setString(5, description);
     }
 
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, BigDecimal amount, String type, String category, String description, int transactionId) throws  SQLException
+    {
+        preparedStatement.setString(1, String.valueOf(amount.setScale(2, RoundingMode.FLOOR)));
+        preparedStatement.setString(2, type);
+        preparedStatement.setString(3, category);
+        preparedStatement.setString(4, description);
+        preparedStatement.setString(5, String.valueOf(transactionId));
+    }
+
     private static User processValidationResult(ResultSet resultSet, String password) throws SQLException {
         if (resultSet.next()) {
             String storedHashedPassword = resultSet.getString("password");
@@ -174,8 +183,15 @@ public class MySQLConnector {
         }
     }
 
-    public static void updateTransactionCard(int userID, BigDecimal amount, String type, String category, String description) throws SQLException
+    public static void updateTransactionCard(int transactionId, BigDecimal amount, String type, String category, String description) throws SQLException
     {
+        String query = SQLStatementFactory.updateTransactionHistoryRecord();
 
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            setPreparedStatementParameters(preparedStatement, amount, type, category, description, transactionId);
+            preparedStatement.executeUpdate();
+        }
     }
 }
