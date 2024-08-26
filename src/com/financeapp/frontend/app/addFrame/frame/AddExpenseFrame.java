@@ -1,8 +1,8 @@
-package com.financeapp.frontend.app.addframe.frame;
+package com.financeapp.frontend.app.addFrame.frame;
 
 import com.financeapp.backend.data.User;
-import com.financeapp.frontend.app.BaseFrame;
-import com.financeapp.frontend.app.addframe.panels.*;
+import com.financeapp.frontend.app.utils.BaseFrame;
+import com.financeapp.frontend.app.addFrame.panels.*;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

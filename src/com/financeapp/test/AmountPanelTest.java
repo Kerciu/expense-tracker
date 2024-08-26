@@ -1,7 +1,7 @@
 package com.financeapp.test;
 
 
-import com.financeapp.frontend.app.addframe.panels.AmountPanel;
+import com.financeapp.frontend.app.addFrame.panels.AmountPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

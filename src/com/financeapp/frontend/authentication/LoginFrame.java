@@ -2,9 +2,8 @@ package com.financeapp.frontend.authentication;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
-import com.financeapp.frontend.app.MainFrame;
+import com.financeapp.frontend.app.mainFrame.MainFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
-import com.mysql.cj.log.Log;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

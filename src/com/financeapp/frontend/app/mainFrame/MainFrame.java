@@ -1,9 +1,12 @@
-package com.financeapp.frontend.app;
+package com.financeapp.frontend.app.mainFrame;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
-import com.financeapp.frontend.app.addframe.frame.AddExpenseFrame;
-import com.financeapp.frontend.app.transactionhistory.frame.TransactionHistoryFrame;
+import com.financeapp.frontend.app.utils.BaseFrame;
+import com.financeapp.frontend.app.generateReport.GenerateReportFrame;
+import com.financeapp.frontend.app.SettingsFrame;
+import com.financeapp.frontend.app.addFrame.frame.AddExpenseFrame;
+import com.financeapp.frontend.app.transactionHistory.frame.TransactionHistoryFrame;
 import com.financeapp.frontend.authentication.LoginFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 

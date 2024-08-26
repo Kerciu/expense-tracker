@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.addframe.panels;
+package com.financeapp.frontend.app.addFrame.panels;
 
 import com.financeapp.frontend.components.UIComponentFactory;
 

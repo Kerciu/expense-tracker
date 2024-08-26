@@ -1,9 +1,6 @@
 package com.financeapp.main;
 
-import com.financeapp.frontend.app.MainFrame;
 import com.financeapp.frontend.authentication.LoginFrame;
-import com.financeapp.frontend.authentication.RegisterFrame;
-import com.mysql.cj.log.Log;
 
 import javax.swing.*;
 

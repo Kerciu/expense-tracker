@@ -1,11 +1,11 @@
-package com.financeapp.frontend.app.addframe.panels;
+package com.financeapp.frontend.app.addFrame.panels;
 
 import com.financeapp.backend.data.User;
 import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.backend.utils.ExpenseWrapper;
 import com.financeapp.backend.utils.TransactionFlowFilter;
-import com.financeapp.frontend.app.MainFrame;
-import com.financeapp.frontend.app.addframe.frame.AddExpenseFrame;
+import com.financeapp.frontend.app.mainFrame.MainFrame;
+import com.financeapp.frontend.app.addFrame.frame.AddExpenseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

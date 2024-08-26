@@ -1,6 +1,6 @@
 package com.financeapp.frontend.authentication;
 
-import com.financeapp.frontend.app.BaseFrame;
+import com.financeapp.frontend.app.utils.BaseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

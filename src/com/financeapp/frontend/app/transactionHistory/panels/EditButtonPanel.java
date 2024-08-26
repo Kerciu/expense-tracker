@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.transactionhistory.panels;
+package com.financeapp.frontend.app.transactionHistory.panels;
 
 import com.financeapp.backend.db.MySQLConnector;
 import com.financeapp.backend.utils.TransactionFlowFilter;

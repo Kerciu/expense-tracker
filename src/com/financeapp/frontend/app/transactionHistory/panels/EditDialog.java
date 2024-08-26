@@ -1,9 +1,8 @@
-package com.financeapp.frontend.app.transactionhistory.panels;
+package com.financeapp.frontend.app.transactionHistory.panels;
 
-import com.financeapp.frontend.app.addframe.panels.*;
+import com.financeapp.frontend.app.addFrame.panels.*;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class EditDialog extends JDialog {
     private HistoryCardsPanel source;

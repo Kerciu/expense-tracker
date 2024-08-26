@@ -1,9 +1,8 @@
-package com.financeapp.frontend.app;
+package com.financeapp.frontend.app.utils;
 
 import com.financeapp.backend.data.User;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 public abstract class BaseFrame extends JFrame {
     protected User user;

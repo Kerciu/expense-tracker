@@ -1,7 +1,7 @@
 package com.financeapp.test;
 
-import com.financeapp.frontend.app.addframe.panels.CategoryPanel;
-import com.financeapp.frontend.app.addframe.panels.TransactionTypePanel;
+import com.financeapp.frontend.app.addFrame.panels.CategoryPanel;
+import com.financeapp.frontend.app.addFrame.panels.TransactionTypePanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.swing.*;

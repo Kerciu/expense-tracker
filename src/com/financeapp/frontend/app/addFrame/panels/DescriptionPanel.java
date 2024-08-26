@@ -1,6 +1,6 @@
-package com.financeapp.frontend.app.addframe.panels;
+package com.financeapp.frontend.app.addFrame.panels;
 
-import com.financeapp.frontend.app.LimitedDocument;
+import com.financeapp.frontend.app.utils.LimitedDocument;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;

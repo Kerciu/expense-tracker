@@ -1,4 +1,4 @@
-package com.financeapp.frontend.app.transactionhistory.panels;
+package com.financeapp.frontend.app.transactionHistory.panels;
 
 import com.financeapp.backend.data.Transaction;
 import com.financeapp.backend.data.User;

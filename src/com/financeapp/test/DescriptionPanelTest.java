@@ -1,6 +1,6 @@
 package com.financeapp.test;
 
-import com.financeapp.frontend.app.addframe.panels.DescriptionPanel;
+import com.financeapp.frontend.app.addFrame.panels.DescriptionPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.swing.*;
