@@ -1,5 +1,6 @@
 package com.financeapp.frontend.app.generateReport.panels;
 
+import com.financeapp.backend.utils.IconLoader;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
@@ -46,6 +47,14 @@ public class ReportTypePanel extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(createFileNameTextField(width), gbc);
+
+        // Icon
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.fill = GridBagConstraints.NONE;
+        add(createFileExtensionIconLabel(), gbc);
     }
 
     private JTextField createFileNameTextField(int width)
@@ -54,6 +63,24 @@ public class ReportTypePanel extends JPanel {
                 20, 20, (width - 30), 30, 20, false
         );
         return fileNameTextField;
+    }
+
+    private JLabel createFileExtensionIconLabel()
+    {
+        return new JLabel(createFileExtensionIcon());
+    }
+
+    private ImageIcon createFileExtensionIcon()
+    {
+        String fileName = extensionName.toLowerCase() + ".png";
+        return fetchFileExtensionIcon(fileName);
+
+    }
+
+    private ImageIcon fetchFileExtensionIcon(String fileName)
+    {
+        String filePath = "/resources/assets/images/";
+        return IconLoader.loadIcon(filePath+fileName);
     }
 
     private JCheckBox createFileToGenerateCheckBox()
