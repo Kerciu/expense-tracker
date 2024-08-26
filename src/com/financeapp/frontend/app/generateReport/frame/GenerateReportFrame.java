@@ -1,20 +1,29 @@
 package com.financeapp.frontend.app.generateReport.frame;
 
 import com.financeapp.backend.data.User;
+import com.financeapp.frontend.app.generateReport.panels.ReportTypePanel;
 import com.financeapp.frontend.app.transactionHistory.panels.HistoryCardsPanel;
 import com.financeapp.frontend.app.transactionHistory.panels.TransactionHistoryButtonPanel;
 import com.financeapp.frontend.app.utils.BaseFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GenerateReportFrame extends BaseFrame {
+    private ReportTypePanel csvReportTypePanel;
+    private ReportTypePanel pdfReportTypePanel;
+    private ReportTypePanel xlsxReportTypePanel;
+    private ReportTypePanel txtReportTypePanel;
+
     public GenerateReportFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
     }
 
     @Override
     protected void addGuiComponents() {
+        setLayout(null);
+
         addWelcomingComponents();
         addPanels();
     }
@@ -24,18 +33,31 @@ public class GenerateReportFrame extends BaseFrame {
         initializePanels();
         arrangePanels();
 
+        add(csvReportTypePanel);
+        add(pdfReportTypePanel);
+        add(xlsxReportTypePanel);
+        add(txtReportTypePanel);
+
         revalidate();
         repaint();
     }
 
     private void initializePanels()
     {
-
+        csvReportTypePanel = new ReportTypePanel("CSV", getWidth());
+        pdfReportTypePanel = new ReportTypePanel("PDF", getWidth());
+        xlsxReportTypePanel =  new ReportTypePanel("XLSX", getWidth());
+        txtReportTypePanel = new ReportTypePanel("TXT", getWidth());
     }
 
     private void arrangePanels()
     {
-
+        int initialYValue = 80;
+        int offset = 100;
+        csvReportTypePanel.setBounds(0, initialYValue, getWidth() - 10, 90);
+        pdfReportTypePanel.setBounds(0, initialYValue + offset, getWidth() - 10, 90);
+        xlsxReportTypePanel.setBounds(0, initialYValue + 2 * offset, getWidth() - 10, 90);
+        txtReportTypePanel.setBounds(0, initialYValue + 3 * offset, getWidth() - 10, 90);
     }
 
     private void addWelcomingComponents()
