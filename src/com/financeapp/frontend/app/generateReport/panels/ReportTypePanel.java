@@ -4,6 +4,8 @@ import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class ReportTypePanel extends JPanel {
     private String extensionName;
@@ -49,7 +51,7 @@ public class ReportTypePanel extends JPanel {
     private JTextField createFileNameTextField(int width)
     {
         fileNameTextField = UIComponentFactory.createTextField(
-                20, 20, (width - 30), 30, 20, true
+                20, 20, (width - 30), 30, 20, false
         );
         return fileNameTextField;
     }
@@ -59,7 +61,24 @@ public class ReportTypePanel extends JPanel {
         checkBox = UIComponentFactory.createCheckBox(
                 "", 5, 35, 15, 15, 0, false
         );
+        checkBox.addItemListener(createCheckBoxItemListener());
         return checkBox;
+    }
+
+    private ItemListener createCheckBoxItemListener()
+    {
+        return new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (checkBox.isSelected()) {
+                    fileNameTextField.setEditable(true);
+                }
+                else {
+                    fileNameTextField.setEditable(false);
+                    fileNameTextField.setText("");
+                }
+            }
+        };
     }
 
     private JLabel createFileExtensionLabel(int width)
