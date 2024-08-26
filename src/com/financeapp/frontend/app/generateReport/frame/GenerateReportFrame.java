@@ -77,4 +77,20 @@ public class GenerateReportFrame extends BaseFrame {
                 "Generate Report", 0, 20, getWidth() - 10, 50, 30, SwingConstants.CENTER
         );
     }
+
+    public ReportTypePanel getCsvReportTypePanel() {
+        return csvReportTypePanel;
+    }
+
+    public ReportTypePanel getPdfReportTypePanel() {
+        return pdfReportTypePanel;
+    }
+
+    public ReportTypePanel getXlsxReportTypePanel() {
+        return xlsxReportTypePanel;
+    }
+
+    public ReportTypePanel getTxtReportTypePanel() {
+        return txtReportTypePanel;
+    }
 }

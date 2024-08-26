@@ -8,6 +8,7 @@ import java.awt.*;
 public class ReportTypePanel extends JPanel {
     private String extensionName;
     private JCheckBox checkBox;
+    private JTextField fileNameTextField;
 
     public ReportTypePanel(String extensionName, int width)
     {
@@ -49,9 +50,10 @@ public class ReportTypePanel extends JPanel {
 
     private JTextField createFileNameTextField(int width)
     {
-        return UIComponentFactory.createTextField(
+        fileNameTextField = UIComponentFactory.createTextField(
                 20, 20, (width - 30), 30, 20, true
         );
+        return fileNameTextField;
     }
 
     private JCheckBox createFileToGenerateCheckBox()
