@@ -1,6 +1,7 @@
 package com.financeapp.frontend.app.utils;
 
 import com.financeapp.backend.data.User;
+import com.financeapp.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
 
@@ -28,6 +29,11 @@ public abstract class BaseFrame extends JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         addGuiComponents();
+    }
+
+    protected JSeparator createSeparator()
+    {
+        return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
     }
 
     protected abstract void addGuiComponents();

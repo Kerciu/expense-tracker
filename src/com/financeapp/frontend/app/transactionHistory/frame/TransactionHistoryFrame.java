@@ -65,11 +65,6 @@ public class TransactionHistoryFrame extends BaseFrame {
         );
     }
 
-    private JSeparator createSeparator()
-    {
-        return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
-    }
-
     private JPanel createHistoryCardsPanel()
     {
         return new HistoryCardsPanel(user);

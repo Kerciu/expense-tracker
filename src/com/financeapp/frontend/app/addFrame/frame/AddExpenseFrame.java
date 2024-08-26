@@ -73,11 +73,6 @@ public class AddExpenseFrame extends BaseFrame {
         );
     }
 
-    private JSeparator createSeparator()
-    {
-        return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
-    }
-
     public AmountPanel getAmountPanel() {
         return amountPanel;
     }
