@@ -16,6 +16,8 @@ public class LimitedDocument extends PlainDocument {
     {
         if (string == null) return;
 
+        if (string.equalsIgnoreCase("\n")) return;
+
         if (getLength() + string.length() <= maxChars) {
             super.insertString(offset, string, attributeSet);
         }
