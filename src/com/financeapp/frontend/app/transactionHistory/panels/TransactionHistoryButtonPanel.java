@@ -26,7 +26,7 @@ public class TransactionHistoryButtonPanel extends JPanel{
     private JButton createGoBackButton(int width)
     {
         JButton button = UIComponentFactory.createButton(
-                "Go Back", 10, 0, width - 20, 30, 25
+                "Go Back", 10, 0, width - 20, 40, 25
         );
         button.addActionListener(createGoBackButtonActionListener());
         return button;

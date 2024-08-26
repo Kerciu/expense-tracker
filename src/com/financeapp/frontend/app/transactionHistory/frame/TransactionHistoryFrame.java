@@ -48,7 +48,7 @@ public class TransactionHistoryFrame extends BaseFrame {
     private void arrangePanels()
     {
         historyCardsScrollPane.setBounds(0, 90, getWidth(), 380);
-        transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 30);
+        transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 40);
     }
 
     private void addWelcomingComponents()

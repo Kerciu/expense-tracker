@@ -1,6 +1,7 @@
 package com.financeapp.frontend.app.generateReport.frame;
 
 import com.financeapp.backend.data.User;
+import com.financeapp.frontend.app.generateReport.panels.GenerateReportButtonPanel;
 import com.financeapp.frontend.app.generateReport.panels.ReportTypePanel;
 import com.financeapp.frontend.app.transactionHistory.panels.HistoryCardsPanel;
 import com.financeapp.frontend.app.transactionHistory.panels.TransactionHistoryButtonPanel;
@@ -15,6 +16,7 @@ public class GenerateReportFrame extends BaseFrame {
     private ReportTypePanel pdfReportTypePanel;
     private ReportTypePanel xlsxReportTypePanel;
     private ReportTypePanel txtReportTypePanel;
+    private GenerateReportButtonPanel buttonPanel;
 
     public GenerateReportFrame(String title, User user, int width, int height) {
         super(title, user, width, height);
@@ -37,6 +39,7 @@ public class GenerateReportFrame extends BaseFrame {
         add(pdfReportTypePanel);
         add(xlsxReportTypePanel);
         add(txtReportTypePanel);
+        add(buttonPanel);
 
         revalidate();
         repaint();
@@ -48,6 +51,7 @@ public class GenerateReportFrame extends BaseFrame {
         pdfReportTypePanel = new ReportTypePanel("PDF", getWidth());
         xlsxReportTypePanel =  new ReportTypePanel("XLSX", getWidth());
         txtReportTypePanel = new ReportTypePanel("TXT", getWidth());
+        buttonPanel = new GenerateReportButtonPanel(this, getWidth());
     }
 
     private void arrangePanels()
@@ -58,6 +62,7 @@ public class GenerateReportFrame extends BaseFrame {
         pdfReportTypePanel.setBounds(0, initialYValue + offset, getWidth() - 10, 90);
         xlsxReportTypePanel.setBounds(0, initialYValue + 2 * offset, getWidth() - 10, 90);
         txtReportTypePanel.setBounds(0, initialYValue + 3 * offset, getWidth() - 10, 90);
+        buttonPanel.setBounds(0, 500, getWidth(), 40);
     }
 
     private void addWelcomingComponents()
