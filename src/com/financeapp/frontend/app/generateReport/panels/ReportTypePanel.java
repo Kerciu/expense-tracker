@@ -14,6 +14,11 @@ public class ReportTypePanel extends JPanel {
     {
         this.extensionName = extensionName;
 
+        arrangeLayOutAndAddComponents(width);
+    }
+
+    private void arrangeLayOutAndAddComponents(int width)
+    {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -39,13 +44,6 @@ public class ReportTypePanel extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(createFileNameTextField(width), gbc);
-    }
-
-    private void addComponents(int width)
-    {
-        add(createFileExtensionLabel(width));
-        add(createFileNameTextField(width));
-        add(createFileToGenerateCheckBox());
     }
 
     private JTextField createFileNameTextField(int width)
