@@ -51,7 +51,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
             e.printStackTrace();
         }
         JTextField userBalanceTextField = UIComponentFactory.createTextField(
-                user.getBalance() + " " + getCurrentCurrency(),
+                user.getBalance().toString(),
                 15, 120, getWidth() - 50, 40, 28, false
         );
         userBalanceTextField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -59,31 +59,31 @@ public class MainFrame extends BaseFrame implements ActionListener {
     }
 
     private void addDepositButton() {
-        JButton depositButton = UIComponentFactory.createButton("Add Expense", 5, 180, getWidth() - 10, 30, 22);
+        JButton depositButton = UIComponentFactory.createButton("Add Expense", 5, 180, getWidth() - 10, 40, 22);
         depositButton.addActionListener(this);
         add(depositButton);
     }
 
     private void addTransactionsHistoryButton() {
-        JButton transactionsHistoryButton = UIComponentFactory.createButton("Transactions History", 5, 250, getWidth() - 10, 30, 22);
+        JButton transactionsHistoryButton = UIComponentFactory.createButton("Transactions History", 5, 250, getWidth() - 10, 40, 22);
         transactionsHistoryButton.addActionListener(this);
         add(transactionsHistoryButton);
     }
 
     private void addGenerateReportButton() {
-        JButton generateReportButton = UIComponentFactory.createButton("Generate Report", 5, 320, getWidth() - 10, 30, 22);
+        JButton generateReportButton = UIComponentFactory.createButton("Generate Report", 5, 320, getWidth() - 10, 40, 22);
         generateReportButton.addActionListener(this);
         add(generateReportButton);
     }
 
     private void addSettingsButton() {
-        JButton generateReportButton = UIComponentFactory.createButton("Settings", 5, 390, getWidth() - 10, 30, 22);
+        JButton generateReportButton = UIComponentFactory.createButton("Settings", 5, 390, getWidth() - 10, 40, 22);
         generateReportButton.addActionListener(this);
         add(generateReportButton);
     }
 
     private void addLogoutButton() {
-        JButton logoutButton = UIComponentFactory.createButton("Logout", 5, 500, getWidth() - 10, 30, 22);
+        JButton logoutButton = UIComponentFactory.createButton("Logout", 5, 500, getWidth() - 10, 40, 22);
         logoutButton.addActionListener(this);
         add(logoutButton);
     }
@@ -118,11 +118,5 @@ public class MainFrame extends BaseFrame implements ActionListener {
             MainFrame.this.dispose();
             new SettingsFrame("Settings", user, 420, 600).setVisible(true);
         }
-    }
-
-    private String getCurrentCurrency()
-    {
-        // for now, TODO fetch currency converter API
-        return "USD";
     }
 }

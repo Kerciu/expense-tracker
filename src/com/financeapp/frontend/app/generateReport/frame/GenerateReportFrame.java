@@ -56,7 +56,7 @@ public class GenerateReportFrame extends BaseFrame {
 
     private void arrangePanels()
     {
-        int initialYValue = 80;
+        int initialYValue = 90;
         int offset = 100;
         csvReportTypePanel.setBounds(0, initialYValue, getWidth() - 10, 90);
         pdfReportTypePanel.setBounds(0, initialYValue + offset, getWidth() - 10, 90);
@@ -69,12 +69,21 @@ public class GenerateReportFrame extends BaseFrame {
     {
         add(createSeparator());
         add(createGenerateReportLabel());
+        add(createGuidingLabel());
     }
 
     private JLabel createGenerateReportLabel()
     {
         return UIComponentFactory.createLabel(
                 "Generate Report", 0, 20, getWidth() - 10, 50, 30, SwingConstants.CENTER
+        );
+    }
+
+    private JLabel createGuidingLabel()
+    {
+        String guidingText = "Check desired file extensions and enter their file names";
+        return UIComponentFactory.createLabel(
+                guidingText, 0, 70, getWidth() - 10, 20, 12, SwingConstants.CENTER
         );
     }
 
