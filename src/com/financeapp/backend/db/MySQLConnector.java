@@ -159,7 +159,7 @@ public class MySQLConnector {
         }
     }
 
-    public static List<Transaction>  getTransactionHistoryDetailsForCards(User user) throws SQLException
+    public static List<Transaction>  getTransactionHistoryDetails(User user) throws SQLException
     {
         List<Transaction> transactions = new ArrayList<>();
         String query = SQLStatementFactory.selectTransactionHistoryDetailsForCardDisplay();

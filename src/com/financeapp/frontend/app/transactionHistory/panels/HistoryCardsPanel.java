@@ -53,6 +53,6 @@ public class HistoryCardsPanel extends JPanel {
 
     private List<Transaction> fetchTransactionHistoryInformation(User user) throws SQLException
     {
-        return MySQLConnector.getTransactionHistoryDetailsForCards(user);
+        return MySQLConnector.getTransactionHistoryDetails(user);
     }
 }
