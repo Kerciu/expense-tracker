@@ -1,5 +1,6 @@
 package com.financeapp.frontend.app.generateReport.panels;
 
+import com.financeapp.backend.writers.CSVWriter;
 import com.financeapp.frontend.app.generateReport.frame.GenerateReportFrame;
 import com.financeapp.frontend.app.mainFrame.MainFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
@@ -7,6 +8,7 @@ import com.financeapp.frontend.components.UIComponentFactory;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class GenerateReportButtonPanel extends JPanel{
     private GenerateReportFrame source;
@@ -59,7 +61,28 @@ public class GenerateReportButtonPanel extends JPanel{
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String workingDirectory = System.getProperty("user.dir");
+                JCheckBox csvCheckBox = source.getCsvReportTypePanel().getCheckBox();
+                JCheckBox pdfCheckBox = source.getPdfReportTypePanel().getCheckBox();
+                JCheckBox xlsxCheckBox = source.getXlsxReportTypePanel().getCheckBox();
+                JCheckBox txtCheckBox = source.getTxtReportTypePanel().getCheckBox();
 
+                String filePath = workingDirectory + File.separator;
+                if (csvCheckBox.isSelected()) {
+                    filePath += source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
+                    System.out.println("File path: " + filePath);
+                    new CSVWriter(filePath, source.getUser()).exportToCSV();
+                    System.out.println("Successfully exported csv file");
+                }
+                if (pdfCheckBox.isSelected()) {
+                    return;
+                }
+                if (xlsxCheckBox.isSelected()) {
+                    return;
+                }
+                if (txtCheckBox.isSelected()) {
+                    return;
+                }
             }
         };
     }

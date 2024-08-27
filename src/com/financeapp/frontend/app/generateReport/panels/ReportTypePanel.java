@@ -124,4 +124,8 @@ public class ReportTypePanel extends JPanel {
     public JCheckBox getCheckBox() {
         return checkBox;
     }
+
+    public JTextField getFileNameTextField() {
+        return fileNameTextField;
+    }
 }
