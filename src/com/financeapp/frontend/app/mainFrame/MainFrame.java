@@ -46,7 +46,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
     private void addBalanceTextField() {
         try {
-            MySQLConnector.getAllTransactionAmounts(user);
+            MySQLConnector.updateUserBalanceFromTransactions(user);
         } catch(SQLException e) {
             e.printStackTrace();
         }

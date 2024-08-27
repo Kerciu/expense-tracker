@@ -68,6 +68,12 @@ public class MySQLConnector {
         preparedStatement.setString(1, username);
     }
 
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, BigDecimal balance, int id) throws SQLException
+    {
+        preparedStatement.setBigDecimal(1, balance.setScale(2, RoundingMode.FLOOR));
+        preparedStatement.setString(2, String.valueOf(id));
+    }
+
     private static void setPreparedStatementParameters(PreparedStatement preparedStatement, String username, String hashedPassword) throws SQLException {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, hashedPassword);
@@ -76,7 +82,7 @@ public class MySQLConnector {
     private static void setPreparedStatementParameters(PreparedStatement preparedStatement, int userId, BigDecimal amount, String type, String category, String description) throws  SQLException
     {
         preparedStatement.setString(1, String.valueOf(userId));
-        preparedStatement.setString(2, String.valueOf(amount.setScale(2, RoundingMode.FLOOR)));
+        preparedStatement.setBigDecimal(2, amount.setScale(2, RoundingMode.FLOOR));
         preparedStatement.setString(3, type);
         preparedStatement.setString(4, category);
         preparedStatement.setString(5, description);
@@ -120,22 +126,24 @@ public class MySQLConnector {
         }
     }
 
-    public static void getAllTransactionAmounts(User user) throws SQLException
+    public static void updateUserBalanceFromTransactions(User user) throws SQLException
     {
-        String query = SQLStatementFactory.selectAllUserTransactionAmounts();
+        String selectAmountsQuery = SQLStatementFactory.selectAllUserTransactionAmounts();
+        String updateBalanceQuery = SQLStatementFactory.updateUserBalance();
 
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query))
+             PreparedStatement selectAmountsPreparedStatement = connection.prepareStatement(selectAmountsQuery);
+             PreparedStatement updateUserBalancePreparedStatement = connection.prepareStatement(updateBalanceQuery))
         {
-            setPreparedStatementParameters(preparedStatement, user.getUsername());
-            ResultSet resultSet = preparedStatement.executeQuery();
+            setPreparedStatementParameters(selectAmountsPreparedStatement, user.getUsername());
+            ResultSet selectAmountsResultSet = selectAmountsPreparedStatement.executeQuery();
 
             user.setBalance(BigDecimal.ZERO);
 
-            while(resultSet.next())
+            while(selectAmountsResultSet.next())
             {
-                String type = resultSet.getString("type");
-                BigDecimal transactionAmount = resultSet.getBigDecimal("amount");
+                String type = selectAmountsResultSet.getString("type");
+                BigDecimal transactionAmount = selectAmountsResultSet.getBigDecimal("amount");
 
                 if (type.equalsIgnoreCase("Expense")) {
                     user.subBalance(transactionAmount);
@@ -143,6 +151,11 @@ public class MySQLConnector {
                     user.addBalance(transactionAmount);
                 }
             }
+
+            setPreparedStatementParameters(updateUserBalancePreparedStatement, user.getBalance(), user.getId());
+            System.out.println("Setting user #"+user.getId()+" balance to " + user.getBalance());
+            updateUserBalancePreparedStatement.executeUpdate();
+            System.out.println("Updated the database, the query was:\n" + updateBalanceQuery);
         }
     }
 

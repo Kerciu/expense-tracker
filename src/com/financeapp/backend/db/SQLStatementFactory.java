@@ -33,6 +33,14 @@ public class SQLStatementFactory {
                 ");";
     }
 
+    public static String selectTransactionsForCSVFile()
+    {
+        return "SELECT amount, type, category, description " +
+                "FROM transactions WHERE user_id = (" +
+                "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
+
     public static String deleteTransactionHistoryRecord()
     {
         return "DELETE FROM transactions WHERE id = ?;";
@@ -43,5 +51,10 @@ public class SQLStatementFactory {
         return "UPDATE transactions SET " +
                 "amount = ?, type = ?, category = ?, description = ? "
                 + "WHERE id = ?;";
+    }
+
+    public static String updateUserBalance()
+    {
+        return "UPDATE user_data SET balance = ? WHERE id = ?";
     }
 }
