@@ -1,0 +1,38 @@
+Username: Kacper
+Balance: 4100.00
+
+Total expenses: 4900.00
+Total income: 9000.00
+
+Transaction History:
+--------------------
+Transaction #1
+ - Amount: 5000.00
+ - Type: Income
+ - Category: Salary
+ - Description: Salary for my software enginnering position in your company in the future :)
+
+Transaction #2
+ - Amount: 4000.00
+ - Type: Income
+ - Category: Freelance
+ - Description: I got some money working on a freelance project
+
+Transaction #3
+ - Amount: 3000.00
+ - Type: Expense
+ - Category: Technology
+ - Description: I bought an IPhone 15 Pro
+
+Transaction #4
+ - Amount: 1800.00
+ - Type: Expense
+ - Category: Accommodation
+ - Description: I had to pay for my apartament on Golden Straße in Warsaw.
+
+Transaction #5
+ - Amount: 100.00
+ - Type: Expense
+ - Category: Health and Beauty
+ - Description: Skin care products and hair mask.
+

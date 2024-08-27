@@ -82,9 +82,10 @@ public class GenerateReportButtonPanel extends JPanel{
                     return;
                 }
                 if (txtCheckBox.isSelected()) {
-                    filePath += source.getTxtReportTypePanel().getFileNameTextField().getText() + ".csv";
+                    filePath += source.getTxtReportTypePanel().getFileNameTextField().getText() + ".txt";
                     System.out.println("File path: " + filePath);
-                    new TXTExporter(filePath, source.getUser());
+                    new TXTExporter(filePath, source.getUser()).exportFile();
+                    System.out.println("Successfully exported txt file");
                 }
             }
         };
