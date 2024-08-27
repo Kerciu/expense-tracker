@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/finance-management-app.iml" filepath="$PROJECT_DIR$/finance-management-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/expense-tracker-app.iml" filepath="$PROJECT_DIR$/expense-tracker-app.iml" />
     </modules>
   </component>
 </project>

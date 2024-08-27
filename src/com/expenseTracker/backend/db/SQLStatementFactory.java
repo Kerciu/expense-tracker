@@ -1,0 +1,60 @@
+package com.expenseTracker.backend.db;
+
+public class SQLStatementFactory {
+
+    public static String constructUsernameStatement()
+    {
+        return "SELECT * FROM user_data WHERE username = ?;";
+    }
+
+    public static String insertUserIntoDatabase()
+    {
+        return "INSERT INTO user_data (username, password) VALUES (?, ?);";
+    }
+
+    public static String insertTransactionIntoDatabase()
+    {
+        return "INSERT INTO transactions (user_id, amount, type, category, description) "
+                + "VALUES (?, ?, ?, ?, ?);";
+    }
+
+    public static String selectAllUserTransactionAmounts()
+    {
+        return "SELECT amount, type FROM transactions WHERE user_id = ("
+                + "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
+
+    public static String selectTransactionHistoryDetailsForCardDisplay()
+    {
+        return "SELECT id, amount, type, category, description " +
+                "FROM transactions WHERE user_id = ("
+                + "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
+
+    public static String selectTransactionsForCSVFile()
+    {
+        return "SELECT amount, type, category, description " +
+                "FROM transactions WHERE user_id = (" +
+                "SELECT id FROM user_data WHERE username = ?" +
+                ");";
+    }
+
+    public static String deleteTransactionHistoryRecord()
+    {
+        return "DELETE FROM transactions WHERE id = ?;";
+    }
+
+    public static String updateTransactionHistoryRecord()
+    {
+        return "UPDATE transactions SET " +
+                "amount = ?, type = ?, category = ?, description = ? "
+                + "WHERE id = ?;";
+    }
+
+    public static String updateUserBalance()
+    {
+        return "UPDATE user_data SET balance = ? WHERE id = ?";
+    }
+}
