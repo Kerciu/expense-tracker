@@ -2,46 +2,25 @@ package com.financeapp.backend.writers;
 
 import com.financeapp.backend.data.Transaction;
 import com.financeapp.backend.data.User;
-import com.financeapp.backend.db.MySQLConnector;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
-public class CSVExporter {
-    private final String filePath;
-    private final User user;
+public class CSVExporter extends FileExporter{
 
     public CSVExporter(String filePath, User user)
     {
-        this.filePath = filePath;
-        this.user = user;
+        super(filePath, user);
     }
 
-    public void exportToCSV()
-    {
-        List<Transaction> transactionDetails = null;
-        try {
-            transactionDetails = getTransactionDetails(user);
-            saveIntoCSVFormat(transactionDetails);
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private List<Transaction> getTransactionDetails(User user) throws SQLException
-    {
-        return MySQLConnector.getTransactionHistoryDetails(user);
-    }
-
-    private void saveIntoCSVFormat(List<Transaction> transactionDetails) throws IOException {
-        if (transactionDetails == null || transactionDetails.isEmpty()) return;
+    @Override
+    public void exportFile() {
+        if (transactionList == null || transactionList.isEmpty()) return;
 
         try(FileWriter csvWriter = new FileWriter(filePath)) {
             csvWriter.append("amount,type,category,description\n");
 
-            for (Transaction transaction : transactionDetails) {
+            for (Transaction transaction : transactionList) {
                 csvWriter.append(String.format("%s,%s,%s,\"%s\"\n",
                         transaction.getAmount().toString(),
                         transaction.getType(),
@@ -50,6 +29,8 @@ public class CSVExporter {
             }
 
             csvWriter.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

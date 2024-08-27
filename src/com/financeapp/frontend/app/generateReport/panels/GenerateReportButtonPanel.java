@@ -72,7 +72,7 @@ public class GenerateReportButtonPanel extends JPanel{
                 if (csvCheckBox.isSelected()) {
                     filePath += source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
                     System.out.println("File path: " + filePath);
-                    new CSVExporter(filePath, source.getUser()).exportToCSV();
+                    new CSVExporter(filePath, source.getUser()).exportFile();
                     System.out.println("Successfully exported csv file");
                 }
                 if (pdfCheckBox.isSelected()) {

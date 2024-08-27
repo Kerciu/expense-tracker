@@ -9,7 +9,7 @@ public class TXTExporter extends FileExporter {
     }
 
     @Override
-    protected void exportFile() {
+    public void exportFile() {
 
     }
 }

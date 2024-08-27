@@ -20,7 +20,7 @@ public abstract class FileExporter {
         fetchUserTransactions();
     }
 
-    protected abstract void exportFile();
+    public abstract void exportFile();
 
     private void fetchUserTransactions()
     {
