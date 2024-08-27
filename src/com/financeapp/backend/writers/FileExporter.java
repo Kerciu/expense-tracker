@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class FileExtensionWriter {
+public abstract class FileExporter {
     protected String filePath;
     protected User user;
     protected List<Transaction> transactionList;
 
-    public FileExtensionWriter(String filePath, User user)
+    public FileExporter(String filePath, User user)
     {
         this.filePath = filePath;
         this.user = user;

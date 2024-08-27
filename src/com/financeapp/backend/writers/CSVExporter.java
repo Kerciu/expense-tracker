@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CSVWriter {
+public class CSVExporter {
     private final String filePath;
     private final User user;
 
-    public CSVWriter(String filePath, User user)
+    public CSVExporter(String filePath, User user)
     {
         this.filePath = filePath;
         this.user = user;

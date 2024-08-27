@@ -1,7 +1,7 @@
 package com.financeapp.frontend.app.generateReport.panels;
 
-import com.financeapp.backend.writers.CSVWriter;
-import com.financeapp.backend.writers.TXTWriter;
+import com.financeapp.backend.writers.CSVExporter;
+import com.financeapp.backend.writers.TXTExporter;
 import com.financeapp.frontend.app.generateReport.frame.GenerateReportFrame;
 import com.financeapp.frontend.app.mainFrame.MainFrame;
 import com.financeapp.frontend.components.UIComponentFactory;
@@ -72,7 +72,7 @@ public class GenerateReportButtonPanel extends JPanel{
                 if (csvCheckBox.isSelected()) {
                     filePath += source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
                     System.out.println("File path: " + filePath);
-                    new CSVWriter(filePath, source.getUser()).exportToCSV();
+                    new CSVExporter(filePath, source.getUser()).exportToCSV();
                     System.out.println("Successfully exported csv file");
                 }
                 if (pdfCheckBox.isSelected()) {
@@ -84,7 +84,7 @@ public class GenerateReportButtonPanel extends JPanel{
                 if (txtCheckBox.isSelected()) {
                     filePath += source.getTxtReportTypePanel().getFileNameTextField().getText() + ".csv";
                     System.out.println("File path: " + filePath);
-                    new TXTWriter(filePath, source.getUser());
+                    new TXTExporter(filePath, source.getUser());
                 }
             }
         };
