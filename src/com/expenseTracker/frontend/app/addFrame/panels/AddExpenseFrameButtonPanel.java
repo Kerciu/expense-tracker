@@ -12,7 +12,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class AddExpenseFrameButtonPanel extends JPanel {
     private AddExpenseFrame source;
@@ -79,15 +83,18 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                     return;
                 }
                 BigDecimal amount = TransactionFlowFilter.filterAmountEntered(amountEnteringTextField.getText());
-
                 String type = (ExpenseWrapper.isExpense() ? "Expense" : "Income");
-
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";
+
+                LocalDate date = source.getDatePanel().getDate();
+                System.out.println("Date Text: " + date.toString());
+                date = LocalDate.now();
+
                 String description = descriptionTextArea.getText();
 
                 try {
-                    MySQLConnector.insertTransactionIntoDatabase(userId, amount, type, category, description);
+                    MySQLConnector.insertTransactionIntoDatabase(userId, amount, type, category, date, description);
                     clearAllTheFieldsUponAdding();
                     JOptionPane.showMessageDialog(source, "Transaction added successfully!");
                 } catch (SQLException ex) {

@@ -100,6 +100,8 @@ public class AddExpenseFrame extends BaseFrame {
         return categoryPanel;
     }
 
+    public DatePanel getDatePanel() { return datePanel; }
+
     public DescriptionPanel getDescriptionPanel() {
         return descriptionPanel;
     }

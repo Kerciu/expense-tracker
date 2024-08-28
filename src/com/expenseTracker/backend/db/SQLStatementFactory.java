@@ -14,8 +14,8 @@ public class SQLStatementFactory {
 
     public static String insertTransactionIntoDatabase()
     {
-        return "INSERT INTO transactions (user_id, amount, type, category, description) "
-                + "VALUES (?, ?, ?, ?, ?);";
+        return "INSERT INTO transactions (user_id, amount, type, category, date, description) "
+                + "VALUES (?, ?, ?, ?, ?, ?);";
     }
 
     public static String selectAllUserTransactionAmounts()

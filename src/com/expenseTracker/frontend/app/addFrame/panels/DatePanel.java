@@ -3,16 +3,22 @@ package com.expenseTracker.frontend.app.addFrame.panels;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DatePanel extends JPanel {
-    private JTextField dateEnteringTextField;
+    private JFormattedTextField dateEnteringTextField;
     private JCheckBox todayCheckBox;
+    private LocalDate dateEntered;
 
     private MaskFormatter maskFormatter;
 
@@ -35,14 +41,14 @@ public class DatePanel extends JPanel {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.NONE;
 
-        add(createDateTextField(width), gbc);
+        add(createDateTextField(), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.WEST;
 
-        add(createTodayDateCheckBox(width), gbc);
+        add(createTodayDateCheckBox(), gbc);
     }
 
     private JLabel createDateLabel(int width)
@@ -52,13 +58,13 @@ public class DatePanel extends JPanel {
         );
     }
 
-    private JTextField createDateTextField(int width)
+    private JTextField createDateTextField()
     {
         maskFormatter = null;
 
         try {
 
-            maskFormatter = new MaskFormatter("# # # # - # # - # #");
+            maskFormatter = new MaskFormatter("#### - ## - ##");
             maskFormatter.setPlaceholderCharacter('_');
             maskFormatter.setValueClass(LocalDate.class);
             maskFormatter.setValidCharacters("0123456789");
@@ -68,7 +74,8 @@ public class DatePanel extends JPanel {
             e.printStackTrace();
         }
 
-        dateEnteringTextField = new JFormattedTextField(maskFormatter);
+        dateEnteringTextField = new JFormattedTextField();
+        dateEnteringTextField.setFormatterFactory(new DefaultFormatterFactory(maskFormatter));
         dateEnteringTextField.setColumns(10);
         dateEnteringTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
         dateEnteringTextField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,7 +86,7 @@ public class DatePanel extends JPanel {
         return dateEnteringTextField;
     }
 
-    private JCheckBox createTodayDateCheckBox(int width)
+    private JCheckBox createTodayDateCheckBox()
     {
         todayCheckBox = new JCheckBox("Today");
         todayCheckBox.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -98,10 +105,12 @@ public class DatePanel extends JPanel {
                     LocalDate todayDate = LocalDate.now();
                     dateEnteringTextField.setText(todayDate.toString());
                     dateEnteringTextField.setEditable(false);
+                    dateEntered = todayDate;
                 }
                 else {
                     dateEnteringTextField.setText("");
                     dateEnteringTextField.setEditable(true);
+                    dateEntered = null;
                 }
             }
         };
@@ -111,8 +120,12 @@ public class DatePanel extends JPanel {
         return dateEnteringTextField;
     }
 
-    public String getDateText() {
-        return dateEnteringTextField.getText();
+    public JCheckBox getTodayCheckBox() {
+        return todayCheckBox;
+    }
+
+    public LocalDate getDate() {
+        return dateEntered;
     }
 
     public void setDateText(String DateText) {

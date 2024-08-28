@@ -10,18 +10,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionRepository {
-    public static void insertTransactionIntoDatabase(int userID, BigDecimal amount, String type, String category, String description) throws SQLException
+    public static void insertTransactionIntoDatabase(int userID, BigDecimal amount, String type, String category, LocalDate date, String description) throws SQLException
     {
         String query = SQLStatementFactory.insertTransactionIntoDatabase();
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            PreparedStatementParametersSetter.setParameters(preparedStatement, userID, amount, type, category, description);
+            PreparedStatementParametersSetter.setParameters(preparedStatement, userID, amount, type, category, date, description);
             preparedStatement.executeUpdate();
         }
     }

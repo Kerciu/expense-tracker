@@ -21,9 +21,9 @@ public class MySQLConnector {
         return UserRepository.registerNewUser(username, password);
     }
 
-    public static void insertTransactionIntoDatabase(int userID, BigDecimal amount, String type, String category, String description) throws SQLException
+    public static void insertTransactionIntoDatabase(int userID, BigDecimal amount, String type, String category, LocalDate date, String description) throws SQLException
     {
-        TransactionRepository.insertTransactionIntoDatabase(userID, amount, type, category, description);
+        TransactionRepository.insertTransactionIntoDatabase(userID, amount, type, category, date, description);
     }
 
     public static void updateUserBalanceFromTransactions(User user) throws SQLException
