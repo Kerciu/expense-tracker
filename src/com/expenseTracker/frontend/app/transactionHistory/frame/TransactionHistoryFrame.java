@@ -47,7 +47,7 @@ public class TransactionHistoryFrame extends BaseFrame {
 
     private void arrangePanels()
     {
-        historyCardsScrollPane.setBounds(0, 90, getWidth(), 380);
+        historyCardsScrollPane.setBounds(0, 70, getWidth(), 400);
         transactionHistoryButtonPanel.setBounds(0, 500, getWidth(), 40);
     }
 
@@ -61,7 +61,7 @@ public class TransactionHistoryFrame extends BaseFrame {
     private JLabel createTransactionHistoryLabel()
     {
         return UIComponentFactory.createLabel(
-                "Transaction History", 0, 20, getWidth() - 10, 50, 30, SwingConstants.CENTER
+                "Transaction History", 0, 00, getWidth() - 10, 50, 30, SwingConstants.CENTER
         );
     }
 

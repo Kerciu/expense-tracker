@@ -10,6 +10,7 @@ public class EditDialog extends JDialog {
     private AmountPanel amountPanel;
     private TransactionTypePanel transactionTypePanel;
     private CategoryPanel categoryPanel;
+    private DatePanel datePanel;
     private DescriptionPanel descriptionPanel;
     private EditButtonPanel editButtonPanel;
 
@@ -20,7 +21,7 @@ public class EditDialog extends JDialog {
 
         setTitle("Edit Card");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 500);
+        setSize(400, 540);
         setModal(false);
         setLocationRelativeTo(source);
         setLayout(null);
@@ -44,6 +45,7 @@ public class EditDialog extends JDialog {
         add(amountPanel);
         add(transactionTypePanel);
         add(categoryPanel);
+        add(datePanel);
         add(descriptionPanel);
         add(editButtonPanel);
     }
@@ -53,17 +55,19 @@ public class EditDialog extends JDialog {
         amountPanel = new AmountPanel(getWidth());
         categoryPanel = new CategoryPanel(getWidth(), true);
         transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
+        datePanel = new DatePanel(getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
         editButtonPanel = new EditButtonPanel(this, getWidth());
     }
 
     private void arrangePanels()
     {
-        amountPanel.setBounds(0, 10, getWidth(), 80);
-        transactionTypePanel.setBounds(0, 100, getWidth(), 40);
-        categoryPanel.setBounds(0, 140, getWidth(), 80);
-        descriptionPanel.setBounds(0, 220, getWidth(), 200);
-        editButtonPanel.setBounds(0, 420, getWidth(), 40);
+        amountPanel.setBounds(0, 0, getWidth(), 80);
+        transactionTypePanel.setBounds(0, 80, getWidth(), 30);
+        categoryPanel.setBounds(0, 100, getWidth(), 80);
+        datePanel.setBounds(0, 180, getWidth(), 80);
+        descriptionPanel.setBounds(0, 260, getWidth(), 190);
+        editButtonPanel.setBounds(0, 450, getWidth(), 40);
     }
 
     private void fillWithExistingValues()
