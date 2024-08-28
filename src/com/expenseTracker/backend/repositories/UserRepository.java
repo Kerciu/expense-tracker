@@ -16,9 +16,10 @@ public class UserRepository {
         String query = SQLStatementFactory.constructUsernameStatement();
 
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = createPreparedStatement(connection, query, username);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+            PreparedStatementParametersSetter.setParameters(preparedStatement, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
             return processValidationResult(resultSet, password);
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
@@ -35,7 +36,7 @@ public class UserRepository {
             try (Connection connection = DatabaseConnection.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-                setPreparedStatementParameters(preparedStatement, username, hashedPassword);
+                PreparedStatementParametersSetter.setParameters(preparedStatement, username, hashedPassword);
                 preparedStatement.executeUpdate();
                 return true;
             }
@@ -47,9 +48,10 @@ public class UserRepository {
     private static boolean checkIfUserExists(String username) throws SQLException {
         String query = SQLStatementFactory.constructUsernameStatement();
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = createPreparedStatement(connection, query, username);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+            PreparedStatementParametersSetter.setParameters(preparedStatement, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         }
     }
@@ -69,11 +71,5 @@ public class UserRepository {
             System.out.println("No user found with the given username and password.");
         }
         return null;
-    }
-
-    private static PreparedStatement createPreparedStatement(Connection connection, String query, String username) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, username);
-        return preparedStatement;
     }
 }

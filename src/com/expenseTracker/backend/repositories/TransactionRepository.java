@@ -21,7 +21,7 @@ public class TransactionRepository {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            setPreparedStatementParameters(preparedStatement, userID, amount, type, category, description);
+            PreparedStatementParametersSetter.setParameters(preparedStatement, userID, amount, type, category, description);
             preparedStatement.executeUpdate();
         }
     }
@@ -35,7 +35,7 @@ public class TransactionRepository {
              PreparedStatement selectAmountsPreparedStatement = connection.prepareStatement(selectAmountsQuery);
              PreparedStatement updateUserBalancePreparedStatement = connection.prepareStatement(updateBalanceQuery))
         {
-            setPreparedStatementParameters(selectAmountsPreparedStatement, user.getUsername());
+            PreparedStatementParametersSetter.setParameters(selectAmountsPreparedStatement, user.getUsername());
             ResultSet selectAmountsResultSet = selectAmountsPreparedStatement.executeQuery();
 
             user.setBalance(BigDecimal.ZERO);
@@ -52,7 +52,7 @@ public class TransactionRepository {
                 }
             }
 
-            setPreparedStatementParameters(updateUserBalancePreparedStatement, user.getBalance(), user.getId());
+            PreparedStatementParametersSetter.setParameters(updateUserBalancePreparedStatement, user.getBalance(), user.getId());
             System.out.println("Setting user #"+user.getId()+" balance to " + user.getBalance());
             updateUserBalancePreparedStatement.executeUpdate();
             System.out.println("Updated the database, the query was:\n" + updateBalanceQuery);
@@ -67,7 +67,7 @@ public class TransactionRepository {
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            setPreparedStatementParameters(preparedStatement, user.getUsername());
+            PreparedStatementParametersSetter.setParameters(preparedStatement, user.getUsername());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -91,7 +91,7 @@ public class TransactionRepository {
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            setPreparedStatementParameters(preparedStatement, transactionId);
+            PreparedStatementParametersSetter.setParameters(preparedStatement, transactionId);
             preparedStatement.executeUpdate();
         }
     }
@@ -103,7 +103,7 @@ public class TransactionRepository {
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            setPreparedStatementParameters(preparedStatement, amount, type, category, description, transactionId);
+            PreparedStatementParametersSetter.setParameters(preparedStatement, amount, type, category, description, transactionId);
             preparedStatement.executeUpdate();
         }
     }
