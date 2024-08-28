@@ -1,7 +1,9 @@
 package com.expenseTracker.frontend.components;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.DateFormat;
 
 public class UIComponentFactory {
     public static JLabel createLabel(String text, int x, int y, int width, int height, int fontSize, int alignment) {
@@ -23,6 +25,15 @@ public class UIComponentFactory {
 
     public static JTextField createTextField(String text, int x, int y, int width, int height, int fontSize, boolean editable) {
         JTextField textField = new JTextField(text);
+        textField.setBounds(x, y, width, height);
+        textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        textField.setHorizontalAlignment(SwingConstants.LEFT);
+        textField.setEditable(editable);
+        return textField;
+    }
+
+    public static JFormattedTextField createFormattedTextField(MaskFormatter format, int x, int y, int width, int height, int fontSize, boolean editable) {
+        JFormattedTextField textField = new JFormattedTextField(format);
         textField.setBounds(x, y, width, height);
         textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         textField.setHorizontalAlignment(SwingConstants.LEFT);
