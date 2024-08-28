@@ -4,7 +4,7 @@ Balance: 4100.00
 Total expenses: 4900.00
 Total income: 9000.00
 
-Transaction History:
+Transaction History
 --------------------
 Transaction #1
  - Amount: 5000.00
