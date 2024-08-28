@@ -5,12 +5,16 @@ import com.expenseTracker.frontend.components.UIComponentFactory;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 
 public class DatePanel extends JPanel {
     private JTextField dateEnteringTextField;
     private JCheckBox todayCheckBox;
+
+    private MaskFormatter maskFormatter;
 
     public DatePanel(int width) {
         setLayout(new GridBagLayout());
@@ -41,13 +45,6 @@ public class DatePanel extends JPanel {
         add(createTodayDateCheckBox(width), gbc);
     }
 
-    private void addDateEnteringComponents(int width)
-    {
-        add(createDateLabel(width));
-        add(createDateTextField(width));
-        add(createTodayDateCheckBox(width));
-    }
-
     private JLabel createDateLabel(int width)
     {
         return UIComponentFactory.createLabel(
@@ -57,13 +54,14 @@ public class DatePanel extends JPanel {
 
     private JTextField createDateTextField(int width)
     {
-        MaskFormatter maskFormatter = null;
+        maskFormatter = null;
 
         try {
 
             maskFormatter = new MaskFormatter("# # # # - # # - # #");
             maskFormatter.setPlaceholderCharacter('_');
             maskFormatter.setValueClass(LocalDate.class);
+            maskFormatter.setValidCharacters("0123456789");
 
         }
         catch (ParseException e) {
@@ -83,7 +81,27 @@ public class DatePanel extends JPanel {
         todayCheckBox = new JCheckBox("Today");
         todayCheckBox.setFont(new Font("Dialog", Font.PLAIN, 20));
         todayCheckBox.setHorizontalAlignment(SwingConstants.RIGHT);
+        todayCheckBox.addItemListener(createCheckBoxItemListener());
         return todayCheckBox;
+    }
+
+    private ItemListener createCheckBoxItemListener()
+    {
+        return new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (todayCheckBox.isSelected())
+                {
+                    LocalDate todayDate = LocalDate.now();
+                    dateEnteringTextField.setText(todayDate.toString());
+                    dateEnteringTextField.setEditable(false);
+                }
+                else {
+                    dateEnteringTextField.setText("");
+                    dateEnteringTextField.setEditable(true);
+                }
+            }
+        };
     }
 
     public JTextField getDateEnteringTextField() {
