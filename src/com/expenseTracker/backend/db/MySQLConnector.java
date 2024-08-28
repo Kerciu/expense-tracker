@@ -6,6 +6,7 @@ import com.expenseTracker.backend.data.User;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,16 @@ public class MySQLConnector {
         preparedStatement.setString(3, category);
         preparedStatement.setString(4, description);
         preparedStatement.setString(5, String.valueOf(transactionId));
+    }
+
+    private static void setPreparedStatementParameters(PreparedStatement preparedStatement, BigDecimal amount, LocalDate date, String type, String category, String description, int transactionId) throws  SQLException
+    {
+        preparedStatement.setString(1, String.valueOf(amount.setScale(2, RoundingMode.FLOOR)));
+        preparedStatement.setDate(java.sql.Date.valueOf(date));
+        preparedStatement.setString(3, type);
+        preparedStatement.setString(4, category);
+        preparedStatement.setString(5, description);
+        preparedStatement.setString(6, String.valueOf(transactionId));
     }
 
     private static User processValidationResult(ResultSet resultSet, String password) throws SQLException {
