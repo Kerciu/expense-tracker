@@ -33,7 +33,7 @@ public abstract class BaseFrame extends JFrame {
 
     protected JSeparator createSeparator()
     {
-        return UIComponentFactory.createSeparator(15, 70, getWidth() - 30, 10);
+        return UIComponentFactory.createSeparator(15, 50, getWidth() - 30, 10);
     }
 
     protected abstract void addGuiComponents();

@@ -6,11 +6,13 @@ import com.expenseTracker.frontend.app.addFrame.panels.*;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddExpenseFrame extends BaseFrame {
     private AmountPanel amountPanel;
     private TransactionTypePanel transactionTypePanel;
     private CategoryPanel categoryPanel;
+    private DatePanel datePanel;
     private DescriptionPanel descriptionPanel;
     private AddExpenseFrameButtonPanel buttonPanel;
     private boolean isExpense;
@@ -35,6 +37,7 @@ public class AddExpenseFrame extends BaseFrame {
         add(amountPanel);
         add(transactionTypePanel);
         add(categoryPanel);
+        add(datePanel);
         add(descriptionPanel);
         add(buttonPanel);
 
@@ -47,17 +50,29 @@ public class AddExpenseFrame extends BaseFrame {
         amountPanel = new AmountPanel(getWidth());
         categoryPanel = new CategoryPanel(getWidth(), true);
         transactionTypePanel = new TransactionTypePanel(categoryPanel, getWidth());
+        datePanel = new DatePanel(getWidth());
         descriptionPanel = new DescriptionPanel(getWidth());
         buttonPanel = new AddExpenseFrameButtonPanel(this, getWidth());
     }
 
     private void arrangePanels()
     {
-        amountPanel.setBounds(0, 80, getWidth(), 80);
-        transactionTypePanel.setBounds(0, 160, getWidth(), 40);
-        categoryPanel.setBounds(0, 200, getWidth(), 80);
-        descriptionPanel.setBounds(0, 280, getWidth(), 220);
-        buttonPanel.setBounds(0, 500, getWidth(), 40);
+        amountPanel.setBounds(0, 60, getWidth(), 80);
+        transactionTypePanel.setBounds(0, 140, getWidth(), 30);
+        categoryPanel.setBounds(0, 170, getWidth(), 80);
+        datePanel.setBounds(0, 250, getWidth(), 80);
+        descriptionPanel.setBounds(0, 330, getWidth(), 190);
+        buttonPanel.setBounds(0, 520, getWidth(), 40);
+    }
+
+    private void colorPanelsForDebug()
+    {
+        amountPanel.setBackground(Color.red);
+        transactionTypePanel.setBackground(Color.blue);
+        categoryPanel.setBackground(Color.yellow);
+        datePanel.setBackground(Color.cyan);
+        descriptionPanel.setBackground(Color.green);
+        buttonPanel.setBackground(Color.pink);
     }
 
     private void addWelcomingComponents()
@@ -69,7 +84,7 @@ public class AddExpenseFrame extends BaseFrame {
     private JLabel createAddExpenseLabel()
     {
         return UIComponentFactory.createLabel(
-                "Add New Transaction", 0, 20, getWidth() - 10, 50, 30, SwingConstants.CENTER
+                "Add New Transaction", 0, 0, getWidth() - 10, 50, 30, SwingConstants.CENTER
         );
     }
 
