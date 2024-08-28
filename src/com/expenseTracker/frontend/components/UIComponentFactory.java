@@ -32,15 +32,6 @@ public class UIComponentFactory {
         return textField;
     }
 
-    public static JFormattedTextField createFormattedTextField(MaskFormatter format, int x, int y, int width, int height, int fontSize, boolean editable) {
-        JFormattedTextField textField = new JFormattedTextField(format);
-        textField.setBounds(x, y, width, height);
-        textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
-        textField.setHorizontalAlignment(SwingConstants.LEFT);
-        textField.setEditable(editable);
-        return textField;
-    }
-
     public static JButton createButton(String text, int x, int y, int width, int height, int fontSize) {
         JButton button = new JButton(text);
         button.setBounds(x, y, width, height);
