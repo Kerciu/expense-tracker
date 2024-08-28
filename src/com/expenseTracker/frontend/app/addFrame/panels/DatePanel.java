@@ -33,14 +33,14 @@ public class DatePanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.NONE;
 
         add(createDateTextField(width), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        gbc.weightx = 0.0;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.WEST;
 
         add(createTodayDateCheckBox(width), gbc);
     }
@@ -71,7 +71,10 @@ public class DatePanel extends JPanel {
         dateEnteringTextField = new JFormattedTextField(maskFormatter);
         dateEnteringTextField.setColumns(10);
         dateEnteringTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
-        dateEnteringTextField.setHorizontalAlignment(SwingConstants.LEFT);
+        dateEnteringTextField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        final int FIXED_WIDTH = 50;
+        dateEnteringTextField.setPreferredSize(new Dimension(FIXED_WIDTH, dateEnteringTextField.getPreferredSize().height));
 
         return dateEnteringTextField;
     }
