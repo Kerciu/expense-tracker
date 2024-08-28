@@ -5,9 +5,7 @@ import com.expenseTracker.frontend.components.UIComponentFactory;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class DatePanel extends JPanel {
@@ -18,18 +16,26 @@ public class DatePanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(0, 5, 0, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.weightx = 0.0;
+        gbc.fill = GridBagConstraints.NONE;
+
+        add(createDateLabel(width), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         add(createDateTextField(width), gbc);
 
         gbc.gridx = 1;
-        gbc.weightx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.0;
         gbc.fill = GridBagConstraints.NONE;
 
         add(createTodayDateCheckBox(width), gbc);
