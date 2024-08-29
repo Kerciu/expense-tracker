@@ -17,11 +17,13 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AddExpenseFrameButtonPanel extends JPanel {
     private AddExpenseFrame source;
     private final User user;
     private final JTextField amountEnteringTextField;
+    private final JTextField dateEnteredTextField;
     private final JTextArea descriptionTextArea;
     private final JComboBox<String> categoryComboBox;
 
@@ -29,6 +31,7 @@ public class AddExpenseFrameButtonPanel extends JPanel {
         this.source = source;
         this.user = source.getUser();
         this.amountEnteringTextField = source.getAmountPanel().getAmountEnteringTextField();
+        this.dateEnteredTextField = source.getDatePanel().getDateEnteringTextField();
         this.descriptionTextArea = source.getDescriptionPanel().getDescriptionTextArea();
         this.categoryComboBox = source.getCategoryPanel().getCategoryComboBox();
 
@@ -87,9 +90,14 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";
 
-                LocalDate date = source.getDatePanel().getDate();
-                System.out.println("Date Text: " + date.toString());
-                date = LocalDate.now();
+                String dateString = dateEnteredTextField.getText();
+
+                if (!TransactionFlowFilter.validateDateEntered(dateString)) {
+                    JOptionPane.showMessageDialog(source, "Date entered must be as 'yyyy-MM-dd' !");
+                    return;
+                }
+
+                LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 String description = descriptionTextArea.getText();
 

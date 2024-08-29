@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DatePanel extends JPanel {
-    private JFormattedTextField dateEnteringTextField;
+    private JTextField dateEnteringTextField;
     private JCheckBox todayCheckBox;
     private LocalDate dateEntered;
 
@@ -60,22 +60,7 @@ public class DatePanel extends JPanel {
 
     private JTextField createDateTextField()
     {
-        maskFormatter = null;
-
-        try {
-
-            maskFormatter = new MaskFormatter("#### - ## - ##");
-            maskFormatter.setPlaceholderCharacter('_');
-            maskFormatter.setValueClass(LocalDate.class);
-            maskFormatter.setValidCharacters("0123456789");
-
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        dateEnteringTextField = new JFormattedTextField();
-        dateEnteringTextField.setFormatterFactory(new DefaultFormatterFactory(maskFormatter));
+        dateEnteringTextField = new JTextField();
         dateEnteringTextField.setColumns(10);
         dateEnteringTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
         dateEnteringTextField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,12 +105,12 @@ public class DatePanel extends JPanel {
         return dateEnteringTextField;
     }
 
-    public JCheckBox getTodayCheckBox() {
-        return todayCheckBox;
+    public String getDateText() {
+        return dateEnteringTextField.getText();
     }
 
-    public LocalDate getDate() {
-        return dateEntered;
+    public JCheckBox getTodayCheckBox() {
+        return todayCheckBox;
     }
 
     public void setDateText(String DateText) {
