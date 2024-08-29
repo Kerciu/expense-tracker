@@ -54,6 +54,18 @@ public class HistoryCardsPanel extends JPanel {
         updatePanel();
     }
 
+    public void refreshCards()
+    {
+        removeAll();
+        try {
+            addTransactionHistoryCards();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to load transaction history.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        updatePanel();
+    }
+
     private List<Transaction> fetchTransactionHistoryInformation(User user) throws SQLException
     {
         return MySQLConnector.getTransactionHistoryDetails(user);
