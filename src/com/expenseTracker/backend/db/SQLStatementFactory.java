@@ -27,18 +27,14 @@ public class SQLStatementFactory {
 
     public static String selectTransactionHistoryDetailsForCardDisplay()
     {
-        return "SELECT id, amount, type, category, description " +
-                "FROM transactions WHERE user_id = ("
-                + "SELECT id FROM user_data WHERE username = ?" +
-                ");";
-    }
-
-    public static String selectTransactionsForCSVFile()
-    {
-        return "SELECT amount, type, category, description " +
-                "FROM transactions WHERE user_id = (" +
-                "SELECT id FROM user_data WHERE username = ?" +
-                ");";
+        return "SELECT id, amount, type, date, category, description " +
+                "FROM transactions " +
+                "WHERE user_id = (" +
+                "  SELECT id " +
+                "  FROM user_data " +
+                "  WHERE username = ?" +
+                ") " +
+                "ORDER BY date DESC;";
     }
 
     public static String deleteTransactionHistoryRecord()
