@@ -33,11 +33,12 @@ public class TransactionHistoryFrame extends BaseFrame {
 
         revalidate();
         repaint();
+        refreshTransactionFrame();
     }
 
     private void initializePanels()
     {
-        historyCardsPanel = new HistoryCardsPanel(user);
+        historyCardsPanel = new HistoryCardsPanel(this, user);
         historyCardsScrollPane = new JScrollPane(historyCardsPanel);
         historyCardsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         historyCardsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -67,6 +68,11 @@ public class TransactionHistoryFrame extends BaseFrame {
 
     private JPanel createHistoryCardsPanel()
     {
-        return new HistoryCardsPanel(user);
+        return new HistoryCardsPanel(this, user);
+    }
+
+    public void refreshTransactionFrame()
+    {
+        historyCardsPanel.updatePanel();
     }
 }

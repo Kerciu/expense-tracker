@@ -3,16 +3,19 @@ package com.expenseTracker.frontend.app.transactionHistory.panels;
 import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
 import com.expenseTracker.backend.db.MySQLConnector;
+import com.expenseTracker.frontend.app.transactionHistory.frame.TransactionHistoryFrame;
 
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class HistoryCardsPanel extends JPanel {
+    private TransactionHistoryFrame source;
     private User user;
 
-    public HistoryCardsPanel(User user)
+    public HistoryCardsPanel(TransactionHistoryFrame source, User user)
     {
+        this.source = source;
         this.user = user;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -54,5 +57,9 @@ public class HistoryCardsPanel extends JPanel {
     private List<Transaction> fetchTransactionHistoryInformation(User user) throws SQLException
     {
         return MySQLConnector.getTransactionHistoryDetails(user);
+    }
+
+    public TransactionHistoryFrame getSource() {
+        return source;
     }
 }

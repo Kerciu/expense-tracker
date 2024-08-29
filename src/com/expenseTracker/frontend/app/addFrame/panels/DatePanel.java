@@ -23,8 +23,6 @@ public class DatePanel extends JPanel {
     private JCheckBox todayCheckBox;
     private LocalDate dateEntered;
 
-    private MaskFormatter maskFormatter;
-
     public DatePanel(int width) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

@@ -3,6 +3,7 @@ package com.expenseTracker.frontend.app.transactionHistory.panels;
 import com.expenseTracker.frontend.app.addFrame.panels.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class EditDialog extends JDialog {
     private HistoryCardsPanel source;
@@ -74,6 +75,8 @@ public class EditDialog extends JDialog {
     {
         amountPanel.setAmountText(String.valueOf(historyCard.getAmount()));
         transactionTypePanel.setExpense(historyCard.getType().equalsIgnoreCase("Expense"));
+        datePanel.setDateText(historyCard.getDate().toString());
+        datePanel.getDateEnteringTextField().setForeground(Color.BLACK);
         descriptionPanel.getDescriptionTextArea().setText(historyCard.getDescription());
 
         JComboBox<String> categoryComboBox = categoryPanel.getCategoryComboBox();

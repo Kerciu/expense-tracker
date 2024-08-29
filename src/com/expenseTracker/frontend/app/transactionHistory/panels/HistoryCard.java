@@ -204,6 +204,8 @@ public class HistoryCard extends JPanel {
         return type;
     }
 
+    public LocalDate getDate() { return date; }
+
     public String getCategory() {
         return category;
     }

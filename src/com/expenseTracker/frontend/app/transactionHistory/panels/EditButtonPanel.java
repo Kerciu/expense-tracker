@@ -77,6 +77,7 @@ public class EditButtonPanel extends JPanel {
                 try {
                     MySQLConnector.updateTransactionCard(transactionId, amount, type, date, category, description);
                     JOptionPane.showMessageDialog(source, "Transaction updated successfully!");
+                    source.getSource().getSource().refreshTransactionFrame();
                     source.getSource().updatePanel();
                     source.dispose();
                 } catch (SQLException ex) {
