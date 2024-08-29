@@ -36,6 +36,7 @@ public class TXTExporter extends FileExporter {
             {
                 txtWriter.append("Transaction #").append(String.valueOf(transactionCounter)).append("\n");
                 txtWriter.append(" - Amount: ").append(transaction.getAmount().toString()).append("\n");
+                txtWriter.append(" - Date: ").append(transaction.getDate().toString()).append("\n");
                 txtWriter.append(" - Type: ").append(transaction.getType()).append("\n");
                 txtWriter.append(" - Category: ").append(transaction.getCategory()).append("\n");
                 txtWriter.append(" - Description: ").append(transaction.getDescription()).append("\n\n");

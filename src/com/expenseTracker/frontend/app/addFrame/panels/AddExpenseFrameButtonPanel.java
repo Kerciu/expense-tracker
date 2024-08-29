@@ -116,5 +116,6 @@ public class AddExpenseFrameButtonPanel extends JPanel {
     {
         amountEnteringTextField.setText("");
         descriptionTextArea.setText("");
+        dateEnteredTextField.setText("");
     }
 }

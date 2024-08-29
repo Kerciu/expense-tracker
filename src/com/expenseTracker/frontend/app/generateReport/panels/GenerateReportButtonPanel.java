@@ -70,10 +70,8 @@ public class GenerateReportButtonPanel extends JPanel{
 
                 String filePath = workingDirectory + File.separator;
                 if (csvCheckBox.isSelected()) {
-                    filePath += source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
-                    System.out.println("File path: " + filePath);
-                    new CSVExporter(filePath, source.getUser()).exportFile();
-                    System.out.println("Successfully exported csv file");
+                    String csvFilePath = filePath + source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
+                    new CSVExporter(csvFilePath, source.getUser()).exportFile();
                 }
                 if (pdfCheckBox.isSelected()) {
                     return;
@@ -82,10 +80,8 @@ public class GenerateReportButtonPanel extends JPanel{
                     return;
                 }
                 if (txtCheckBox.isSelected()) {
-                    filePath += source.getTxtReportTypePanel().getFileNameTextField().getText() + ".txt";
-                    System.out.println("File path: " + filePath);
-                    new TXTExporter(filePath, source.getUser()).exportFile();
-                    System.out.println("Successfully exported txt file");
+                    String txtFilePath = filePath + source.getTxtReportTypePanel().getFileNameTextField().getText() + ".txt";
+                    new TXTExporter(txtFilePath, source.getUser()).exportFile();
                 }
             }
         };

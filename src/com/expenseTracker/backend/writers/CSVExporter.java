@@ -18,11 +18,12 @@ public class CSVExporter extends FileExporter{
         if (transactionList == null || transactionList.isEmpty()) return;
 
         try(FileWriter csvWriter = new FileWriter(filePath)) {
-            csvWriter.append("amount,type,category,description\n");
+            csvWriter.append("amount,date,type,category,description\n");
 
             for (Transaction transaction : transactionList) {
-                csvWriter.append(String.format("%s,%s,%s,\"%s\"\n",
+                csvWriter.append(String.format("%s,%s,%s,%s,\"%s\"\n",
                         transaction.getAmount().toString(),
+                        transaction.getDate().toString(),
                         transaction.getType(),
                         transaction.getCategory(),
                         escapeCsv(transaction.getDescription())));
