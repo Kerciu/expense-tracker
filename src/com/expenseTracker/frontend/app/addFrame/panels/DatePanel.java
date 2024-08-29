@@ -1,5 +1,6 @@
 package com.expenseTracker.frontend.app.addFrame.panels;
 
+import com.expenseTracker.frontend.authentication.PlaceholderTextField;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DatePanel extends JPanel {
-    private JTextField dateEnteringTextField;
+    private PlaceholderTextField dateEnteringTextField;
     private JCheckBox todayCheckBox;
     private LocalDate dateEntered;
 
@@ -60,7 +61,7 @@ public class DatePanel extends JPanel {
 
     private JTextField createDateTextField()
     {
-        dateEnteringTextField = new JTextField();
+        dateEnteringTextField = new PlaceholderTextField("YYYY-MM-DD");
         dateEnteringTextField.setColumns(10);
         dateEnteringTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
         dateEnteringTextField.setHorizontalAlignment(SwingConstants.CENTER);
