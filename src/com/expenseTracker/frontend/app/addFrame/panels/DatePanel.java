@@ -1,5 +1,6 @@
 package com.expenseTracker.frontend.app.addFrame.panels;
 
+import com.expenseTracker.frontend.app.utils.DateDocumentFilter;
 import com.expenseTracker.frontend.authentication.PlaceholderTextField;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
@@ -8,6 +9,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -68,6 +70,9 @@ public class DatePanel extends JPanel {
 
         final int FIXED_WIDTH = 50;
         dateEnteringTextField.setPreferredSize(new Dimension(FIXED_WIDTH, dateEnteringTextField.getPreferredSize().height));
+
+        PlainDocument plainDocument = (PlainDocument) dateEnteringTextField.getDocument();
+        plainDocument.setDocumentFilter(new DateDocumentFilter());
 
         return dateEnteringTextField;
     }
