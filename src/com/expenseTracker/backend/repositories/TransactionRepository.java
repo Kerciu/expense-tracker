@@ -76,9 +76,10 @@ public class TransactionRepository {
                 int id = resultSet.getInt("id");
                 BigDecimal amount = resultSet.getBigDecimal("amount");
                 String type = resultSet.getString("type");
+                LocalDate date = resultSet.getDate("date").toLocalDate();
                 String category = resultSet.getString("category");
                 String description = resultSet.getString("description");
-                transactions.add(new Transaction(id, user.getId(), amount, type, category, description));
+                transactions.add(new Transaction(id, user.getId(), amount, date, type, category, description));
             }
 
             return transactions;

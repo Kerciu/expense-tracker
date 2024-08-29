@@ -61,7 +61,7 @@ public class TransactionHistoryFrame extends BaseFrame {
     private JLabel createTransactionHistoryLabel()
     {
         return UIComponentFactory.createLabel(
-                "Transaction History", 0, 00, getWidth() - 10, 50, 30, SwingConstants.CENTER
+                "Transaction History", 0, 0, getWidth() - 10, 50, 30, SwingConstants.CENTER
         );
     }
 

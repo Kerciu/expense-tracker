@@ -33,7 +33,7 @@ public class HistoryCardsPanel extends JPanel {
 
         // amount, type, category, description
         for (Transaction t : transactions) {
-            add(new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getCategory(), t.getDescription()));
+            add(new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getDate(), t.getCategory(), t.getDescription()));
         }
 
         updatePanel();

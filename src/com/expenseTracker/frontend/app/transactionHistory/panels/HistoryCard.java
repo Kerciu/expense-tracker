@@ -9,21 +9,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class HistoryCard extends JPanel {
     private HistoryCardsPanel source;
     private int id;
     private BigDecimal amount;
     private String type;
+    private LocalDate date;
     private String category;
     private String description;
 
-    public HistoryCard(HistoryCardsPanel source, int id, BigDecimal amount, String type, String category, String description)
+    public HistoryCard(HistoryCardsPanel source, int id, BigDecimal amount, String type, LocalDate date, String category, String description)
     {
         this.id = id;
         this.source = source;
         this.amount = amount;
         this.type = type;
+        this.date = date;
         this.category = category;
         this.description = description;
 
@@ -53,18 +56,27 @@ public class HistoryCard extends JPanel {
         gbc.weightx = 1.0;
         contentPanel.add(createCategoryLabel(), gbc);
 
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPanel.add(createButtonPanel(), gbc);
+
+        gbc.gridx = 0;
         gbc.gridy = 1;
         contentPanel.add(createAmountLabel(), gbc);
 
-        gbc.gridy = 2;
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPanel.add(createDateLabel(), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         contentPanel.add(createDescriptionTextArea(), gbc);
 
-        JPanel buttonPanel = createButtonPanel();
-
         add(contentPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.EAST);
     }
 
     private JLabel createCategoryLabel()
@@ -80,6 +92,14 @@ public class HistoryCard extends JPanel {
         JLabel amountLabel = new JLabel(text);
         amountLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
         return amountLabel;
+    }
+
+    private JLabel createDateLabel()
+    {
+        String text = date.toString();
+        JLabel dateLabel = new JLabel(text);
+        dateLabel.setFont(new Font("Dialog", Font.PLAIN, 14));
+        return dateLabel;
     }
 
     private JTextArea createDescriptionTextArea()
