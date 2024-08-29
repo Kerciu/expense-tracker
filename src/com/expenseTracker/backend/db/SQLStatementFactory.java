@@ -45,7 +45,7 @@ public class SQLStatementFactory {
     public static String updateTransactionHistoryRecord()
     {
         return "UPDATE transactions SET " +
-                "amount = ?, type = ?, category = ?, description = ? "
+                "amount = ?, type = ?, date = ?, category = ?, description = ? "
                 + "WHERE id = ?;";
     }
 

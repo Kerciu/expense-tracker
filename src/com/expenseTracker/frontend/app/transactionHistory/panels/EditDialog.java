@@ -96,6 +96,8 @@ public class EditDialog extends JDialog {
         return categoryPanel;
     }
 
+    public DatePanel getDatePanel() { return datePanel; }
+
     public DescriptionPanel getDescriptionPanel() {
         return descriptionPanel;
     }

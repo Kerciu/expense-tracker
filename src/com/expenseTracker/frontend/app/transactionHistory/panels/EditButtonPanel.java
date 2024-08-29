@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EditButtonPanel extends JPanel {
     private EditDialog source;
@@ -60,14 +62,20 @@ public class EditButtonPanel extends JPanel {
 
                 String type = (source.getTransactionTypePanel().getIsExpense() ? "Expense" : "Income");
 
-                System.out.println("isExpense: " + source.getTransactionTypePanel().getIsExpense());
+
+                if (!TransactionFlowFilter.validateDateEntered(source.getDatePanel().getDateText())) {
+                    JOptionPane.showMessageDialog(source, "Date entered must be in 'yyyy-MM-dd' format!");
+                    return;
+                }
+
+                LocalDate date = LocalDate.parse(source.getDatePanel().getDateText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 String category = (String) source.getCategoryPanel().getCategoryComboBox().getSelectedItem();
                 category = category != null ? category : "Other";
                 String description = source.getDescriptionPanel().getDescriptionTextArea().getText();
 
                 try {
-                    MySQLConnector.updateTransactionCard(transactionId, amount, type, category, description);
+                    MySQLConnector.updateTransactionCard(transactionId, amount, type, date, category, description);
                     JOptionPane.showMessageDialog(source, "Transaction updated successfully!");
                     source.getSource().updatePanel();
                     source.dispose();

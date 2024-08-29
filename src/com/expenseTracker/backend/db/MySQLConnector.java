@@ -41,8 +41,8 @@ public class MySQLConnector {
         TransactionRepository.deleteTransactionHistoryCard(transactionId);
     }
 
-    public static void updateTransactionCard(int transactionId, BigDecimal amount, String type, String category, String description) throws SQLException
+    public static void updateTransactionCard(int transactionId, BigDecimal amount, String type, LocalDate date, String category, String description) throws SQLException
     {
-        TransactionRepository.updateTransactionCard(transactionId, amount, type, category, description);
+        TransactionRepository.updateTransactionCard(transactionId, amount, type, date, category, description);
     }
 }

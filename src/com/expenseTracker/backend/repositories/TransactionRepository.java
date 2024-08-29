@@ -98,14 +98,14 @@ public class TransactionRepository {
         }
     }
 
-    public static void updateTransactionCard(int transactionId, BigDecimal amount, String type, String category, String description) throws SQLException
+    public static void updateTransactionCard(int transactionId, BigDecimal amount, String type, LocalDate date, String category, String description) throws SQLException
     {
         String query = SQLStatementFactory.updateTransactionHistoryRecord();
 
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            PreparedStatementParametersSetter.setParameters(preparedStatement, amount, type, category, description, transactionId);
+            PreparedStatementParametersSetter.setParameters(preparedStatement, amount, type, date, category, description, transactionId);
             preparedStatement.executeUpdate();
         }
     }
