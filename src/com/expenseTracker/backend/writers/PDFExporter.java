@@ -5,6 +5,8 @@ import com.expenseTracker.backend.data.User;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,5 +29,14 @@ public class PDFExporter extends FileExporter {
         catch(IOException e) {
             throw new RuntimeException();
         }
+    }
+
+    private Paragraph createHeader()
+    {
+        Paragraph headerParagraph = new Paragraph(user.getUsername());
+        headerParagraph.setFontSize(20);
+        headerParagraph.setBold();
+        headerParagraph.setTextAlignment(TextAlignment.LEFT);
+        return headerParagraph;
     }
 }
