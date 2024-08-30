@@ -5,6 +5,8 @@ import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
 import com.expenseTracker.backend.utils.DateBoundPair;
 import com.expenseTracker.backend.utils.UserBalanceAggregator;
+import com.itextpdf.kernel.colors.DeviceCmyk;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -18,6 +20,7 @@ import com.itextpdf.layout.property.UnitValue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -54,9 +57,11 @@ public class PDFExporter extends FileExporter {
 
     private Paragraph createHeader() {
         Paragraph headerParagraph = new Paragraph(user.getUsername());
-        headerParagraph.setFontSize(20);
+        headerParagraph.setFontSize(28);
         headerParagraph.setBold();
         headerParagraph.setTextAlignment(TextAlignment.LEFT);
+        headerParagraph.setMarginBottom(10);
+        headerParagraph.setPadding(5);
         return headerParagraph;
     }
 
@@ -64,6 +69,8 @@ public class PDFExporter extends FileExporter {
         float[] tableCols = new float[]{1, 1, 1};
         Table table = new Table(tableCols);
         table.setWidth(UnitValue.createPercentValue(100));
+        table.setMarginBottom(20);
+        table.setBorder(Border.NO_BORDER);
         populateSummaryTable(table);
         return table;
     }
@@ -102,17 +109,19 @@ public class PDFExporter extends FileExporter {
     }
 
     private void addSummaryCell(Table table, String text, int fontSize, boolean isBold) {
-        Paragraph paragraph = new Paragraph(text).setFontSize(fontSize);
+        Paragraph paragraph = new Paragraph(text).setFontSize(fontSize).setTextAlignment(TextAlignment.LEFT);
         if (isBold) {
             paragraph.setBold();
         }
-        Cell cell = new Cell().add(paragraph).setTextAlignment(TextAlignment.LEFT).setBorder(null);
+        Cell cell = new Cell().add(paragraph).setTextAlignment(TextAlignment.LEFT).setBorder(null).setPadding(5);
         table.addCell(cell);
     }
 
     private void addTransactionCell(Table table, String... texts) {
         for (String text : texts) {
-            table.addCell(new Cell().add(new Paragraph(text)));
+            Cell cell = new Cell().add(new Paragraph(text));
+            cell.setPadding(5);
+            table.addCell(cell);
         }
     }
 
@@ -120,16 +129,22 @@ public class PDFExporter extends FileExporter {
     {
         String[] headers = {"Date", "Type", "Category", "Amount", "Description"};
         for (String header : headers) {
-            table.addCell(new Cell().add(new Paragraph(header)).setBold());
+            Cell cell = new Cell().add(new Paragraph(header));
+            cell.setBackgroundColor(new DeviceRgb(200, 200, 200));
+            cell.setTextAlignment(TextAlignment.CENTER);
+            cell.setPadding(5);
+
+            table.addCell(cell);
         }
     }
 
     private String createReportDateBoundsInfo() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateBoundPair dateBoundPair = fetchTransactionDateBounds();
         return "Transaction Dates: \n" +
-                dateBoundPair.getFirst().toString()
+                dateBoundPair.getFirst().format(dateTimeFormatter)
                 + "—" +
-                dateBoundPair.getSecond().toString();
+                dateBoundPair.getSecond().format(dateTimeFormatter);
     }
 
     private DateBoundPair fetchTransactionDateBounds() {
