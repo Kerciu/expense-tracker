@@ -6,9 +6,16 @@ import javax.swing.text.PlainDocument;
 
 public class LimitedDocument extends PlainDocument {
     private int maxChars;
+    private String charsAllowed;
 
     public LimitedDocument(int maxChars) {
+        this(maxChars, null);
+    }
+
+    public LimitedDocument(int maxChars, String charsAllowed) {
+
         this.maxChars = maxChars;
+        this.charsAllowed = charsAllowed;
     }
 
     @Override
@@ -17,6 +24,14 @@ public class LimitedDocument extends PlainDocument {
         if (string == null) return;
 
         if (string.equalsIgnoreCase("\n")) return;
+
+        if (charsAllowed != null && !charsAllowed.isEmpty()) {
+            for (char c : string.toCharArray()) {
+                if (charsAllowed.indexOf(c) == -1) {
+                    return;
+                }
+            }
+        }
 
         if (getLength() + string.length() <= maxChars) {
             super.insertString(offset, string, attributeSet);

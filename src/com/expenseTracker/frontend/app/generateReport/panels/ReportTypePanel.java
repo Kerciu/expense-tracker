@@ -1,9 +1,11 @@
 package com.expenseTracker.frontend.app.generateReport.panels;
 
 import com.expenseTracker.backend.utils.IconLoader;
+import com.expenseTracker.frontend.app.utils.LimitedDocument;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -62,6 +64,11 @@ public class ReportTypePanel extends JPanel {
         fileNameTextField = UIComponentFactory.createTextField(
                 20, 20, (width - 30), 30, 20, false
         );
+
+        final int MAX_CHARS = 31;
+        final String ALLOWED_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+        fileNameTextField.setDocument(new LimitedDocument(MAX_CHARS, ALLOWED_CHARS));
+
         return fileNameTextField;
     }
 
