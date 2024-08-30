@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.writers;
 
 
+import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
 import com.expenseTracker.backend.utils.DateBoundPair;
 import com.expenseTracker.backend.utils.UserBalanceAggregator;
@@ -35,8 +36,20 @@ public class PDFExporter extends FileExporter {
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
 
+            document.add(createHeader());
+
+            Table summaryTable = createSummaryTable();
+            document.add(summaryTable);
+
+            Table transactionTable = createTransactionTable();
+            document.add(transactionTable);
+
+            document.close();
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found: " + filePath, e);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while closing the document", e);
         }
     }
 
@@ -52,16 +65,39 @@ public class PDFExporter extends FileExporter {
         float[] tableCols = new float[]{1, 1, 1};
         Table table = new Table(tableCols);
         table.setWidth(UnitValue.createPercentValue(100));
+        populateSummaryTable(table);
         return table;
     }
 
-    private Table populateSummaryTable(Table table) {
+    private Table createTransactionTable() {
+        float[] tableCols = new float[]{2, 2, 1, 1, 3, 1, 2};
+        Table table = new Table(tableCols);
+        table.setWidth(UnitValue.createPercentValue(100));
+        table.setMarginTop(10);
+        populateTransactionTable(table);
+        return table;
+    }
+
+    private void populateTransactionTable(Table table) {
+        addTransactionHeaders(table);
+
+        for (Transaction transaction : transactionList) {
+            addTransactionCell(table,
+                transaction.getDate().toString(),
+                transaction.getType(),
+                transaction.getCategory(),
+                transaction.getAmount().toString(),
+                transaction.getDescription()
+            );
+        }
+    }
+
+    private void populateSummaryTable(Table table) {
         addSummaryCell(table, createReportDateBoundsInfo(), 10, false, TextAlignment.LEFT);
         addSummaryCell(table, createReportGeneratedDate(), 10, false, TextAlignment.LEFT);
         addSummaryCell(table, createUserBalanceInfo(), 12, true, TextAlignment.RIGHT);
         addSummaryCell(table, createTotalProcessedExpensesInfo(), 12, true, TextAlignment.RIGHT);
         addSummaryCell(table, createTotalProcessedIncomeInfo(), 12, true, TextAlignment.RIGHT);
-        return table;
     }
 
     private void addSummaryCell(Table table, String text, int fontSize, boolean isBold, TextAlignment alignment) {
@@ -71,6 +107,20 @@ public class PDFExporter extends FileExporter {
         }
         Cell cell = new Cell().add(paragraph).setTextAlignment(alignment).setBorder(null);
         table.addCell(cell);
+    }
+
+    private void addTransactionCell(Table table, String... texts) {
+        for (String text : texts) {
+            table.addCell(new Cell().add(new Paragraph(text)));
+        }
+    }
+
+    private void addTransactionHeaders(Table table)
+    {
+        String[] headers = {"Date", "Type", "Category", "Amount", "Description"};
+        for (String header : headers) {
+            table.addCell(new Cell().add(new Paragraph(header)).setBold());
+        }
     }
 
     private String createReportDateBoundsInfo() {
