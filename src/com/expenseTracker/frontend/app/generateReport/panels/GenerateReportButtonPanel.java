@@ -1,7 +1,9 @@
 package com.expenseTracker.frontend.app.generateReport.panels;
 
 import com.expenseTracker.backend.writers.CSVExporter;
+import com.expenseTracker.backend.writers.PDFExporter;
 import com.expenseTracker.backend.writers.TXTExporter;
+import com.expenseTracker.backend.writers.XLSXExporter;
 import com.expenseTracker.frontend.app.generateReport.frame.GenerateReportFrame;
 import com.expenseTracker.frontend.app.mainFrame.MainFrame;
 import com.expenseTracker.frontend.components.UIComponentFactory;
@@ -74,10 +76,12 @@ public class GenerateReportButtonPanel extends JPanel{
                     new CSVExporter(csvFilePath, source.getUser()).exportFile();
                 }
                 if (pdfCheckBox.isSelected()) {
-                    return;
+                    String pdfFilePath = filePath + source.getPdfReportTypePanel().getFileNameTextField().getText() + ".pdf";
+                    new PDFExporter(pdfFilePath, source.getUser()).exportFile();
                 }
                 if (xlsxCheckBox.isSelected()) {
-                    return;
+                    String xlsxFilePath = filePath + source.getXlsxReportTypePanel().getFileNameTextField().getText() + ".xlsx";
+                    new XLSXExporter(xlsxFilePath, source.getUser()).exportFile();
                 }
                 if (txtCheckBox.isSelected()) {
                     String txtFilePath = filePath + source.getTxtReportTypePanel().getFileNameTextField().getText() + ".txt";

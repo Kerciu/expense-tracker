@@ -8,17 +8,16 @@ import com.expenseTracker.backend.utils.UserBalanceAggregator;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
-import com.mysql.cj.conf.ConnectionUrlParser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -70,7 +69,7 @@ public class PDFExporter extends FileExporter {
     }
 
     private Table createTransactionTable() {
-        float[] tableCols = new float[]{2, 2, 1, 1, 3, 1, 2};
+        float[] tableCols = new float[]{2, 1, 2, 2, 3};
         Table table = new Table(tableCols);
         table.setWidth(UnitValue.createPercentValue(100));
         table.setMarginTop(10);
@@ -93,19 +92,21 @@ public class PDFExporter extends FileExporter {
     }
 
     private void populateSummaryTable(Table table) {
-        addSummaryCell(table, createReportDateBoundsInfo(), 10, false, TextAlignment.LEFT);
-        addSummaryCell(table, createReportGeneratedDate(), 10, false, TextAlignment.LEFT);
-        addSummaryCell(table, createUserBalanceInfo(), 12, true, TextAlignment.RIGHT);
-        addSummaryCell(table, createTotalProcessedExpensesInfo(), 12, true, TextAlignment.RIGHT);
-        addSummaryCell(table, createTotalProcessedIncomeInfo(), 12, true, TextAlignment.RIGHT);
+        addSummaryCell(table, createReportDateBoundsInfo(), 10, false);
+        addSummaryCell(table, createReportGeneratedDate(), 10, false);
+        table.addCell(new Cell().add(new Paragraph()).setBorder(Border.NO_BORDER));
+
+        addSummaryCell(table, createUserBalanceInfo(), 12, true);
+        addSummaryCell(table, createTotalProcessedExpensesInfo(), 12, true);
+        addSummaryCell(table, createTotalProcessedIncomeInfo(), 12, true);
     }
 
-    private void addSummaryCell(Table table, String text, int fontSize, boolean isBold, TextAlignment alignment) {
+    private void addSummaryCell(Table table, String text, int fontSize, boolean isBold) {
         Paragraph paragraph = new Paragraph(text).setFontSize(fontSize);
         if (isBold) {
             paragraph.setBold();
         }
-        Cell cell = new Cell().add(paragraph).setTextAlignment(alignment).setBorder(null);
+        Cell cell = new Cell().add(paragraph).setTextAlignment(TextAlignment.LEFT).setBorder(null);
         table.addCell(cell);
     }
 
