@@ -1,8 +1,8 @@
 package com.expenseTracker.backend.writers;
 
 import com.expenseTracker.backend.data.User;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import com.mysql.cj.xdevapi.Column;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
@@ -37,13 +37,45 @@ public class XLSXExporter extends FileExporter{
     }
 
     private int createHeader(Sheet sheet, int rowNum) {
-        return 0;
+        Row row = sheet.createRow(rowNum++);
+        Cell cell = row.createCell(0);
+        cell.setCellValue(user.getUsername());
+
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        Font font = sheet.getWorkbook().createFont();
+
+        font.setFontHeightInPoints((short) 28);
+        font.setBold(true);
+
+        cellStyle.setFont(font);
+        cell.setCellStyle(cellStyle);
+
+        return rowNum;
     }
 
     private int createSummaryTable(Sheet sheet, int rowNum) {
-        return 0;
+        rowNum = addSummaryRow(sheet, rowNum, createReportDateBoundsInfo());
+        rowNum = addSummaryRow(sheet, rowNum, createReportGeneratedDate());
+        rowNum = addSummaryRow(sheet, rowNum, createUserBalanceInfo());
+        rowNum = addSummaryRow(sheet, rowNum, createTotalProcessedExpensesInfo());
+        rowNum = addSummaryRow(sheet, rowNum, createTotalProcessedIncomeInfo());
+        ++rowNum;
+        return rowNum;
+    }
+
+    private int addSummaryRow(Sheet sheet, int rowNum, String text) {
+        Row row = sheet.createRow(rowNum++);
+        Cell cell = row.createCell(0);
+        cell.setCellValue(text);
+
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cell.setCellStyle(cellStyle);
+
+        return rowNum;
     }
 
     private void createTransactionsTable(Sheet sheet, int rowNum) {
+        
     }
 }
