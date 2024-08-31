@@ -135,43 +135,4 @@ public class PDFExporter extends FileExporter {
             table.addCell(cell);
         }
     }
-
-    private String createReportDateBoundsInfo() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        DateBoundPair dateBoundPair = fetchTransactionDateBounds();
-        return "Transaction Dates: \n" +
-                dateBoundPair.getFirst().format(dateTimeFormatter)
-                + "—" +
-                dateBoundPair.getSecond().format(dateTimeFormatter);
-    }
-
-    private DateBoundPair fetchTransactionDateBounds() {
-        // transaction list is ordered by date descending
-        return new DateBoundPair(
-                transactionList.getLast().getDate(),
-                transactionList.getFirst().getDate()
-        );
-    }
-
-    private String createReportGeneratedDate() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        return "Report Generated on:\n" + LocalDateTime.now().format(dateTimeFormatter);
-    }
-
-    private String createUserBalanceInfo() {
-        String username = user.getUsername();
-        String usernameCapitalized = username.substring(0, 1).toUpperCase() + username.substring(1);
-        String userBalance = user.getBalance().toString();
-        return usernameCapitalized + "'s Balance: \n" + userBalance;
-    }
-
-    private String createTotalProcessedExpensesInfo() {
-        BigDecimal processedExpenses = UserBalanceAggregator.getSummedUserExpenses(transactionList);
-        return "Total Expenses:\n" + processedExpenses.toString();
-    }
-
-    private String createTotalProcessedIncomeInfo() {
-        BigDecimal processedIncome = UserBalanceAggregator.getSummedUserIncome(transactionList);
-        return "Total Income:\n" + processedIncome.toString();
-    }
 }
