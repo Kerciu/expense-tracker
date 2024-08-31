@@ -14,6 +14,12 @@ public class UIComponentFactory {
         return label;
     }
 
+    public static JLabel createImageLabel(ImageIcon icon, int x, int y, int width, int height) {
+        JLabel label = new JLabel(icon);
+        label.setBounds(x, y, width, height);
+        return label;
+    }
+
     public static JTextField createTextField(int x, int y, int width, int height, int fontSize, boolean editable) {
         JTextField textField = new JTextField();
         textField.setBounds(x, y, width, height);

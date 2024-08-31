@@ -1,9 +1,11 @@
 package com.expenseTracker.frontend.authentication;
 
+import com.expenseTracker.backend.utils.IconLoader;
 import com.expenseTracker.frontend.app.utils.BaseFrame;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class AuthenticationBaseFrame extends BaseFrame {
     protected enum LabelType {CENTER_TEXT, USERNAME, PASSWORD, REENTER_PASSWORD};
@@ -16,7 +18,9 @@ public abstract class AuthenticationBaseFrame extends BaseFrame {
     protected JLabel createLabel(String text, LabelType type) {
         switch (type) {
             case CENTER_TEXT -> {
-                return UIComponentFactory.createLabel(text, 0, 20, super.getWidth(), 40, 32, SwingConstants.CENTER);
+                JLabel centerLabel = UIComponentFactory.createLabel(text, 30, 30, super.getWidth(), 40, 32, SwingConstants.CENTER);
+                centerLabel.setFont(new Font("Dialog", Font.BOLD, 36));
+                return centerLabel;
             }
             case USERNAME -> {
                 return UIComponentFactory.createLabel(text, 20, 120, super.getWidth() - 30, 24, 20, SwingConstants.LEFT);
@@ -26,6 +30,13 @@ public abstract class AuthenticationBaseFrame extends BaseFrame {
             }
             default -> throw new IllegalArgumentException("Invalid LabelType");
         }
+    }
+
+    protected JLabel createIconLabel()
+    {
+        String iconPath = "/resources/assets/images/expense-tracker-icon.png";
+        ImageIcon imageIcon = IconLoader.loadIcon(iconPath);
+        return UIComponentFactory.createImageLabel(imageIcon, 20, 20, 64, 64);
     }
 
     protected JTextField createTextField() {

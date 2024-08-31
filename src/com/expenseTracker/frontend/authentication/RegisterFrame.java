@@ -21,7 +21,8 @@ public class RegisterFrame extends AuthenticationBaseFrame {
     }
     @Override
     protected void addGuiComponents() {
-        add(UIComponentFactory.createLabel("Expense Tracker", 0, 20, getWidth(), 40, 32, SwingConstants.CENTER));
+        add(createLabel("Expense Tracker", LabelType.CENTER_TEXT));
+        add(createIconLabel());
         add(UIComponentFactory.createLabel("Username", 20, 120, getWidth() - 30, 24, 20, SwingConstants.LEFT));
         add(UIComponentFactory.createLabel("New Password", 20, 220, getWidth() - 30, 24, 20, SwingConstants.LEFT));
         add(UIComponentFactory.createLabel("Re-enter Password", 20, 320, getWidth() - 30, 24, 20, SwingConstants.LEFT));

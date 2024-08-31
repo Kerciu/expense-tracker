@@ -22,6 +22,7 @@ public class LoginFrame extends AuthenticationBaseFrame{
     @Override
     protected void addGuiComponents() {
         add(createLabel("Expense Tracker", LabelType.CENTER_TEXT));
+        add(createIconLabel());
         add(createLabel("Username", LabelType.USERNAME));
         add(createLabel("Password", LabelType.PASSWORD));
 
