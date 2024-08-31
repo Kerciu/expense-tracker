@@ -1,7 +1,7 @@
 package com.expenseTracker.backend.writers;
 
+import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
-import com.mysql.cj.xdevapi.Column;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,8 +18,8 @@ public class XLSXExporter extends FileExporter{
     public void exportFile() {
         if (transactionList == null || transactionList.isEmpty()) return;
 
-        try (Workbook workbook = new XSSFWorkbook("Transactions")) {
-            Sheet sheet = workbook.createSheet();
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Transactions");
             int rowNum = 0;
 
             rowNum = createHeader(sheet, rowNum);
@@ -59,8 +59,7 @@ public class XLSXExporter extends FileExporter{
         rowNum = addSummaryRow(sheet, rowNum, createUserBalanceInfo());
         rowNum = addSummaryRow(sheet, rowNum, createTotalProcessedExpensesInfo());
         rowNum = addSummaryRow(sheet, rowNum, createTotalProcessedIncomeInfo());
-        ++rowNum;
-        return rowNum;
+        return ++rowNum;
     }
 
     private int addSummaryRow(Sheet sheet, int rowNum, String text) {
@@ -76,6 +75,44 @@ public class XLSXExporter extends FileExporter{
     }
 
     private void createTransactionsTable(Sheet sheet, int rowNum) {
-        
+        createHeaderColumns(sheet, rowNum++);
+        createTransactionRows(sheet, rowNum);
+        autoSizeColumns(sheet);
+    }
+
+    private void createHeaderColumns(Sheet sheet, int rowNum) {
+        Row row = sheet.createRow(rowNum);
+
+        int cellNum = 0;
+        for (String header : headers) {
+            Cell cell = row.createCell(cellNum++);
+            cell.setCellValue(header);
+
+            CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+
+            cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            cell.setCellStyle(cellStyle);
+        }
+    }
+
+    private void createTransactionRows(Sheet sheet, int rowNum) {
+        for (Transaction transaction : transactionList) {
+            Row row = sheet.createRow(rowNum++);
+            int cellNum = 0;
+
+            row.createCell(cellNum++).setCellValue(transaction.getDate().toString());
+            row.createCell(cellNum++).setCellValue(transaction.getType());
+            row.createCell(cellNum++).setCellValue(transaction.getCategory());
+            row.createCell(cellNum++).setCellValue(transaction.getAmount().toString());
+            row.createCell(cellNum).setCellValue(transaction.getDescription());
+        }
+    }
+
+    private void autoSizeColumns(Sheet sheet) {
+        for (int i = 0; i < headers.length; ++i) {
+            sheet.autoSizeColumn(i);
+        }
     }
 }

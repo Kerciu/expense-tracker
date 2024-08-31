@@ -125,7 +125,6 @@ public class PDFExporter extends FileExporter {
 
     private void addTransactionHeaders(Table table)
     {
-        String[] headers = {"Date", "Type", "Category", "Amount", "Description"};
         for (String header : headers) {
             Cell cell = new Cell().add(new Paragraph(header));
             cell.setBackgroundColor(new DeviceRgb(200, 200, 200));

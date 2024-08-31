@@ -51,9 +51,7 @@ public class TransactionRepository {
             }
 
             PreparedStatementParametersSetter.setParameters(updateUserBalancePreparedStatement, user.getBalance(), user.getId());
-            System.out.println("Setting user #"+user.getId()+" balance to " + user.getBalance());
             updateUserBalancePreparedStatement.executeUpdate();
-            System.out.println("Updated the database, the query was:\n" + updateBalanceQuery);
         }
     }
 

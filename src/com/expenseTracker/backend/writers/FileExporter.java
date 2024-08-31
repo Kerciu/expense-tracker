@@ -17,6 +17,8 @@ public abstract class FileExporter {
     protected User user;
     protected List<Transaction> transactionList;
 
+    protected final String[] headers = {"Date", "Type", "Category", "Amount", "Description"};
+
     public FileExporter(String filePath, User user)
     {
         this.filePath = filePath;

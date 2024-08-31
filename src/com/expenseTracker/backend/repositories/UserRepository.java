@@ -61,8 +61,6 @@ public class UserRepository {
                 int userId = resultSet.getInt("id");
                 BigDecimal balance = resultSet.getBigDecimal("balance");
                 return new User(userId, resultSet.getString("username"), password, balance);
-            } else {
-                System.out.println("Password does not match.");
             }
         } else {
             System.out.println("No user found with the given username and password.");
