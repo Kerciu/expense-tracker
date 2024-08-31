@@ -6,10 +6,7 @@ import com.expenseTracker.backend.db.PasswordUtils;
 import com.expenseTracker.backend.db.SQLStatementFactory;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserRepository {
     public static User validateLogin(String username, String password) {

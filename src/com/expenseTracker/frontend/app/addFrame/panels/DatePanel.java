@@ -5,23 +5,15 @@ import com.expenseTracker.frontend.authentication.PlaceholderTextField;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class DatePanel extends JPanel {
     private PlaceholderTextField dateEnteringTextField;
     private JCheckBox todayCheckBox;
-    private LocalDate dateEntered;
 
     public DatePanel(int width) {
         setLayout(new GridBagLayout());
@@ -94,12 +86,10 @@ public class DatePanel extends JPanel {
                     LocalDate todayDate = LocalDate.now();
                     dateEnteringTextField.setText(todayDate.toString());
                     dateEnteringTextField.setEditable(false);
-                    dateEntered = todayDate;
                 }
                 else {
                     dateEnteringTextField.setText("");
                     dateEnteringTextField.setEditable(true);
-                    dateEntered = null;
                 }
             }
         };

@@ -5,7 +5,6 @@ import com.expenseTracker.frontend.app.utils.LimitedDocument;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;

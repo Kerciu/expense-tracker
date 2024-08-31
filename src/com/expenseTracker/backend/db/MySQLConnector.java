@@ -6,10 +6,8 @@ import com.expenseTracker.backend.repositories.TransactionRepository;
 import com.expenseTracker.backend.repositories.UserRepository;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLConnector {

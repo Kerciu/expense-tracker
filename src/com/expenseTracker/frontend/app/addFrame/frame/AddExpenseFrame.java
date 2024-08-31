@@ -6,7 +6,6 @@ import com.expenseTracker.frontend.app.addFrame.panels.*;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AddExpenseFrame extends BaseFrame {
     private AmountPanel amountPanel;
@@ -63,16 +62,6 @@ public class AddExpenseFrame extends BaseFrame {
         datePanel.setBounds(0, 250, getWidth(), 80);
         descriptionPanel.setBounds(0, 330, getWidth(), 190);
         buttonPanel.setBounds(0, 520, getWidth(), 40);
-    }
-
-    private void colorPanelsForDebug()
-    {
-        amountPanel.setBackground(Color.red);
-        transactionTypePanel.setBackground(Color.blue);
-        categoryPanel.setBackground(Color.yellow);
-        datePanel.setBackground(Color.cyan);
-        descriptionPanel.setBackground(Color.green);
-        buttonPanel.setBackground(Color.pink);
     }
 
     private void addWelcomingComponents()

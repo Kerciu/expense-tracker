@@ -8,48 +8,37 @@ import java.awt.event.FocusEvent;
 public class PlaceholderTextField extends JTextField {
     private String placeholderText;
 
-    public PlaceholderTextField(String placeholderText)
-    {
-        this.placeholderText = placeholderText;
-        addPlaceholderBehaviour();
-    }
-
-    public String getPlaceholderText() {
-        return placeholderText;
-    }
-
-    public void setPlaceholderText(String placeholderText) {
+    public PlaceholderTextField(String placeholderText) {
         this.placeholderText = placeholderText;
     }
 
-    private void addPlaceholderBehaviour()
-    {
-        this.setText(placeholderText);
-        this.setForeground(Color.GRAY);
-
-        this.addFocusListener(
-                createFocusListener()
-        );
+    public PlaceholderTextField() {
+        this.placeholderText = null;
     }
 
-    private FocusAdapter createFocusListener()
-    {
-        return new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (getText().equals(placeholderText)) {
-                    setText("");
-                    setForeground(Color.BLACK);
-                }
-            }
+    @Override
+    public String getText() {
+        String text = super.getText();
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (getText().isEmpty()) {
-                    setText(placeholderText);
-                    setForeground(Color.GRAY);
-                }
-            }
-        };
+        if (text.trim().isEmpty() && placeholderText != null) {
+            text = placeholderText;
+        }
+
+        return text;
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (!super.getText().isEmpty() || placeholderText == null) {
+            return;
+        }
+
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(super.getDisabledTextColor());
+        g2.drawString(placeholderText, getInsets().left, g.getFontMetrics().getMaxAscent() + getInsets().top);
     }
 }

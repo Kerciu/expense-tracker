@@ -12,10 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -86,7 +83,9 @@ public class AddExpenseFrameButtonPanel extends JPanel {
                     return;
                 }
                 BigDecimal amount = TransactionFlowFilter.filterAmountEntered(amountEnteringTextField.getText());
+
                 String type = (ExpenseWrapper.isExpense() ? "Expense" : "Income");
+
                 String category = (String) categoryComboBox.getSelectedItem();
                 category = category != null ? category : "Other";
 

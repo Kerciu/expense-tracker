@@ -5,7 +5,6 @@ import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
 import com.expenseTracker.backend.utils.DateBoundPair;
 import com.expenseTracker.backend.utils.UserBalanceAggregator;
-import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -20,7 +19,6 @@ import com.itextpdf.layout.property.UnitValue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

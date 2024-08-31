@@ -61,7 +61,6 @@ public class TransactionTypePanel extends JPanel {
                 isExpense = true;
                 incomeCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
-                System.out.println("Expense selected, isExpense set to: " + isExpense); // Debug
                 ExpenseWrapper.setIsExpense(true);
             }
         });
@@ -71,7 +70,6 @@ public class TransactionTypePanel extends JPanel {
                 isExpense = false;
                 expenseCheckBox.setSelected(false);
                 categoryPanel.updateCategories(this.isExpense);
-                System.out.println("Income selected, isExpense set to: " + isExpense); // Debug
                 ExpenseWrapper.setIsExpense(false);
             }
         });

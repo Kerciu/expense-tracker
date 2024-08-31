@@ -17,7 +17,6 @@ public class PlaceholderTextFieldTest {
         PlaceholderTextField textField = new PlaceholderTextField("Enter your username..");
 
         assertEquals("Enter your username..", textField.getText());
-        assertEquals("Enter your username..", textField.getPlaceholderText());
     }
 
     @Test
