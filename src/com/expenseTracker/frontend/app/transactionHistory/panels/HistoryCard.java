@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -38,8 +39,9 @@ public class HistoryCard extends JPanel {
     {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        setPreferredSize(new Dimension(400, 100));
-        setMaximumSize(new Dimension(400, 100));
+
+        setPreferredSize(new Dimension(source.getWidth() - 5, 100));
+        setMaximumSize(new Dimension(source.getWidth() - 5, 100));
     }
 
     private void addComponents() {

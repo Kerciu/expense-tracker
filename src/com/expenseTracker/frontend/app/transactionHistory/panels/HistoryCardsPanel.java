@@ -6,6 +6,7 @@ import com.expenseTracker.backend.db.MySQLConnector;
 import com.expenseTracker.frontend.app.transactionHistory.frame.TransactionHistoryFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -35,7 +36,11 @@ public class HistoryCardsPanel extends JPanel {
         List<Transaction> transactions = fetchTransactionHistoryInformation(user);
 
         for (Transaction t : transactions) {
-            add(new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getDate(), t.getCategory(), t.getDescription()));
+            JPanel cardPanel = new JPanel(new BorderLayout());
+            cardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            HistoryCard card = new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getDate(), t.getCategory(), t.getDescription());
+            cardPanel.add(card, BorderLayout.CENTER);
+            add(cardPanel);
         }
 
         updatePanel();
