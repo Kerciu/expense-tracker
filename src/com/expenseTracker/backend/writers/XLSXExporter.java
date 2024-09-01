@@ -2,7 +2,9 @@ package com.expenseTracker.backend.writers;
 
 import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
+import com.expenseTracker.backend.utils.ChartGenerator;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
@@ -25,6 +27,7 @@ public class XLSXExporter extends FileExporter{
             rowNum = createHeader(sheet, rowNum);
             rowNum = createSummaryTable(sheet, rowNum);
             createTransactionsTable(sheet, rowNum);
+            ChartGenerator.createPieChartXLSX((XSSFSheet) sheet, transactionList, rowNum +1, rowNum +2);
 
             try(FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
                 workbook.write(fileOutputStream);
