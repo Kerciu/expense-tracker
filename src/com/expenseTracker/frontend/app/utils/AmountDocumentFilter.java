@@ -35,26 +35,30 @@ public class AmountDocumentFilter extends DocumentFilter {
 
     private boolean isValid(FilterBypass fb, int offset, String text) throws BadLocationException {
         String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-        String newText = new StringBuilder(currentText)
-                .replace(offset, offset + text.length(), text)
-                .toString();
+        String newText = new StringBuilder(currentText).replace(offset, offset + text.length(), text).toString();
 
-        boolean dotAlreadyPresent = currentText.contains(".");
+        return !isInvalidLeadingZero(newText) && !hasMoreThanOneDot(newText)
+                && !hasMoreThanTwoDecimalPlaces(newText) && allCharsAreDigitsOrDot(newText);
+    }
 
-        for (int i = 0; i < text.length(); ++i) {
-            char character = text.charAt(i);
-            if (!Character.isDigit(character)) {
-                if (character == '.') {
-                    if (dotAlreadyPresent) {
-                        return false;
-                    }
-                    dotAlreadyPresent = true;
-                } else {
-                    return false;
-                }
-            }
-        }
+    private boolean isInvalidLeadingZero(String text)
+    {
+        return text.matches("^0[^.]");
+    }
 
-        return true;
+    private boolean hasMoreThanOneDot(String text)
+    {
+        return text.chars().filter(c -> c == '.').count() > 1;
+    }
+
+    private boolean hasMoreThanTwoDecimalPlaces(String text)
+    {
+        int dotIndex = text.indexOf('.');
+        return dotIndex != -1 && text.length() - dotIndex - 1 > 2;
+    }
+
+    private boolean allCharsAreDigitsOrDot(String text)
+    {
+        return text.matches("[0-9.]*");
     }
 }
