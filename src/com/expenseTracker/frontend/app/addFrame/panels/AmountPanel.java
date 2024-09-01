@@ -1,8 +1,10 @@
 package com.expenseTracker.frontend.app.addFrame.panels;
 
+import com.expenseTracker.frontend.app.utils.AmountDocumentFilter;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 
 public class AmountPanel extends JPanel {
     private JTextField amountEnteringTextField;
@@ -32,9 +34,14 @@ public class AmountPanel extends JPanel {
 
     private JTextField createAmountTextField(int width)
     {
-        return UIComponentFactory.createTextField(
+        JTextField amountTextField =  UIComponentFactory.createTextField(
                 5, 40, width - 10, 40, 20, true
         );
+
+        PlainDocument plainDocument = (PlainDocument) amountTextField.getDocument();
+        plainDocument.setDocumentFilter(new AmountDocumentFilter());
+
+        return amountTextField;
     }
 
     public String getAmountText() {
