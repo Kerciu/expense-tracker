@@ -1,5 +1,7 @@
 package com.expenseTracker.frontend.components;
 
+import com.expenseTracker.frontend.authentication.PlaceholderTextField;
+
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
@@ -28,6 +30,15 @@ public class UIComponentFactory {
         textField.setEditable(editable);
         return textField;
     }
+
+    public static JTextField createPlaceholderTextField(String placeholder, int x, int y, int width, int height, int fontSize, boolean centerAligned) {
+        JTextField textField = new PlaceholderTextField(placeholder, centerAligned);
+        textField.setBounds(x, y, width, height);
+        textField.setFont(new Font("Dialog", Font.PLAIN, fontSize));
+        textField.setHorizontalAlignment(SwingConstants.LEFT);
+        return textField;
+    }
+
 
     public static JTextField createTextField(String text, int x, int y, int width, int height, int fontSize, boolean editable) {
         JTextField textField = new JTextField(text);

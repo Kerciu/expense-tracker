@@ -53,7 +53,7 @@ public class DatePanel extends JPanel {
 
     private JTextField createDateTextField()
     {
-        dateEnteringTextField = new PlaceholderTextField("YYYY-MM-DD");
+        dateEnteringTextField = new PlaceholderTextField("YYYY-MM-DD", true);
         dateEnteringTextField.setColumns(10);
         dateEnteringTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
         dateEnteringTextField.setHorizontalAlignment(SwingConstants.CENTER);
