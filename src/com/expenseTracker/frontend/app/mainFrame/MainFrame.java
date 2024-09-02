@@ -4,7 +4,6 @@ import com.expenseTracker.backend.data.User;
 import com.expenseTracker.backend.db.MySQLConnector;
 import com.expenseTracker.frontend.app.utils.BaseFrame;
 import com.expenseTracker.frontend.app.generateReport.frame.GenerateReportFrame;
-import com.expenseTracker.frontend.app.SettingsFrame;
 import com.expenseTracker.frontend.app.addFrame.frame.AddExpenseFrame;
 import com.expenseTracker.frontend.app.transactionHistory.frame.TransactionHistoryFrame;
 import com.expenseTracker.frontend.authentication.LoginFrame;
@@ -29,7 +28,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
         addDepositButton();
         addTransactionsHistoryButton();
         addGenerateReportButton();
-        addSettingsButton();
         addLogoutButton();
     }
 
@@ -40,7 +38,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
     }
 
     private void addBalanceLabel() {
-        JLabel balanceLabel = UIComponentFactory.createLabel("Current Balance", 0, 80, getWidth() - 10, 30, 22, SwingConstants.CENTER);
+        JLabel balanceLabel = UIComponentFactory.createLabel("Current Balance", 0, 300, getWidth() - 10, 30, 22, SwingConstants.CENTER);
         add(balanceLabel);
     }
 
@@ -52,32 +50,26 @@ public class MainFrame extends BaseFrame implements ActionListener {
         }
         JTextField userBalanceTextField = UIComponentFactory.createTextField(
                 user.getBalance().toString(),
-                15, 120, getWidth() - 50, 40, 28, false
+                20, 340, getWidth() - 50, 40, 28, false
         );
         userBalanceTextField.setHorizontalAlignment(SwingConstants.CENTER);
         add(userBalanceTextField);
     }
 
     private void addDepositButton() {
-        JButton depositButton = UIComponentFactory.createButton("Add Transaction", 5, 180, getWidth() - 10, 40, 22);
+        JButton depositButton = UIComponentFactory.createButton("Add Transaction", 5, 90, getWidth() - 10, 40, 22);
         depositButton.addActionListener(this);
         add(depositButton);
     }
 
     private void addTransactionsHistoryButton() {
-        JButton transactionsHistoryButton = UIComponentFactory.createButton("Transactions History", 5, 250, getWidth() - 10, 40, 22);
+        JButton transactionsHistoryButton = UIComponentFactory.createButton("Browse Transactions History", 5, 160, getWidth() - 10, 40, 22);
         transactionsHistoryButton.addActionListener(this);
         add(transactionsHistoryButton);
     }
 
     private void addGenerateReportButton() {
-        JButton generateReportButton = UIComponentFactory.createButton("Generate Report", 5, 320, getWidth() - 10, 40, 22);
-        generateReportButton.addActionListener(this);
-        add(generateReportButton);
-    }
-
-    private void addSettingsButton() {
-        JButton generateReportButton = UIComponentFactory.createButton("Settings", 5, 390, getWidth() - 10, 40, 22);
+        JButton generateReportButton = UIComponentFactory.createButton("Generate Report", 5, 230, getWidth() - 10, 40, 22);
         generateReportButton.addActionListener(this);
         add(generateReportButton);
     }
@@ -103,7 +95,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
             MainFrame.this.dispose();
             new AddExpenseFrame("Add Transaction", user, 420, 600).setVisible(true);
         }
-        else if (buttonClicked.equalsIgnoreCase("Transactions History"))
+        else if (buttonClicked.equalsIgnoreCase("Browse Transactions History"))
         {
             MainFrame.this.dispose();
             new TransactionHistoryFrame("Transactions History", user, 420, 600).setVisible(true);
@@ -112,11 +104,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
         {
             MainFrame.this.dispose();
             new GenerateReportFrame("Generate Report", user, 420, 600).setVisible(true);
-        }
-        else if (buttonClicked.equalsIgnoreCase("Settings"))
-        {
-            MainFrame.this.dispose();
-            new SettingsFrame("Settings", user, 420, 600).setVisible(true);
         }
     }
 }
