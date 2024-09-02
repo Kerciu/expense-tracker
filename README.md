@@ -49,6 +49,11 @@ A Java desktop application designed for managing and tracking expenses and incom
   - **iText** - For PDF generation. 📄
   - **Apache POI** - For Excel file creation. 📈
 
+## 📙 Database Schema
+<p align="center">
+  <img src="./assets/images/screenshots/database-schema.svg" alt="Database Schema" />
+</p>
+
 ## 🖼️ Screenshots
 <p align="center">
   <img src="assets/images/screenshots/login-frame.png" alt="Login frame" width="300" />
