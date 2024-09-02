@@ -72,34 +72,54 @@ public class GenerateReportButtonPanel extends JPanel{
                     documentsDir.mkdirs();
                 }
 
+                JTextField csvTextField = source.getCsvReportTypePanel().getFileNameTextField();
+                JTextField pdfTextField = source.getPdfReportTypePanel().getFileNameTextField();
+                JTextField xlsxTextField = source.getXlsxReportTypePanel().getFileNameTextField();
+                JTextField txtTextField = source.getTxtReportTypePanel().getFileNameTextField();
+
                 JCheckBox csvCheckBox = source.getCsvReportTypePanel().getCheckBox();
                 JCheckBox pdfCheckBox = source.getPdfReportTypePanel().getCheckBox();
                 JCheckBox xlsxCheckBox = source.getXlsxReportTypePanel().getCheckBox();
                 JCheckBox txtCheckBox = source.getTxtReportTypePanel().getCheckBox();
 
+                int fileCounter = 0;
                 String filePath = documentsDirectory + File.separator;
-                if (csvCheckBox.isSelected()) {
+                if (csvCheckBox.isSelected() && !csvTextField.getText().isEmpty()) {
                     String csvFilePath = filePath + source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
                     new CSVExporter(csvFilePath, source.getUser()).exportFile();
+                    ++fileCounter;
                 }
-                if (pdfCheckBox.isSelected()) {
+                if (pdfCheckBox.isSelected() && !pdfTextField.getText().isEmpty()) {
                     String pdfFilePath = filePath + source.getPdfReportTypePanel().getFileNameTextField().getText() + ".pdf";
                     new PDFExporter(pdfFilePath, source.getUser()).exportFile();
+                    ++fileCounter;
                 }
-                if (xlsxCheckBox.isSelected()) {
+                if (xlsxCheckBox.isSelected() && !xlsxTextField.getText().isEmpty()) {
                     String xlsxFilePath = filePath + source.getXlsxReportTypePanel().getFileNameTextField().getText() + ".xlsx";
                     new XLSXExporter(xlsxFilePath, source.getUser()).exportFile();
+                    ++fileCounter;
                 }
-                if (txtCheckBox.isSelected()) {
+                if (txtCheckBox.isSelected() && !txtTextField.getText().isEmpty()) {
                     String txtFilePath = filePath + source.getTxtReportTypePanel().getFileNameTextField().getText() + ".txt";
                     new TXTExporter(txtFilePath, source.getUser()).exportFile();
+                    ++fileCounter;
+                }
+
+                clearAllTheFieldsUponAdding(csvTextField, pdfTextField, xlsxTextField, txtTextField);
+
+                if (fileCounter > 0) {
+                    JOptionPane.showMessageDialog(source, "Successfully created "+fileCounter+" files in /documents/ directory.");
+                } else {
+                    JOptionPane.showMessageDialog(source, "No file extensions selected!");
                 }
             }
         };
     }
 
-    private void clearAllTheFieldsUponAdding()
+    private void clearAllTheFieldsUponAdding(JTextField... textFields)
     {
-        // TODO
+        for (JTextField textField : textFields) {
+            textField.setText("");
+        }
     }
 }
