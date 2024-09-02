@@ -27,14 +27,14 @@ public class MoneyFlowPanel extends JPanel {
             gbc.gridy = 0;
             add(createIconLabel("expense"), gbc);
 
-            gbc.gridy = 1;
+            gbc.gridx = 1;
             add(createIconLabel("income"), gbc);
 
-            gbc.gridx = 1;
-            gbc.gridy = 0;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
             add(createMoneyFlowLabel(TransactionType.EXPENSE, transactionList), gbc);
 
-            gbc.gridy = 1;
+            gbc.gridx = 1;
             add(createMoneyFlowLabel(TransactionType.INCOME, transactionList), gbc);
         } catch(SQLException e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class MoneyFlowPanel extends JPanel {
 
         JLabel moneyFlowLabel = new JLabel(text);
         moneyFlowLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
-        moneyFlowLabel.setForeground(type == TransactionType.EXPENSE ? Color.RED : Color.GREEN);
+        moneyFlowLabel.setForeground(type == TransactionType.EXPENSE ? new Color(0x800000) : new Color(0x008000));
         moneyFlowLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return moneyFlowLabel;
     }
