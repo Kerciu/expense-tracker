@@ -1,4 +1,4 @@
-# 🌦️ Expense Tracker App
+# 💸 Expense Tracker App
 
 ## 📜 Description
 
@@ -51,12 +51,12 @@ A Java desktop application.
   <img src="assets/images/screenshots/register-frame.png" alt="Register frame" width="300" />
   <img src="assets/images/screenshots/main-frame.png" alt="Main frame" width="300" />
   <img src="assets/images/screenshots/add-transaction-frame.png" alt="Add transaction frame" width="300" />
-   <img src="assets/images/screenshots/browse-transaction-history-frame.png" alt="Browse transaction frame" width="300" />
+  <img src="assets/images/screenshots/browse-transaction-history-frame.png" alt="Browse transaction frame" width="300" />
   <img src="assets/images/screenshots/generate-report-frame.png" alt="Generate report frame" width="300" />
 </p>
 
 ## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](LICENCE) file for details. 📝
+This project is licensed under the MIT License. See the [LICENCE](LICENCE) file for details. 📝
 
 ## 📬 Contact
 For questions, feedback, or support:
