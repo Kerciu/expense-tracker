@@ -7,27 +7,27 @@ import java.math.RoundingMode;
 import java.util.List;
 
 public class UserBalanceAggregator {
-    private enum SumType {
+    public enum TransactionType {
         EXPENSE, INCOME
     }
 
     public static BigDecimal getSummedUserExpenses(List<Transaction> transactionList)
     {
-        return getSummedBalance(transactionList, SumType.EXPENSE);
+        return getSummedBalance(transactionList, TransactionType.EXPENSE);
     }
 
     public static BigDecimal getSummedUserIncome(List<Transaction> transactionList)
     {
-        return getSummedBalance(transactionList, SumType.INCOME);
+        return getSummedBalance(transactionList, TransactionType.INCOME);
     }
 
-    public static BigDecimal getSummedBalance(List<Transaction> transactionList, SumType type)
+    private static BigDecimal getSummedBalance(List<Transaction> transactionList, TransactionType type)
     {
         BigDecimal totalBalance = BigDecimal.ZERO;
         for (Transaction transaction : transactionList)
         {
             if (transaction.getType().equalsIgnoreCase(
-                type == SumType.EXPENSE ? "Expense" : "Income"
+                type == TransactionType.EXPENSE ? "Expense" : "Income"
             )) {
                 totalBalance = totalBalance.add(transaction.getAmount());
             }
