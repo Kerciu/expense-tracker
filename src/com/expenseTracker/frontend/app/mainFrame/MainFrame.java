@@ -10,6 +10,7 @@ import com.expenseTracker.frontend.authentication.LoginFrame;
 import com.expenseTracker.frontend.components.UIComponentFactory;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -28,6 +29,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
         addDepositButton();
         addTransactionsHistoryButton();
         addGenerateReportButton();
+        addMoneyFlowPanel();
         addLogoutButton();
     }
 
@@ -39,6 +41,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
     private void addBalanceLabel() {
         JLabel balanceLabel = UIComponentFactory.createLabel("Current Balance", 0, 300, getWidth() - 10, 30, 22, SwingConstants.CENTER);
+        balanceLabel.setFont(new Font("Dialog", Font.BOLD, 30));
         add(balanceLabel);
     }
 
@@ -78,6 +81,13 @@ public class MainFrame extends BaseFrame implements ActionListener {
         JButton logoutButton = UIComponentFactory.createButton("Logout", 5, 500, getWidth() - 10, 40, 22);
         logoutButton.addActionListener(this);
         add(logoutButton);
+    }
+
+    private void addMoneyFlowPanel() {
+        JPanel moneyFlowPanel = new MoneyFlowPanel(this);
+        moneyFlowPanel.setBounds(5, 380, getWidth() - 10, 120);
+        add(moneyFlowPanel);
+
     }
 
     @Override

@@ -47,7 +47,7 @@ public class MoneyFlowPanel extends JPanel {
 
     public JLabel createIconLabel(String iconName)
     {
-        String filePath = "resources/assets/images/"+iconName + "-icon.png";
+        String filePath = "/resources/assets/images/"+iconName + "-icon.png";
         ImageIcon imageIcon = IconLoader.loadIcon(filePath);
         return new JLabel(imageIcon);
     }
