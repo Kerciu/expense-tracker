@@ -1,9 +1,9 @@
 package com.expenseTracker.frontend.app.generateReport.panels;
 
-import com.expenseTracker.backend.writers.CSVExporter;
-import com.expenseTracker.backend.writers.PDFExporter;
-import com.expenseTracker.backend.writers.TXTExporter;
-import com.expenseTracker.backend.writers.XLSXExporter;
+import com.expenseTracker.backend.fileExporters.CSVExporter;
+import com.expenseTracker.backend.fileExporters.PDFExporter;
+import com.expenseTracker.backend.fileExporters.TXTExporter;
+import com.expenseTracker.backend.fileExporters.XLSXExporter;
 import com.expenseTracker.frontend.app.generateReport.frame.GenerateReportFrame;
 import com.expenseTracker.frontend.app.mainFrame.MainFrame;
 import com.expenseTracker.frontend.components.UIComponentFactory;
@@ -65,12 +65,19 @@ public class GenerateReportButtonPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String workingDirectory = System.getProperty("user.dir");
+                String documentsDirectory = workingDirectory + File.separator + "documents";
+                File documentsDir = new File(documentsDirectory);
+
+                if (!documentsDir.exists()) {
+                    documentsDir.mkdirs();
+                }
+
                 JCheckBox csvCheckBox = source.getCsvReportTypePanel().getCheckBox();
                 JCheckBox pdfCheckBox = source.getPdfReportTypePanel().getCheckBox();
                 JCheckBox xlsxCheckBox = source.getXlsxReportTypePanel().getCheckBox();
                 JCheckBox txtCheckBox = source.getTxtReportTypePanel().getCheckBox();
 
-                String filePath = workingDirectory + File.separator;
+                String filePath = documentsDirectory + File.separator;
                 if (csvCheckBox.isSelected()) {
                     String csvFilePath = filePath + source.getCsvReportTypePanel().getFileNameTextField().getText() + ".csv";
                     new CSVExporter(csvFilePath, source.getUser()).exportFile();

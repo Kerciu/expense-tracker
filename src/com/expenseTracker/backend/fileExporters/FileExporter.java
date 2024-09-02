@@ -1,4 +1,4 @@
-package com.expenseTracker.backend.writers;
+package com.expenseTracker.backend.fileExporters;
 
 import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;

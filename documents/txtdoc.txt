@@ -1,57 +1,70 @@
 Username: Kacper
-Balance: 3755.01
+Transaction Dates: 
+07/03/2024—10/15/2024
+Report Generated on:
+09/02/2024 13:05:20
 
-Total expenses: 5250.00
-Total income: 9005.01
-
-Transaction History:
+Balance:
+1830.00
+Total Expenses:
+7370.00
+Total Income:
+9200.00
+Transaction History
 --------------------
 Transaction #1
  - Amount: 150.00
  - Date: 2024-10-15
  - Type: Expense
  - Category: Food and Drinks
- - Description: Whiskey for ma birthday
+ - Description: Light meal in the cafe and four espresso shots.
 
 Transaction #2
+ - Amount: 20.00
+ - Date: 2024-09-01
+ - Type: Expense
+ - Category: Gifts and Donations
+ - Description: Tip for the waiter
+
+Transaction #3
  - Amount: 4000.00
  - Date: 2024-08-28
  - Type: Income
  - Category: Freelance
  - Description: I got some money working on a freelance project
 
-Transaction #3
+Transaction #4
  - Amount: 3000.00
  - Date: 2024-08-28
  - Type: Expense
  - Category: Technology
  - Description: I bought an IPhone 15 Pro
 
-Transaction #4
+Transaction #5
  - Amount: 1800.00
  - Date: 2024-08-28
  - Type: Expense
  - Category: Accommodation
- - Description: I had to pay for my apartament on Golden Straße in Warsaw.
+ - Description: I had to pay for my apartament in Warsaw.
 
-Transaction #5
- - Amount: 5005.01
+Transaction #6
+ - Amount: 5200.00
  - Date: 2024-08-24
  - Type: Income
  - Category: Food and Drinks
  - Description: Salary for my software enginnering position in your company in the future :)
 
-Transaction #6
+Transaction #7
  - Amount: 100.00
  - Date: 2024-07-15
  - Type: Expense
  - Category: Health and Beauty
  - Description: Skin care products and hair mask.
 
-Transaction #7
- - Amount: 200.00
- - Date: 1410-10-15
+Transaction #8
+ - Amount: 2300.00
+ - Date: 2024-07-03
  - Type: Expense
- - Category: Entertainment
- - Description: Battle of Grundwald
+ - Category: Travel
+ - Description: Went to Turkey for the summer holydays.
 

@@ -1,12 +1,10 @@
-package com.expenseTracker.backend.writers;
+package com.expenseTracker.backend.fileExporters;
 
 import com.expenseTracker.backend.data.Transaction;
 import com.expenseTracker.backend.data.User;
-import com.expenseTracker.backend.utils.UserBalanceAggregator;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class TXTExporter extends FileExporter {
     public TXTExporter(String filePath, User user)
