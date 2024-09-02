@@ -1,13 +1,13 @@
 Username: Kacper
 Transaction Dates: 
-07/03/2024—10/15/2024
+06/23/2024—10/15/2024
 Report Generated on:
-09/02/2024 13:13:54
+09/02/2024 13:53:40
 
 Balance:
-1830.00
+1679.01
 Total Expenses:
-7370.00
+7520.99
 Total Income:
 9200.00
 Transaction History
@@ -51,7 +51,7 @@ Transaction #6
  - Amount: 5200.00
  - Date: 2024-08-24
  - Type: Income
- - Category: Food and Drinks
+ - Category: Salary
  - Description: Salary for my software enginnering position in your company in the future :)
 
 Transaction #7
@@ -67,4 +67,11 @@ Transaction #8
  - Type: Expense
  - Category: Travel
  - Description: Went to Turkey for the summer holydays.
+
+Transaction #9
+ - Amount: 150.99
+ - Date: 2024-06-23
+ - Type: Expense
+ - Category: House and Garden
+ - Description: Garden hose and watering can for my garden
 
