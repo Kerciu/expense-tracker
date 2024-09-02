@@ -39,6 +39,10 @@ public class HistoryCardsPanel extends JPanel {
             JPanel cardPanel = new JPanel(new BorderLayout());
             cardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             HistoryCard card = new HistoryCard(this, t.getId(), t.getAmount(), t.getType(), t.getDate(), t.getCategory(), t.getDescription());
+
+            int panelWidth = source.getWidth() - 20;
+            cardPanel.setMaximumSize(new Dimension(panelWidth, 120));
+
             cardPanel.add(card, BorderLayout.CENTER);
             add(cardPanel);
         }

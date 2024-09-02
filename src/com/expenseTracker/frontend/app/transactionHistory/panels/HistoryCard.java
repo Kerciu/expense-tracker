@@ -40,8 +40,9 @@ public class HistoryCard extends JPanel {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        setPreferredSize(new Dimension(source.getWidth() - 5, 100));
-        setMaximumSize(new Dimension(source.getWidth() - 5, 100));
+        int cardWidth = source.getWidth() - 40;
+        setPreferredSize(new Dimension(cardWidth, 100));
+        setMaximumSize(new Dimension(cardWidth, 100));
     }
 
     private void addComponents() {
@@ -112,6 +113,7 @@ public class HistoryCard extends JPanel {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setPreferredSize(new Dimension(380, 40));
+        textArea.setMaximumSize(new Dimension(380, 40));
         return textArea;
     }
 
