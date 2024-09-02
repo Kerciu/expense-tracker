@@ -2,7 +2,7 @@
 
 ## 📜 Description
 
-A Java desktop application.
+A Java desktop application designed for managing and tracking expenses and income. The application uses Swing for the user interface, MySQL for database management, Jbcrypt for password encryption, iText for PDF generation, and Apache POI for creating Excel files.
 
 ## 📝 Notes
 
@@ -43,7 +43,11 @@ A Java desktop application.
       - `main/` - Main method
       - `test/` - Unit tests and test resources
   - `resources/assets/images` - Image and icon assets
-- `lib/` - External libraries
+- `lib/` - External libraries including:
+  - **MySQL** - For database management. 🗄️
+  - **Jbcrypt** - For password encryption. 🔐
+  - **iText** - For PDF generation. 📄
+  - **Apache POI** - For Excel file creation. 📈
 
 ## 🖼️ Screenshots
 <p align="center">
