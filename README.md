@@ -70,7 +70,7 @@ This project is licensed under the MIT License. See the [LICENCE](LICENCE) file 
 ## 📬 Contact
 For questions, feedback, or support:
 - **Author**: Kacper Górski
-- **LinkedIn**: [Kacper Górski](https://www.linkedin.com/in/kacper-gorski)
+- **LinkedIn**: [Kacper Górski](https://www.linkedin.com/in/kacper-gorski-se)
 - **Instagram**: [@kxcper.gorski](https://www.instagram.com/kxcper.gorski)
 - **X**: [@Kerciuu](https://x.com/Kerciuu)
 - **GitHub**: [Kerciu](https://github.com/Kerciu)
